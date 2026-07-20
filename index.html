@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis</title>
+    <meta name="description" content="Generator pembuat Surat Lelayu dan Pawartos Duka Bahasa Jawa online. Isi nama, langsung jadi PDF rapi dan siap sebar ke WhatsApp. 100% Gratis.">
+    <meta name="keywords" content="surat lelayu, pawartos duka, generator lelayu, cetak lelayu online, lelayu bahasa jawa, format lelayu pdf, pengumuman duka cita">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis">
+    <meta property="og:description" content="Generator surat lelayu bahasa Jawa. Isi form, langsung jadi PDF siap cetak atau sebar ke WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cetak-lelayu.web.id">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Cetak Lelayu",
+      "url": "https://cetak-lelayu.web.id",
+      "description": "Generator surat lelayu dan pawartos duka bahasa Jawa online, gratis.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Apakah aplikasi ini 100% gratis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ya, 100% gratis. Tidak ada biaya apa pun. Semoga bermanfaat untuk masyarakat yang sedang berduka."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah data yang saya masukkan aman?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sangat aman. Semua proses dilakukan langsung di browser Anda. Kami tidak menyimpan data apa pun di server."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== Emil's Design Engineering: CSS Custom Properties ===== */
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+            --color-bg: #fafaf9;
+            --color-surface: #ffffff;
+            --color-text: #1c1917;
+            --color-text-secondary: #78716c;
+            --color-border: #e7e5e4;
+            --color-accent: #2563eb;
+            --color-accent-light: #eff6ff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0c0a09;
+                --color-surface: #1c1917;
+                --color-text: #fafaf9;
+                --color-text-secondary: #a8a29e;
+                --color-border: #292524;
+                --color-accent: #3b82f6;
+                --color-accent-light: #1e1b4b;
+            }
+        }
+
+        body.dark-mode {
+            --color-bg: #0c0a09;
+            --color-surface: #1c1917;
+            --color-text: #fafaf9;
+            --color-text-secondary: #a8a29e;
+            --color-border: #292524;
+            --color-accent: #3b82f6;
+            --color-accent-light: #1e1b4b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100dvh;
+            margin: 0;
+            transition: background-color 400ms var(--ease-out), color 400ms var(--ease-out);
+        }
+
+        /* ===== Emil: Button Press Feedback ===== */
+        .btn-press {
+            transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out);
+            cursor: pointer;
+        }
+        .btn-press:active { transform: scale(0.97); }
+
+        /* ===== Emil: Scroll Reveal ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Emil: Stagger delays ===== */
+        .stagger-1 { transition-delay: 0ms; }
+        .stagger-2 { transition-delay: 60ms; }
+        .stagger-3 { transition-delay: 120ms; }
+        .stagger-4 { transition-delay: 180ms; }
+        .stagger-5 { transition-delay: 240ms; }
+
+        /* ===== Emil: Hover Lift (touch-safe) ===== */
+        @media (hover: hover) and (pointer: fine) {
+            .hover-lift:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+                transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+            }
+        }
+
+        /* ===== Layout ===== */
+        #main-container {
+            display: flex;
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            align-items: stretch;
+            flex-direction: row;
+        }
+
+        #sidebar {
+            width: 420px;
+            background: var(--color-surface);
+            padding: 24px;
+            overflow-y: auto;
+            box-shadow: 1px 0 0 var(--color-border);
+            z-index: 10;
+            flex-shrink: 0;
+            transition: background-color 300ms var(--ease-out);
+        }
+
+        #preview-container {
+            flex: 1;
+            padding: 40px 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            min-height: 0;
+            width: 100%;
+        }
+
+        /* ===== A4 Page ===== */
+        #a4-page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            padding: 20mm 20mm 15mm 20mm;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.08);
+            font-family: 'Times New Roman', Times, serif;
+            position: relative;
+            box-sizing: border-box;
+            color: black;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+            transition: box-shadow 300ms var(--ease-out);
+        }
+
+        #a4-page:hover {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        #scale-wrapper {
+            transform-origin: top center;
+            margin: 0 auto;
+            width: 210mm;
+            transition: transform 300ms var(--ease-out), margin 300ms var(--ease-out);
+        }
+
+        /* ===== Desktop Scaling ===== */
+        @media (min-width: 1600px) {
+            #scale-wrapper { transform: scale(1); margin-bottom: 0; }
+        }
+        @media (max-width: 1599px) and (min-width: 1400px) {
+            #scale-wrapper { transform: scale(0.9); margin-bottom: -30mm; }
+        }
+        @media (max-width: 1399px) and (min-width: 1200px) {
+            #scale-wrapper { transform: scale(0.80); margin-bottom: -60mm; }
+            #sidebar { width: 380px; }
+        }
+        @media (max-width: 1199px) and (min-width: 992px) {
+            #scale-wrapper { transform: scale(0.65); margin-bottom: -105mm; }
+            #sidebar { width: 360px; }
+        }
+
+        /* ===== Mobile ===== */
+        @media (max-width: 991px) {
+            #main-container {
+                flex-direction: column;
+                height: auto;
+                overflow: visible;
+            }
+            body { height: auto !important; overflow-y: auto !important; }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                box-shadow: 0 1px 0 var(--color-border);
+            }
+            #preview-container {
+                padding: 20px 10px;
+                overflow: hidden;
+                align-items: center;
+            }
+            #scale-wrapper { transform: none !important; }
+        }
+
+        @media (max-width: 768px) {
+            .form-group.flex { flex-direction: column; }
+            .w-1\/2 { width: 100% !important; }
+        }
+
+        /* ===== A4 Document Styles ===== */
+        .header-container { text-align: center; margin-bottom: 5px; position: relative; }
+        .logo-left { position: absolute; left: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
+        .logo-right { position: absolute; right: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
+        .header-title { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
+        .header-subtitle { font-size: 12pt; font-weight: bold; margin: 0; line-height: 1.2; }
+        .separator { border-top: 3px double black; margin-top: 15px; margin-bottom: 20px; }
+        .text-normal { font-size: 12pt; line-height: 1.4; margin-bottom: 8px; }
+        .text-bold { font-weight: bold; }
+        .text-center { text-align: center; }
+        .text-italic { font-style: italic; }
+        .text-underline { text-decoration: underline; }
+        .title-lelayu { font-size: 18pt; font-weight: bold; text-align: center; margin: 15px 0; letter-spacing: 1px; }
+        .name-section { text-align: center; margin: 15px 0; }
+        .name-almarhum { font-size: 14pt; font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
+        .umur-almarhum { font-size: 12pt; font-weight: bold; }
+        .detail-grid { display: grid; grid-template-columns: 100px 15px 1fr; font-size: 12pt; line-height: 1.4; }
+        .family-grid { display: grid; grid-template-columns: 30px 1fr 150px; font-size: 12pt; line-height: 1.4; margin-top: 5px; }
+        .content-body { flex: 1; }
+        .footer-container { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 10pt; font-style: italic; }
+        .mt-4 { margin-top: 15px; }
+        .mb-4 { margin-bottom: 15px; }
+
+        /* ===== Form Styles ===== */
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 6px; letter-spacing: 0.025em; transition: color 200ms var(--ease-out); }
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: var(--color-bg);
+            color: var(--color-text);
+            transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out), background-color 200ms var(--ease-out);
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        /* ===== Reduced Motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 100ms !important;
+            }
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Navbar ===== -->
+    <header style="position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--color-bg) 80%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--color-border);">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 36px; height: 36px; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; font-size: 14px;">CL</div>
+                <span style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em;">Cetak Lelayu</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <button onclick="toggleTheme()" class="btn-press" style="background: var(--color-surface); border: 1px solid var(--color-border); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--color-text); display: flex; align-items: center; gap: 6px; font-family: inherit;">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-label">Gelap</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== Intro ===== -->
+    <div class="reveal" style="background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 32px 24px; text-align: center;">
+        <h1 style="font-size: clamp(24px, 4vw, 36px); font-weight: 800; letter-spacing: -0.03em; margin: 0 0 8px; line-height: 1.15;">Buat Surat Pawartos Duka Online</h1>
+        <p style="color: var(--color-text-secondary); max-width: 640px; margin: 0 auto; font-size: 15px; line-height: 1.6;">
+            Isi formulir di bawah, pratinjau langsung terlihat. Unduh sebagai PDF untuk dicetak atau dibagikan ke WhatsApp. <strong>100% gratis, tanpa iklan.</strong>
+        </p>
+    </div>
+
+    <!-- ===== Main Content ===== -->
+    <div id="main-container">
+        <!-- Sidebar Form -->
+        <div id="sidebar">
+            <div style="padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--color-border);">
+                <h2 style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 4px;">Cetak Lelayu</h2>
+                <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">Generator Surat Pawartos Duka</p>
+            </div>
+
+            <div style="flex: 1; overflow-y: auto; padding-right: 8px; display: flex; flex-direction: column; gap: 20px;">
+
+                <!-- Penerima -->
+                <div class="reveal stagger-1" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border); transition: border-color 200ms var(--ease-out);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">✉️</span>
+                        Penerima Surat
+                    </h3>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Yth. (Nama Penerima)</label>
+                        <input type="text" class="form-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat">
+                    </div>
+                </div>
+
+                <!-- Data Almarhum -->
+                <div class="reveal stagger-2" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">👤</span>
+                        Data Almarhum/ah
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-input" id="in-status-almarhum">
+                            <option value="Almarhum">Almarhum</option>
+                            <option value="Almarhumah" selected>Almarhumah</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-input" id="in-nama" placeholder="Nama binti/bin nama">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Umur (Yuswa)</label>
+                        <input type="text" class="form-input" id="in-umur" placeholder="60 tahun">
+                    </div>
+                </div>
+
+                <!-- Waktu Wafat -->
+                <div class="reveal stagger-3" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">🕒</span>
+                        Waktu Wafat (Sedorikolo)
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group"><label class="form-label">Hari</label><input type="text" class="form-input" id="in-wafat-hari" placeholder="Jumat Legi"></div>
+                        <div class="form-group"><label class="form-label">Tanggal</label><input type="text" class="form-input" id="in-wafat-tanggal" placeholder="19 Mei 2026"></div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Jam</label><input type="text" class="form-input" id="in-wafat-jam" placeholder="22.00 WIB"></div>
+                    <div class="form-group" style="margin-bottom: 0;"><label class="form-label">Tempat</label><textarea class="form-input" id="in-wafat-tempat" rows="2" placeholder="Alamat lengkap tempat wafat" style="resize: none;"></textarea></div>
+                </div>
+
+                <!-- Waktu Pemakaman -->
+                <div class="reveal stagger-4" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">🪦</span>
+                        Waktu Pemakaman
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="form-group"><label class="form-label">Hari</label><input type="text" class="form-input" id="in-makam-hari" placeholder="Sabtu Paing"></div>
+                        <div class="form-group"><label class="form-label">Tanggal</label><input type="text" class="form-input" id="in-makam-tanggal" placeholder="20 Mei 2026"></div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Jam</label><input type="text" class="form-input" id="in-makam-jam" placeholder="14.00 WIB (Jam 2 Siang)"></div>
+                    <div class="form-group" style="margin-bottom: 0;"><label class="form-label">Makam</label><input type="text" class="form-input" id="in-makam-tempat" placeholder="Nama makam"></div>
+                </div>
+
+                <!-- Keluarga -->
+                <div class="reveal stagger-5" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="display: flex; align-items: center; gap: 8px;">
+                            <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">👨‍👩‍👧‍👦</span>
+                            Keluarga Ditinggalkan
+                        </span>
+                        <button onclick="addKeluarga()" class="btn-press" style="font-size: 12px; font-weight: 700; background: var(--color-accent-light); color: var(--color-accent); border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: inherit;">+ Tambah</button>
+                    </h3>
+                    <div id="keluarga-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                </div>
+
+                <!-- Footer Notes -->
+                <div class="reveal" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">📝</span>
+                        Catatan Kaki
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Catatan Kiri</label>
+                        <input type="text" class="form-input" id="in-footer-left" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun.">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Catatan Kanan</label>
+                        <input type="text" class="form-input" id="in-footer-right" value="">
+                    </div>
+                </div>
+
+                <!-- Logo Upload -->
+                <div class="reveal" style="background: var(--color-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--color-border);">
+                    <h3 style="font-size: 13px; font-weight: 700; color: var(--color-accent); margin: 0 0 14px; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--color-accent-light); padding: 4px 8px; border-radius: 8px; font-size: 14px;">🖼️</span>
+                        Logo (Opsional)
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div>
+                            <label class="form-label" style="font-size: 12px;">Logo Kiri</label>
+                            <input type="file" accept="image/*" style="font-size: 12px; width: 100%;" onchange="loadLogo(event, 'out-logo-kiri')">
+                        </div>
+                        <div>
+                            <label class="form-label" style="font-size: 12px;">Logo Kanan</label>
+                            <input type="file" accept="image/*" style="font-size: 12px; width: 100%;" onchange="loadLogo(event, 'out-logo-kanan')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <div style="padding-top: 20px; margin-top: 16px; border-top: 1px solid var(--color-border);">
+                <button onclick="downloadPDF()" class="btn-press" style="width: 100%; background: var(--color-accent); color: white; font-weight: 700; padding: 14px 20px; border-radius: 12px; border: none; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); font-family: inherit; letter-spacing: -0.01em;">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download PDF / Cetak
+                </button>
+            </div>
+        </div>
+
+        <!-- Preview Area -->
+        <div id="preview-container">
+            <div id="scale-wrapper">
+                <div id="a4-page">
+                    <div class="content-body">
+                        <div class="header-container">
+                            <img id="out-logo-kiri" class="logo-left" src="" alt="Logo Kiri" style="display:none;">
+                            <svg id="placeholder-logo-kiri" class="logo-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" style="opacity:0.15;"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1.5" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+                            <img id="out-logo-kanan" class="logo-right" src="" alt="Logo Kanan" style="display:none;">
+                            <svg id="placeholder-logo-kanan" class="logo-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" style="opacity:0.15;"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1.5" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+
+                            <div class="header-title" id="out-kop-title1"></div>
+                            <div class="header-title" id="out-kop-title2"></div>
+                            <div class="header-subtitle" id="out-kop-subtitle"></div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="text-normal text-bold">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
+                        <div class="text-normal text-bold" style="color: transparent; border-bottom: 2px dotted black; display: inline-block; min-width: 200px; margin-bottom: 10px; height: 16px;"></div>
+
+                        <div class="text-normal text-bold text-italic mt-4">Assalamu'alaikum Wr.Wb</div>
+
+                        <div class="title-lelayu">PAWARTOS LELAYU</div>
+
+                        <div class="text-normal">Inna lillahi wa inna ilaihi roji'un</div>
+                        <div class="text-normal">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
+
+                        <div class="name-section">
+                            <div class="name-almarhum"><span id="out-status-almarhum">Almarhumah</span> <span id="out-nama"></span></div>
+                            <div class="umur-almarhum">Yuswa : <span id="out-umur"></span></div>
+                        </div>
+
+                        <div class="text-normal mt-4">Sedorikolo</div>
+                        <div class="detail-grid">
+                            <div>Dinten</div><div>:</div><div id="out-wafat-hari"></div>
+                            <div>Tanggal</div><div>:</div><div id="out-wafat-tanggal"></div>
+                            <div>Jam</div><div>:</div><div id="out-wafat-jam"></div>
+                            <div>Wonten</div><div>:</div><div id="out-wafat-tempat"></div>
+                        </div>
+
+                        <div class="text-normal mt-4">Jenazah badhe dipunkasareaken</div>
+                        <div class="detail-grid">
+                            <div>Dinten</div><div>:</div><div id="out-makam-hari"></div>
+                            <div>Tanggal</div><div>:</div><div id="out-makam-tanggal"></div>
+                            <div>Jam</div><div>:</div><div id="out-makam-jam"></div>
+                            <div>Wonten ing makam</div><div>:</div><div id="out-makam-tempat"></div>
+                        </div>
+
+                        <div class="text-normal mt-4" style="text-align: justify;">
+                            Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status-almarhum-2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.
+                        </div>
+
+                        <div class="text-normal text-bold text-italic mt-4">Wassalamu'alaikum Wr.Wb</div>
+
+                        <div class="text-normal">Ingkang nandang sungkawa :</div>
+                        <div id="out-keluarga-list"></div>
+                    </div>
+
+                    <div class="footer-container">
+                        <div id="out-footer-left">Sumangga dipun-getok tularaken dhumateng warga sanesipun.</div>
+                        <div id="out-footer-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FAQ Section ===== -->
+    <section class="reveal" style="background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 64px 24px;">
+        <div style="max-width: 720px; margin: 0 auto;">
+            <h2 style="font-size: clamp(20px, 3vw, 28px); font-weight: 800; letter-spacing: -0.02em; text-align: center; margin: 0 0 32px;">Pertanyaan Umum</h2>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <details style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; transition: border-color 200ms var(--ease-out);">
+                    <summary style="font-weight: 700; cursor: pointer; font-size: 15px; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        Apakah aplikasi ini 100% gratis?
+                        <span style="font-size: 12px; color: var(--color-text-secondary);">+</span>
+                    </summary>
+                    <p style="margin: 12px 0 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.6;">Ya, 100% gratis. Tidak ada biaya apa pun. Tidak ada iklan. Semoga bermanfaat untuk masyarakat yang sedang berduka.</p>
+                </details>
+
+                <details style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; transition: border-color 200ms var(--ease-out);">
+                    <summary style="font-weight: 700; cursor: pointer; font-size: 15px; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        Apakah data saya aman?
+                        <span style="font-size: 12px; color: var(--color-text-secondary);">+</span>
+                    </summary>
+                    <p style="margin: 12px 0 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.6;">Sangat aman. Semua proses dilakukan langsung di browser perangkat Anda. Kami tidak menyimpan data almarhum maupun keluarga di server mana pun.</p>
+                </details>
+
+                <details style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; transition: border-color 200ms var(--ease-out);">
+                    <summary style="font-weight: 700; cursor: pointer; font-size: 15px; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        Bagaimana cara kirim PDF ke WhatsApp?
+                        <span style="font-size: 12px; color: var(--color-text-secondary);">+</span>
+                    </summary>
+                    <p style="margin: 12px 0 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.6;">Klik tombol "Download PDF / Cetak", file akan tersimpan di perangkat Anda. Buka WhatsApp, pilih kontak atau grup, klik ikon lampiran (📎), pilih "Dokumen", lalu kirimkan file PDF tersebut.</p>
+                </details>
+
+                <details style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 16px 20px; transition: border-color 200ms var(--ease-out);">
+                    <summary style="font-weight: 700; cursor: pointer; font-size: 15px; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                        Mengapa preview terlihat kecil di HP?
+                        <span style="font-size: 12px; color: var(--color-text-secondary);">+</span>
+                    </summary>
+                    <p style="margin: 12px 0 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.6;">Di layar HP, preview diperkecil agar kertas A4 muat di layar. Saat di-download, PDF akan berukuran normal A4 standar yang rapi untuk dicetak.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer style="background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 40px 24px; text-align: center;">
+        <div style="max-width: 720px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px;">
+                <div style="width: 28px; height: 28px; background: var(--color-accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 800; font-size: 11px;">CL</div>
+                <span style="font-weight: 800; font-size: 16px; letter-spacing: -0.02em;">Cetak Lelayu</span>
+            </div>
+            <p style="color: var(--color-text-secondary); font-size: 14px; margin: 0 0 4px;">100% Gratis. Semoga bermanfaat.</p>
+            <p style="color: var(--color-text-secondary); font-size: 12px; margin: 0; opacity: 0.7;">Data Anda tetap di browser Anda. Tidak ada yang kami simpan.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== Data =====
+        let keluargaData = [
+            { nama: "", status: "( Garwo )" },
+            { nama: "", status: "( anak/mantu )" },
+            { nama: "Lan Sedoyo Keluargo", status: "" }
+        ];
+
+        const syncMap = {
+            'in-penerima': 'out-penerima',
+            'in-nama': 'out-nama',
+            'in-umur': 'out-umur',
+            'in-wafat-hari': 'out-wafat-hari',
+            'in-wafat-tanggal': 'out-wafat-tanggal',
+            'in-wafat-jam': 'out-wafat-jam',
+            'in-wafat-tempat': 'out-wafat-tempat',
+            'in-makam-hari': 'out-makam-hari',
+            'in-makam-tanggal': 'out-makam-tanggal',
+            'in-makam-jam': 'out-makam-jam',
+            'in-makam-tempat': 'out-makam-tempat',
+            'in-footer-left': 'out-footer-left',
+            'in-footer-right': 'out-footer-right',
+        };
+
+        // ===== Setup Listeners =====
+        function setupListeners() {
+            for (let inId in syncMap) {
+                const el = document.getElementById(inId);
+                if (el) {
+                    el.addEventListener('input', (e) => {
+                        const target = document.getElementById(syncMap[inId]);
+                        if (target) target.innerText = e.target.value;
+                    });
+                }
+            }
+            const statusEl = document.getElementById('in-status-almarhum');
+            if (statusEl) {
+                statusEl.addEventListener('change', (e) => {
+                    const s1 = document.getElementById('out-status-almarhum');
+                    const s2 = document.getElementById('out-status-almarhum-2');
+                    if (s1) s1.innerText = e.target.value;
+                    if (s2) s2.innerText = e.target.value;
+                });
+            }
+        }
+
+        // ===== Keluarga =====
+        function renderKeluarga() {
+            const container = document.getElementById('keluarga-container');
+            const outContainer = document.getElementById('out-keluarga-list');
+            if (!container || !outContainer) return;
+            container.innerHTML = '';
+            outContainer.innerHTML = '';
+
+            keluargaData.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.style.cssText = 'display: flex; gap: 8px; align-items: center;';
+                div.innerHTML = `
+                    <span style="font-size: 13px; width: 16px; color: var(--color-text-secondary);">${index + 1}.</span>
+                    <input type="text" class="form-input" style="padding: 8px 10px; font-size: 13px; flex: 1;" value="${item.nama}" placeholder="Nama" oninput="updateKeluarga(${index}, 'nama', this.value)">
+                    <input type="text" class="form-input" style="padding: 8px 10px; font-size: 13px; width: 100px;" value="${item.status}" placeholder="Status" oninput="updateKeluarga(${index}, 'status', this.value)">
+                    <button onclick="removeKeluarga(${index})" class="btn-press" style="background: none; border: none; cursor: pointer; padding: 4px; font-size: 14px; opacity: 0.5; transition: opacity 200ms var(--ease-out);" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0.5">✕</button>
+                `;
+                container.appendChild(div);
+
+                const outDiv = document.createElement('div');
+                outDiv.className = 'family-grid';
+                outDiv.innerHTML = `<div style="text-align:right; padding-right:5px;">${index + 1}.</div><div>${item.nama}</div><div>${item.status}</div>`;
+                outContainer.appendChild(outDiv);
+            });
+        }
+
+        function updateKeluarga(index, field, value) {
+            keluargaData[index][field] = value;
+            const list = document.getElementById('out-keluarga-list');
+            if (list && list.children[index]) {
+                list.children[index].children[field === 'nama' ? 1 : 2].innerText = value;
+            }
+        }
+
+        function addKeluarga() { keluargaData.push({ nama: "", status: "" }); renderKeluarga(); }
+        function removeKeluarga(index) { keluargaData.splice(index, 1); renderKeluarga(); }
+
+        // ===== Logo =====
+        function loadLogo(event, targetId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(targetId);
+                    const placeholder = document.getElementById('placeholder-' + targetId.replace('out-', ''));
+                    if (img) { img.src = e.target.result; img.style.display = 'block'; }
+                    if (placeholder) placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ===== Theme =====
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+            document.getElementById('theme-label').textContent = isDark ? 'Terang' : 'Gelap';
+        }
+
+        // ===== Download PDF =====
+        function downloadPDF() {
+            const element = document.getElementById('a4-page');
+            const namaAlmarhum = document.getElementById('in-nama').value || "Almarhum";
+
+            const opt = {
+                margin: 0,
+                filename: 'Surat Lelayu ' + namaAlmarhum + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    scrollY: 0,
+                    onclone: function(clonedDoc) {
+                        const wrapper = clonedDoc.getElementById('scale-wrapper');
+                        if (wrapper) wrapper.style.transform = 'none';
+                        const el = clonedDoc.getElementById('a4-page');
+                        el.style.transform = 'none';
+                        el.style.margin = '0';
+                        el.style.boxShadow = 'none';
+                        el.style.height = '296mm';
+                        el.style.overflow = 'hidden';
+                    }
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
+                const totalPages = pdf.internal.getNumberOfPages();
+                if (totalPages > 1) {
+                    for (let i = totalPages; i > 1; i--) pdf.deletePage(i);
+                }
+            }).save();
+        }
+
+        // ===== Mobile Preview Scaling =====
+        function updatePreviewScale() {
+            const wrapper = document.getElementById('scale-wrapper');
+            const container = document.getElementById('preview-container');
+            if (!wrapper || !container) return;
+
+            if (window.innerWidth <= 991) {
+                const containerWidth = container.clientWidth - 20;
+                const a4WidthPx = 793;
+                const scale = Math.min(containerWidth / a4WidthPx, 1);
+                wrapper.style.transform = 'none';
+                wrapper.style.zoom = scale;
+                wrapper.style.margin = '0 auto';
+            } else {
+                wrapper.style.zoom = '';
+                wrapper.style.transform = '';
+                wrapper.style.margin = '';
+            }
+        }
+
+        // ===== Emil: Scroll Reveal with IntersectionObserver =====
+        function setupReveal() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '-30px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // ===== Init =====
+        window.addEventListener('resize', updatePreviewScale);
+        window.addEventListener('load', () => {
+            updatePreviewScale();
+            setupReveal();
+        });
+        setTimeout(updatePreviewScale, 100);
+
+        setupListeners();
+        renderKeluarga();
+    </script>
+</body>
+</html>
