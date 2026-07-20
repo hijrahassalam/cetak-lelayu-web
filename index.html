@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis</title>
     <meta name="description" content="Generator pembuat Surat Lelayu dan Pawartos Duka Bahasa Jawa online. Isi nama, langsung jadi PDF rapi dan siap sebar ke WhatsApp. 100% Gratis.">
-    <meta name="keywords" content="surat lelayu, pawartos duka, generator lelayu, cetak lelayu online, lelayu bahasa jawa, format lelayu pdf, pengumuman duka cita">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis">
-    <meta property="og:description" content="Generator surat lelayu bahasa Jawa. Isi form, langsung jadi PDF.">
-    <meta property="og:type" content="website">
+    <meta property="og:description" content="Generator surat lelayu. Pilih konteks, isi data, langsung jadi PDF.">
     <meta property="og:url" content="https://cetak-lelayu.web.id">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <script type="application/ld+json">
@@ -23,130 +21,123 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
-    tailwind.config = {
-        theme: { extend: {
-            fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] },
-            colors: { bg:'#f5f5f4', surface:'#ffffff', ink:'#18181b', sub:'#71717a', hair:'#e4e4e7', accent:'#3b5fe0', accentsoft:'#eef2ff', muted:'#fafafa' }
-        }}
-    }
+    tailwind.config={theme:{extend:{fontFamily:{sans:['"Plus Jakarta Sans"','system-ui','sans-serif']},colors:{bg:'#f5f5f4',surface:'#ffffff',ink:'#18181b',sub:'#71717a',hair:'#e4e4e7',accent:'#3b5fe0',accentsoft:'#eef2ff'}}}}
     </script>
 
     <style>
-        :root { --ease: cubic-bezier(0.22,1,0.36,1); }
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 0; background: #f5f5f4; color: #18181b; overflow: hidden; }
+        :root{--ease:cubic-bezier(0.22,1,0.36,1)}
+        *{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+        body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;margin:0;background:#f5f5f4;color:#18181b;overflow:hidden}
 
-        .step { display: none; } .step.active { display: block; }
+        .step{display:none}.step.active{display:block}
 
         /* Stepper */
-        .stp { display: flex; align-items: center; gap: 0; }
-        .stp-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #a1a1aa; cursor: pointer; transition: color 200ms var(--ease); white-space: nowrap; }
-        .stp-item .dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; border: 2px solid #e4e4e7; color: #a1a1aa; background: #fff; transition: all 250ms var(--ease); }
-        .stp-item.done .dot { border-color: #3b5fe0; background: #3b5fe0; color: #fff; }
-        .stp-item.done .dot::after { content: '✓'; font-size: 12px; }
-        .stp-item.done .dot .num { display: none; }
-        .stp-item.current .dot { border-color: #3b5fe0; color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
-        .stp-item.current { color: #18181b; }
-        .stp-item.done { color: #3b5fe0; }
-        .stp-line { flex: 1; height: 2px; background: #e4e4e7; margin: 0 6px; min-width: 12px; transition: background 300ms var(--ease); }
-        .stp-line.done { background: #3b5fe0; }
+        .stp{display:flex;align-items:center}
+        .stp-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#a1a1aa;cursor:pointer;white-space:nowrap;transition:color 200ms var(--ease)}
+        .stp-item .dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #e4e4e7;color:#a1a1aa;background:#fff;transition:all 250ms var(--ease)}
+        .stp-item.done .dot{border-color:#3b5fe0;background:#3b5fe0;color:#fff}
+        .stp-item.done .dot::after{content:'✓';font-size:12px}
+        .stp-item.done .dot .n{display:none}
+        .stp-item.current .dot{border-color:#3b5fe0;color:#3b5fe0;box-shadow:0 0 0 3px rgba(59,95,224,0.12)}
+        .stp-item.current{color:#18181b}.stp-item.done{color:#3b5fe0}
+        .stp-line{flex:1;height:2px;background:#e4e4e7;margin:0 6px;min-width:10px;transition:background 300ms var(--ease)}
+        .stp-line.done{background:#3b5fe0}
 
-        /* Form */
-        .f-label { display: block; font-size: 12px; font-weight: 600; color: #71717a; margin-bottom: 3px; }
-        .f-hint { font-size: 11px; color: #a1a1aa; margin-bottom: 5px; line-height: 1.4; }
-        .f-input { width: 100%; padding: 9px 11px; border: 1px solid #e4e4e7; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fafafa; color: #18181b; outline: none; transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease); }
-        .f-input:focus { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.08); background: #fff; }
-        .f-group { margin-bottom: 13px; }
+        /* Context Cards */
+        .ctx-card{border:2px solid #e4e4e7;border-radius:14px;padding:16px;cursor:pointer;text-align:center;transition:all 200ms var(--ease)}
+        .ctx-card:hover{border-color:#a1a1aa;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.06)}
+        .ctx-card.sel{border-color:#3b5fe0;box-shadow:0 0 0 3px rgba(59,95,224,0.12);background:#eef2ff}
+        .ctx-icon{font-size:28px;margin-bottom:6px}
+        .ctx-name{font-size:12px;font-weight:700;color:#18181b}
+        .ctx-desc{font-size:10px;color:#71717a;margin-top:2px}
 
         /* Chips */
-        .chip { display: inline-flex; padding: 5px 11px; border-radius: 8px; border: 1px solid #e4e4e7; font-size: 12px; font-weight: 600; color: #71717a; background: #fff; cursor: pointer; transition: all 160ms var(--ease); }
-        .chip:hover { border-color: #a1a1aa; }
-        .chip.sel { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
+        .chip{display:inline-flex;padding:5px 11px;border-radius:8px;border:1px solid #e4e4e7;font-size:12px;font-weight:600;color:#71717a;background:#fff;cursor:pointer;transition:all 160ms var(--ease)}
+        .chip:hover{border-color:#a1a1aa}
+        .chip.sel{border-color:#3b5fe0;background:#eef2ff;color:#3b5fe0}
 
-        /* Template Cards */
-        .tpl-card { border: 2px solid #e4e4e7; border-radius: 12px; padding: 10px; cursor: pointer; text-align: center; transition: all 200ms var(--ease); }
-        .tpl-card:hover { border-color: #a1a1aa; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .tpl-card.sel { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
-        .tpl-card .tpl-name { font-size: 10px; font-weight: 700; margin-top: 6px; color: #71717a; }
-        .tpl-card.sel .tpl-name { color: #3b5fe0; }
-        .tpl-thumb { width: 100%; aspect-ratio: 210/297; background: #fff; border-radius: 3px; border: 1px solid #eee; overflow: hidden; position: relative; }
+        /* Form */
+        .f-label{display:block;font-size:12px;font-weight:600;color:#71717a;margin-bottom:3px}
+        .f-hint{font-size:11px;color:#a1a1aa;margin-bottom:5px;line-height:1.4}
+        .f-input{width:100%;padding:9px 11px;border:1px solid #e4e4e7;border-radius:10px;font-size:14px;font-family:inherit;background:#fafafa;color:#18181b;outline:none;transition:border-color 160ms var(--ease),box-shadow 160ms var(--ease)}
+        .f-input:focus{border-color:#3b5fe0;box-shadow:0 0 0 3px rgba(59,95,224,0.08);background:#fff}
+        .f-group{margin-bottom:13px}
+        .sec-h{font-size:11px;font-weight:700;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid #e4e4e7}
 
         /* Buttons */
-        .btn-p { padding: 9px 20px; border-radius: 10px; border: none; font-size: 13px; font-weight: 700; font-family: inherit; color: #fff; background: #3b5fe0; cursor: pointer; transition: transform 120ms var(--ease), background 160ms var(--ease); display: inline-flex; align-items: center; gap: 6px; }
-        .btn-p:hover { background: #2d4bc4; }
-        .btn-p:active { transform: scale(0.97); }
-        .btn-p:disabled { opacity: 0.3; cursor: default; transform: none; }
-        .btn-g { padding: 9px 16px; border-radius: 10px; border: 1px solid #e4e4e7; font-size: 13px; font-weight: 600; font-family: inherit; color: #71717a; background: transparent; cursor: pointer; transition: transform 120ms var(--ease); }
-        .btn-g:hover { border-color: #a1a1aa; }
-        .btn-g:active { transform: scale(0.97); }
-
-        .sec-h { font-size: 11px; font-weight: 700; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; padding-bottom: 7px; border-bottom: 1px solid #e4e4e7; }
+        .btn-p{padding:9px 20px;border-radius:10px;border:none;font-size:13px;font-weight:700;font-family:inherit;color:#fff;background:#3b5fe0;cursor:pointer;transition:transform 120ms var(--ease),background 160ms var(--ease);display:inline-flex;align-items:center;gap:6px}
+        .btn-p:hover{background:#2d4bc4}.btn-p:active{transform:scale(0.97)}
+        .btn-p:disabled{opacity:0.3;cursor:default;transform:none}
+        .btn-g{padding:9px 16px;border-radius:10px;border:1px solid #e4e4e7;font-size:13px;font-weight:600;font-family:inherit;color:#71717a;background:transparent;cursor:pointer;transition:transform 120ms var(--ease)}
+        .btn-g:hover{border-color:#a1a1aa}.btn-g:active{transform:scale(0.97)}
 
         /* A4 */
-        #a4-wrap { transform-origin: top center; width: 210mm; }
-        #a4 { width: 210mm; height: 297mm; background: #fff; color: #000; display: flex; flex-direction: column; flex-shrink: 0; position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.08); border-radius: 2px; }
-        .d-body { flex: 1; }
-        .d-foot { padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-style: italic; }
-        .flash { animation: fIn 200ms var(--ease); }
-        @keyframes fIn { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+        #a4{width:210mm;height:297mm;background:#fff;color:#000;flex-shrink:0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08),0 8px 32px rgba(0,0,0,0.08);border-radius:2px}
+        #a4-wrap{transform-origin:top center;width:210mm}
+        .flash{animation:fIn 200ms var(--ease)}@keyframes fIn{0%{opacity:0.2}100%{opacity:1}}
 
         /* Zoom */
-        .zoom-bar { display: flex; align-items: center; gap: 6px; }
-        .zoom-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d4d4d8; background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 120ms var(--ease); }
-        .zoom-btn:hover { border-color: #a1a1aa; }
-        .zoom-btn.sel { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
+        .zoom-btn{width:28px;height:28px;border-radius:6px;border:1px solid #d4d4d8;background:#fff;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 120ms var(--ease)}
+        .zoom-btn:hover{border-color:#a1a1aa}.zoom-btn.sel{border-color:#3b5fe0;background:#eef2ff;color:#3b5fe0}
 
-        #form-scroll::-webkit-scrollbar { width: 4px; }
-        #form-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+        #form-scroll::-webkit-scrollbar{width:4px}
+        #form-scroll::-webkit-scrollbar-thumb{background:#d4d4d8;border-radius:4px}
 
-        @media (max-width: 991px) {
-            #app { flex-direction: column !important; overflow-y: auto !important; }
-            #form-panel { width: 100% !important; max-height: none !important; border-right: none !important; }
-            #preview-panel { width: 100% !important; padding: 12px !important; }
-            #a4-wrap { transform: none !important; margin: 0 !important; }
-            body { overflow: auto !important; }
+        @media(max-width:991px){
+            #app{flex-direction:column!important;overflow-y:auto!important}
+            #form-panel{width:100%!important;max-height:none!important;border-right:none!important}
+            #preview-panel{width:100%!important;padding:12px!important}
+            #a4-wrap{transform:none!important;margin:0!important}
+            body{overflow:auto!important}
         }
-        @media (max-width: 600px) { #a4-wrap { zoom: 0.42; } }
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 60ms !important; animation: none !important; } }
+        @media(max-width:600px){#a4-wrap{zoom:0.42}}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:60ms!important;animation:none!important}}
     </style>
 </head>
 
 <body>
-    <!-- NAV -->
     <nav class="h-12 border-b border-hair bg-surface flex items-center justify-between px-4" style="position:sticky;top:0;z-index:50">
         <div class="flex items-center gap-2"><span class="text-xl">🕊️</span><span class="text-sm font-extrabold tracking-tight hidden sm:block">Cetak Lelayu</span></div>
         <span class="text-[11px] text-sub hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
     </nav>
 
-    <!-- APP -->
-    <div id="app" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden;">
+    <div id="app" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden">
 
         <!-- FORM -->
-        <div id="form-panel" style="width:38%;min-width:360px;max-width:480px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#fff;">
+        <div id="form-panel" style="width:38%;min-width:360px;max-width:480px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#fff">
 
             <!-- Stepper -->
             <div class="px-5 pt-4 pb-3 border-b border-hair bg-surface" id="stp-area">
                 <div class="stp" id="stepper">
-                    <div class="stp-item current" data-s="0" onclick="goStep(0)"><span class="dot"><span class="num">1</span></span><span class="hidden md:inline">Almarhum</span></div>
+                    <div class="stp-item current" data-s="0" onclick="goStep(0)"><span class="dot"><span class="n">1</span></span><span class="hidden md:inline">Konteks</span></div>
                     <div class="stp-line"></div>
-                    <div class="stp-item" data-s="1" onclick="goStep(1)"><span class="dot"><span class="num">2</span></span><span class="hidden md:inline">Wafat</span></div>
+                    <div class="stp-item" data-s="1" onclick="goStep(1)"><span class="dot"><span class="n">2</span></span><span class="hidden md:inline">Almarhum</span></div>
                     <div class="stp-line"></div>
-                    <div class="stp-item" data-s="2" onclick="goStep(2)"><span class="dot"><span class="num">3</span></span><span class="hidden md:inline">Makam</span></div>
+                    <div class="stp-item" data-s="2" onclick="goStep(2)"><span class="dot"><span class="n">3</span></span><span class="hidden md:inline">Waktu</span></div>
                     <div class="stp-line"></div>
-                    <div class="stp-item" data-s="3" onclick="goStep(3)"><span class="dot"><span class="num">4</span></span><span class="hidden md:inline">Keluarga</span></div>
+                    <div class="stp-item" data-s="3" onclick="goStep(3)"><span class="dot"><span class="n">4</span></span><span class="hidden md:inline">Keluarga</span></div>
                     <div class="stp-line"></div>
-                    <div class="stp-item" data-s="4" onclick="goStep(4)"><span class="dot"><span class="num">5</span></span><span class="hidden md:inline">Surat</span></div>
+                    <div class="stp-item" data-s="4" onclick="goStep(4)"><span class="dot"><span class="n">5</span></span><span class="hidden md:inline">Atur</span></div>
                 </div>
                 <div class="mt-3 text-center">
                     <button onclick="toggleMode()" id="mode-btn" class="text-[11px] text-sub hover:text-ink bg-transparent border-none cursor-pointer underline underline-offset-2 decoration-hair" style="font-family:inherit">Lihat semua sekaligus</button>
                 </div>
             </div>
 
-            <!-- Form -->
-            <div id="form-scroll" style="flex:1;overflow-y:auto;padding:20px 20px 24px;">
+            <div id="form-scroll" style="flex:1;overflow-y:auto;padding:20px 20px 24px">
 
-                <!-- Step 0 -->
+                <!-- Step 0: CONTEXT -->
                 <div class="step active" data-step="0">
+                    <div class="sec-h">Pilih Berdasarkan Kebutuhan</div>
+                    <div class="grid grid-cols-2 gap-3 mb-5" id="ctx-grid"></div>
+                    <div id="sub-opts" style="display:none">
+                        <div class="sec-h" id="sub-label">Pilihan</div>
+                        <div class="flex gap-2 flex-wrap" id="sub-chips"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Almarhum -->
+                <div class="step" data-step="1">
                     <div class="sec-h">Data Almarhum</div>
                     <div class="f-group">
                         <label class="f-label">Status</label>
@@ -154,40 +145,35 @@
                     </div>
                     <div class="f-group">
                         <label class="f-label">Nama Lengkap</label>
-                        <div class="f-hint">Nama yang akan muncul pada surat</div>
-                        <input class="f-input" id="in-nama" placeholder="cth: Siti Aminah binti Ahmad">
+                        <div class="f-hint">Nama yang akan menjadi fokus surat</div>
+                        <input class="f-input" id="in-nama" placeholder="cth: H. Ahmad Supriyanto bin H. Mohammed">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Gelar / Panggilan (opsional)</label>
+                        <div class="f-hint">cth: Dra., H., KH., Nyai</div>
+                        <input class="f-input" id="in-gelar" placeholder="cth: Haji">
                     </div>
                     <div class="f-group">
                         <label class="f-label">Umur</label>
-                        <div class="f-hint">Yuswa (umur almarhum/ah)</div>
                         <input class="f-input" id="in-umur" placeholder="60 tahun">
                     </div>
-                    <div class="f-group">
-                        <label class="f-label">Penerima Surat</label>
-                        <div class="f-hint">Biasanya: Yth. Bapak/Ibu/Saudara/Masyarakat</div>
-                        <input class="f-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat">
-                    </div>
                 </div>
 
-                <!-- Step 1 -->
-                <div class="step" data-step="1">
+                <!-- Step 2: Waktu -->
+                <div class="step" data-step="2">
                     <div class="sec-h">Waktu Wafat</div>
-                    <div class="f-group"><label class="f-label">Hari</label><div class="f-hint">Hari pasaran Jawa, cth: Jumat Legi</div><input class="f-input" id="in-wf-hari" placeholder="Jumat Legi"></div>
+                    <div class="f-group"><label class="f-label">Hari</label><div class="f-hint">Hari pasaran Jawa</div><input class="f-input" id="in-wf-hari" placeholder="Jumat Legi"></div>
                     <div class="f-group"><label class="f-label">Tanggal</label><input class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026"></div>
                     <div class="f-group"><label class="f-label">Jam</label><input class="f-input" id="in-wf-jam" placeholder="22.00 WIB"></div>
-                    <div class="f-group"><label class="f-label">Tempat Wafat</label><div class="f-hint">Rumah sakit, rumah duka, atau alamat</div><textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="RSUD Dr. Moewardi, Solo"></textarea></div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="step" data-step="2">
-                    <div class="sec-h">Waktu Pemakaman</div>
+                    <div class="f-group"><label class="f-label">Tempat</label><textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="RSUD Dr. Moewardi, Surakarta"></textarea></div>
+                    <div class="sec-h mt-4">Waktu Pemakaman</div>
                     <div class="f-group"><label class="f-label">Hari</label><input class="f-input" id="in-mk-hari" placeholder="Sabtu Paing"></div>
                     <div class="f-group"><label class="f-label">Tanggal</label><input class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026"></div>
                     <div class="f-group"><label class="f-label">Jam</label><input class="f-input" id="in-mk-jam" placeholder="14.00 WIB"></div>
-                    <div class="f-group"><label class="f-label">Nama Makam</label><input class="f-input" id="in-mk-tmp" placeholder="TPU Bonoloyo, Solo"></div>
+                    <div class="f-group"><label class="f-label">Makam</label><input class="f-input" id="in-mk-tmp" placeholder="TPU Bonoloyo, Surakarta"></div>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Step 3: Keluarga -->
                 <div class="step" data-step="3">
                     <div class="sec-h" style="display:flex;justify-content:space-between;align-items:center;border-bottom:none;padding-bottom:0;margin-bottom:6px">
                         <span>Keluarga Ditinggalkan</span>
@@ -197,30 +183,16 @@
                     <div id="fam-box" class="flex flex-col gap-2"></div>
                 </div>
 
-                <!-- Step 4: SHOWROOM -->
+                <!-- Step 4: Settings -->
                 <div class="step" data-step="4">
-                    <div class="sec-h">Pilih Template</div>
-                    <div class="grid grid-cols-3 gap-2 mb-5" id="tpl-grid"></div>
-
-                    <div class="sec-h">Bahasa Surat</div>
-                    <div class="flex gap-2 mb-5 flex-wrap" id="lang-chips"></div>
-
-                    <div class="sec-h">Gaya Penulisan</div>
-                    <div class="flex gap-2 mb-5 flex-wrap" id="style-chips"></div>
-
-                    <div class="sec-h">Ukuran Kertas</div>
-                    <div class="flex gap-2 mb-5" id="size-chips"></div>
-
                     <div class="sec-h">Kop Surat</div>
-                    <div class="flex gap-2 mb-3 flex-wrap" id="kop-chips"></div>
                     <div class="f-group"><label class="f-label">Baris 1</label><input class="f-input" id="in-kop1" placeholder="Nama organisasi"></div>
-                    <div class="f-group"><label class="f-label">Baris 2</label><input class="f-input" id="in-kop2" placeholder="RT/RW atau divisi"></div>
-                    <div class="f-group"><label class="f-label">Alamat</label><input class="f-input" id="in-kop3" placeholder="Alamat"></div>
-
-                    <div class="sec-h mt-4">Catatan Kaki</div>
-                    <div class="f-group"><label class="f-label">Catatan Kiri</label><input class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun."></div>
-                    <div class="f-group"><label class="f-label">Catatan Kanan</label><input class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026"></div>
-
+                    <div class="f-group"><label class="f-label">Baris 2</label><input class="f-input" id="in-kop2" placeholder="Divisi / RT/RW"></div>
+                    <div class="f-group"><label class="f-label">Alamat</label><input class="f-input" id="in-kop3" placeholder="Alamat lengkap"></div>
+                    <div class="sec-h mt-4">Penerima</div>
+                    <div class="f-group"><label class="f-label">Yth.</label><div class="f-hint">Siapa yang menerima surat ini</div><input class="f-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat"></div>
+                    <div class="sec-h mt-4">Catatan</div>
+                    <div class="f-group"><label class="f-label">Catatan Kaki</label><input class="f-input" id="in-foot" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun."></div>
                     <div class="sec-h mt-4">Logo (Opsional)</div>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="f-group"><label class="f-label">Logo Kiri</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-l')"></div>
@@ -237,22 +209,19 @@
         </div>
 
         <!-- PREVIEW -->
-        <div id="preview-panel" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:16px 20px;overflow:auto;background:#e8e8e6;">
-            <!-- Zoom -->
-            <div class="zoom-bar mb-3 shrink-0">
+        <div id="preview-panel" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:16px 20px;overflow:auto;background:#e8e8e6">
+            <div class="flex items-center gap-2 mb-3 shrink-0">
                 <button class="zoom-btn" onclick="setZoom(0.55)">50%</button>
                 <button class="zoom-btn" onclick="setZoom(0.72)">75%</button>
                 <button class="zoom-btn sel" onclick="setZoom(1)">100%</button>
             </div>
-            <div id="a4-wrap">
-                <div id="a4"></div>
-            </div>
+            <div id="a4-wrap"><div id="a4"></div></div>
         </div>
     </div>
 
-    <!-- DOWNLOAD BAR -->
-    <div style="height:52px;border-top:1px solid #e4e4e7;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;">
-        <span class="text-[12px] text-sub" id="dl-hint">Lengkapi data untuk mengunduh</span>
+    <!-- DOWNLOAD -->
+    <div style="height:52px;border-top:1px solid #e4e4e7;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px">
+        <span class="text-[12px] text-sub" id="dl-hint">Pilih konteks untuk memulai</span>
         <button onclick="downloadPDF()" id="dl-btn" class="btn-p" disabled>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download PDF
@@ -261,470 +230,396 @@
 
     <script>
         let cur=0, mode='wizard', zoomLevel=1;
-        const labels=['Almarhum','Wafat','Pemakaman','Keluarga','Surat'];
+        const labels=['Konteks','Almarhum','Waktu','Keluarga','Atur'];
 
-        // ===== TEMPLATE DEFINITIONS =====
-        const templates = [
-            { id:'klasik', name:'Klasik', font:'"Times New Roman",serif',
-              style:'classic' },
-            { id:'modern', name:'Modern', font:'"Georgia",serif',
-              style:'modern' },
-            { id:'islami', name:'Islami', font:'"Book Antiqua",serif',
-              style:'islami' },
-            { id:'minimalis', name:'Minimalis', font:'"Cambria",serif',
-              style:'minimal' },
-            { id:'rt', name:'RT/RW', font:'"Times New Roman",serif',
-              style:'rt' },
-            { id:'masjid', name:'Masjid', font:'"Book Antiqua",serif',
-              style:'masjid' },
+        // ===== CONTEXT DEFINITIONS =====
+        const contexts = [
+            { id:'rt', icon:'🏘', name:'RT / RW', desc:'Surat resmi lingkungan',
+              subs:[], defaultKop:['RUKUN TETANGGA 03 / RW 05','',''] },
+            { id:'masjid', icon:'🕌', name:'Masjid', desc:'Pengumuman jamaah',
+              subs:[{id:'nu',name:'NU'},{id:'muhammadiyah',name:'Muhammadiyah'},{id:'umum',name:'Umum'}],
+              subLabel:'Aliran', defaultKop:['DEWAN KEMAKMURAN MASJID','',''] },
+            { id:'pesantren', icon:'🏫', name:'Pesantren', desc:'Pondok pesantren',
+              subs:[], defaultKop:['PONDOK PESANTREN','',''] },
+            { id:'desa', icon:'🏡', name:'Desa', desc:'Pemerintah desa',
+              subs:[], defaultKop:['PEMERINTAH DESA','',''] },
+            { id:'keluarga', icon:'👪', name:'Keluarga', desc:'Surat pribadi keluarga',
+              subs:[{id:'jawa',name:'Bahasa Jawa'},{id:'indo',name:'Bahasa Indonesia'},{id:'campur',name:'Campuran'}],
+              subLabel:'Bahasa', defaultKop:['','',''] },
+            { id:'minimalis', icon:'📄', name:'Minimalis', desc:'Desain bersih sederhana',
+              subs:[], defaultKop:['','',''] },
         ];
-        let selTpl='klasik';
+        let selCtx = null;
+        let selSub = null;
 
-        const languages=[
-            {id:'jawa',name:'Jawa Krama'},
-            {id:'jawa_ngoko',name:'Jawa Ngoko'},
-            {id:'indo',name:'Indonesia'},
-            {id:'campur',name:'Campuran'},
-        ];
-        let selLang='jawa';
+        function renderContexts() {
+            const grid = document.getElementById('ctx-grid');
+            grid.innerHTML = '';
+            contexts.forEach(c => {
+                const d = document.createElement('div');
+                d.className = 'ctx-card' + (selCtx === c.id ? ' sel' : '');
+                d.onclick = () => selectContext(c.id);
+                d.innerHTML = `<div class="ctx-icon">${c.icon}</div><div class="ctx-name">${c.name}</div><div class="ctx-desc">${c.desc}</div>`;
+                grid.appendChild(d);
+            });
+        }
 
-        const styles=[
-            {id:'formal',name:'Formal'},
-            {id:'tradisional',name:'Tradisional'},
-            {id:'modern',name:'Modern'},
-            {id:'islami',name:'Islami'},
-            {id:'nu',name:'NU'},
-            {id:'muhammadiyah',name:'Muhammadiyah'},
-        ];
-        let selStyle='tradisional';
+        function selectContext(id) {
+            selCtx = id;
+            selSub = null;
+            const ctx = contexts.find(c => c.id === id);
 
-        const sizes=[{id:'a4',name:'A4'},{id:'f4',name:'F4'}];
-        let selSize='a4';
+            // Set default kop
+            if (ctx.defaultKop[0]) {
+                document.getElementById('in-kop1').value = ctx.defaultKop[0];
+                document.getElementById('in-kop2').value = ctx.defaultKop[1];
+                document.getElementById('in-kop3').value = ctx.defaultKop[2];
+            }
 
-        const kopPresets=[
-            {id:'masjid',name:'Masjid',l1:'DEWAN KEMAKMURAN MASJID',l2:'',l3:''},
-            {id:'rt',name:'RT',l1:'RUKUN TETANGGA 03 / RW 05',l2:'',l3:''},
-            {id:'rw',name:'RW',l1:'RUKUN WARGA 05',l2:'',l3:''},
-            {id:'karang',name:'Karang Taruna',l1:'KARANG TARUNA',l2:'',l3:''},
-            {id:'desa',name:'Desa',l1:'PEMERINTAH DESA',l2:'',l3:''},
-            {id:'paguyuban',name:'Paguyuban',l1:'PAGUYUBAN',l2:'',l3:''},
-            {id:'custom',name:'Isi Sendiri',l1:'',l2:'',l3:''},
-        ];
-        let selKop='custom';
+            // Show sub options
+            const subDiv = document.getElementById('sub-opts');
+            const subChips = document.getElementById('sub-chips');
+            const subLabel = document.getElementById('sub-label');
+
+            if (ctx.subs.length > 0) {
+                subDiv.style.display = 'block';
+                subLabel.textContent = ctx.subLabel;
+                subChips.innerHTML = '';
+                ctx.subs.forEach(s => {
+                    const b = document.createElement('button');
+                    b.className = 'chip' + (selSub === s.id ? ' sel' : '');
+                    b.textContent = s.name;
+                    b.onclick = () => { selSub = s.id; selectContext(id); };
+                    subChips.appendChild(b);
+                });
+                if (!selSub) selSub = ctx.subs[0].id;
+            } else {
+                subDiv.style.display = 'none';
+                selSub = null;
+            }
+
+            renderContexts();
+            renderA4();
+        }
 
         // ===== TEMPLATE RENDERER =====
-        function renderA4() {
-            const a4 = document.getElementById('a4');
-            const tpl = templates.find(t=>t.id===selTpl);
-            const t = getTexts();
+        function getTemplateTexts() {
+            const ctx = selCtx || 'keluarga';
+            const sub = selSub;
             const nama = document.getElementById('in-nama').value || '';
+            const gelar = document.getElementById('in-gelar').value || '';
             const umur = document.getElementById('in-umur').value || '';
-            const penerima = document.getElementById('in-penerima').value || '';
             const status = document.getElementById('in-status').value;
+            const penerima = document.getElementById('in-penerima').value;
             const kop1 = document.getElementById('in-kop1').value;
             const kop2 = document.getElementById('in-kop2').value;
             const kop3 = document.getElementById('in-kop3').value;
-            const footL = document.getElementById('in-foot-l').value;
-            const footR = document.getElementById('in-foot-r').value;
+            const foot = document.getElementById('in-foot').value;
+            const wf = { hari: document.getElementById('in-wf-hari').value||'...', tgl: document.getElementById('in-wf-tgl').value||'...', jam: document.getElementById('in-wf-jam').value||'...', tmp: document.getElementById('in-wf-tmp').value||'...' };
+            const mk = { hari: document.getElementById('in-mk-hari').value||'...', tgl: document.getElementById('in-mk-tgl').value||'...', jam: document.getElementById('in-mk-jam').value||'...', tmp: document.getElementById('in-mk-tmp').value||'...' };
 
-            const wf = {
-                hari: document.getElementById('in-wf-hari').value||'...',
-                tgl: document.getElementById('in-wf-tgl').value||'...',
-                jam: document.getElementById('in-wf-jam').value||'...',
-                tmp: document.getElementById('in-wf-tmp').value||'...',
-            };
-            const mk = {
-                hari: document.getElementById('in-mk-hari').value||'...',
-                tgl: document.getElementById('in-mk-tgl').value||'...',
-                jam: document.getElementById('in-mk-jam').value||'...',
-                tmp: document.getElementById('in-mk-tmp').value||'...',
-            };
+            const fullNama = (gelar ? gelar + ' ' : '') + (nama || '...');
 
-            let famHTML = '';
+            return { ctx, sub, nama, gelar, umur, status, penerima, kop1, kop2, kop3, foot, wf, mk, fullNama };
+        }
+
+        function getFamHTML() {
+            let h = '';
             famData.forEach((f,i) => {
-                famHTML += `<div style="display:grid;grid-template-columns:20px 1fr 120px;font-size:12pt;line-height:1.5;margin-top:3px"><div style="text-align:right;padding-right:4px">${i+1}.</div><div>${f.nama||'...'}</div><div>${f.status}</div></div>`;
+                h += `<div style="display:grid;grid-template-columns:20px 1fr 120px;font-size:12pt;line-height:1.5;margin-top:3px"><div style="text-align:right;padding-right:4px">${i+1}.</div><div>${f.nama||'...'}</div><div>${f.status}</div></div>`;
             });
+            return h;
+        }
 
-            // Build different layouts per template style
+        function renderA4() {
+            const a4 = document.getElementById('a4');
+            const d = getTemplateTexts();
+            const fam = getFamHTML();
             let html = '';
 
-            if (tpl.style === 'classic') {
-                html = `
-                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
-                    <div style="text-align:center;margin-bottom:5px">
-                        ${kop1?`<div style="font-size:16pt;font-weight:bold">${kop1}</div>`:''}
-                        ${kop2?`<div style="font-size:16pt;font-weight:bold">${kop2}</div>`:''}
-                        ${kop3?`<div style="font-size:12pt;font-weight:bold">${kop3}</div>`:''}
-                    </div>
-                    <div style="border-top:3px double #000;margin:15px 0 20px"></div>
-                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
-                    <div style="font-size:12pt;font-weight:bold;color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin:10px 0;height:16px"></div>
-                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:15px">${t.salam}</div>
-                    <div style="font-size:18pt;font-weight:bold;text-align:center;margin:15px 0;letter-spacing:1px">${t.title}</div>
-                    <div style="font-size:12pt">${t.open}</div>
-                    <div style="font-size:12pt">${t.announce}</div>
-                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt;font-weight:bold">Yuswa : ${umur||'...'}</div></div>
-                    <div style="font-size:12pt;margin-top:15px">${t.wfLabel}</div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.4">
-                        <div>Dinten</div><div>:</div><div>${wf.hari}</div>
-                        <div>Tanggal</div><div>:</div><div>${wf.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
-                        <div>Wonten</div><div>:</div><div>${wf.tmp}</div>
-                    </div>
-                    <div style="font-size:12pt;margin-top:15px">${t.mkLabel}</div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.4">
-                        <div>Dinten</div><div>:</div><div>${mk.hari}</div>
-                        <div>Tanggal</div><div>:</div><div>${mk.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
-                        <div>Wonten ing makam</div><div>:</div><div>${mk.tmp}</div>
-                    </div>
-                    <div style="font-size:12pt;margin-top:15px;text-align:justify">${t.closing} ${status} kasebat. Mugi dadosna ing pamriksa.</div>
-                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:15px">${t.wsalam}</div>
-                    <div style="font-size:12pt">${t.familyLabel}</div>
-                    ${famHTML}
-                    <div style="flex:1"></div>
-                    <div style="border-top:1px solid #000;padding-top:8px;margin-top:auto;display:flex;justify-content:space-between;font-size:10pt;font-style:italic"><div>${footL}</div><div>${footR}</div></div>
-                </div>`;
-
-            } else if (tpl.style === 'modern') {
-                html = `
-                <div style="padding:28mm 24mm 18mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
-                    ${kop1?`<div style="font-size:11pt;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#555;margin-bottom:2px">${kop1}</div>`:''}
-                    ${kop2?`<div style="font-size:10pt;color:#888;letter-spacing:0.1em">${kop2}</div>`:''}
-                    ${kop3?`<div style="font-size:9pt;color:#aaa;margin-bottom:20mm">${kop3}</div>`:''}
-                    <div style="border-top:1px solid #ccc;margin:0 0 20mm"></div>
-                    <div style="font-size:13pt;font-weight:bold;text-align:center;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8mm">${t.title}</div>
-                    <div style="font-size:11pt;text-align:center;color:#555;margin-bottom:10mm">${t.open}</div>
-                    <div style="text-align:center;margin-bottom:10mm"><div style="font-size:16pt;font-weight:700;letter-spacing:-0.01em">${nama||'...'}</div><div style="font-size:10pt;color:#777;margin-top:4px">${status} &bull; Yuswa ${umur||'...'}</div></div>
-                    <div style="display:grid;grid-template-columns:90px 12px 1fr;font-size:10.5pt;line-height:1.8;color:#333;margin-bottom:8mm">
-                        <div style="color:#888">Wafat</div><div>:</div><div>${wf.hari}, ${wf.tgl} pukul ${wf.jam}</div>
-                        <div style="color:#888">Tempat</div><div>:</div><div>${wf.tmp}</div>
-                    </div>
-                    <div style="display:grid;grid-template-columns:90px 12px 1fr;font-size:10.5pt;line-height:1.8;color:#333;margin-bottom:10mm">
-                        <div style="color:#888">Makam</div><div>:</div><div>${mk.hari}, ${mk.tgl} pukul ${mk.jam}</div>
-                        <div style="color:#888">Lokasi</div><div>:</div><div>${mk.tmp}</div>
-                    </div>
-                    <div style="font-size:10.5pt;color:#444;line-height:1.6;margin-bottom:8mm">${t.closing} ${status} kasebat.</div>
-                    <div style="font-size:10.5pt;color:#444;margin-bottom:10mm">${t.familyLabel}</div>
-                    ${famHTML}
-                    <div style="flex:1"></div>
-                    <div style="border-top:1px solid #ddd;padding-top:8px;display:flex;justify-content:space-between;font-size:9pt;color:#999"><div>${footL}</div><div>${footR}</div></div>
-                </div>`;
-
-            } else if (tpl.style === 'islami') {
-                html = `
-                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
-                    <div style="text-align:center;font-size:14pt;margin-bottom:8px;color:#2d5a3d;line-height:1.6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-                    <div style="text-align:center;font-size:11pt;color:#2d5a3d;margin-bottom:12px;line-height:1.5">إِنَّا لِلّهِ وَإِنَّـا إِلَيْهِ رَاجِعُونَ</div>
-                    ${kop1?`<div style="text-align:center;font-size:15pt;font-weight:bold;color:#1a3a25;margin-top:8px">${kop1}</div>`:''}
-                    ${kop2?`<div style="text-align:center;font-size:13pt;font-weight:bold;color:#1a3a25">${kop2}</div>`:''}
-                    ${kop3?`<div style="text-align:center;font-size:11pt;color:#555">${kop3}</div>`:''}
-                    <div style="border-top:2px solid #2d5a3d;margin:15px 0 20px"></div>
-                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
-                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:12px">${t.salam}</div>
-                    <div style="font-size:17pt;font-weight:bold;text-align:center;margin:12px 0;color:#2d5a3d">${t.title}</div>
-                    <div style="font-size:12pt;text-align:center;margin-bottom:10px">${t.open}</div>
-                    <div style="font-size:12pt">${t.announce}</div>
-                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt">Yuswa : ${umur||'...'}</div></div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
-                        <div>Hari/Tgl</div><div>:</div><div>${wf.hari}, ${wf.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
-                        <div>Tempat</div><div>:</div><div>${wf.tmp}</div>
-                    </div>
-                    <div style="font-size:12pt;margin-top:12px">Dimakamkan:</div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
-                        <div>Hari/Tgl</div><div>:</div><div>${mk.hari}, ${mk.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
-                        <div>Makam</div><div>:</div><div>${mk.tmp}</div>
-                    </div>
-                    <div style="font-size:12pt;margin-top:12px;text-align:justify">${t.closing} ${status} kasebat.</div>
-                    <div style="font-size:12pt;font-style:italic;margin-top:8px">${t.familyLabel}</div>
-                    ${famHTML}
-                    <div style="flex:1"></div>
-                    <div style="border-top:1px solid #2d5a3d;padding-top:8px;display:flex;justify-content:space-between;font-size:10pt;font-style:italic;color:#2d5a3d"><div>${footL}</div><div>${footR}</div></div>
-                </div>`;
-
-            } else if (tpl.style === 'minimal') {
-                html = `
-                <div style="padding:30mm 28mm 20mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
-                    ${kop1?`<div style="font-size:10pt;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:2px">${kop1}</div>`:''}
-                    ${kop2?`<div style="font-size:9pt;color:#bbb">${kop2}</div>`:''}
-                    <div style="margin-top:24mm"></div>
-                    <div style="font-size:22pt;font-weight:300;letter-spacing:-0.02em;margin-bottom:16mm">${t.title}</div>
-                    <div style="font-size:12pt;color:#555;margin-bottom:10mm">${t.open}</div>
-                    <div style="margin-bottom:10mm"><div style="font-size:15pt;font-weight:600">${nama||'...'}</div><div style="font-size:10pt;color:#888;margin-top:4px">${status} &middot; ${umur||'...'}</div></div>
-                    <div style="font-size:10pt;line-height:2;color:#444">
-                        <div>${wf.hari}, ${wf.tgl} &middot; ${wf.jam}</div>
-                        <div>${wf.tmp}</div>
-                    </div>
-                    <div style="margin:8mm 0"></div>
-                    <div style="font-size:10pt;line-height:2;color:#444">
-                        <div>${mk.hari}, ${mk.tgl} &middot; ${mk.jam}</div>
-                        <div>${mk.tmp}</div>
-                    </div>
-                    <div style="margin:10mm 0"></div>
-                    <div style="font-size:10pt;color:#555;line-height:1.7">${t.familyLabel}</div>
-                    ${famHTML}
-                    <div style="flex:1"></div>
-                    <div style="font-size:9pt;color:#bbb;display:flex;justify-content:space-between"><div>${footL}</div><div>${footR}</div></div>
-                </div>`;
-
-            } else if (tpl.style === 'rt') {
-                html = `
-                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+            // ===== RT/RW =====
+            if (d.ctx === 'rt') {
+                html = `<div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:'Times New Roman',serif">
                     <div style="border:2px solid #000;padding:12px 16px;text-align:center;margin-bottom:15px">
-                        ${kop1?`<div style="font-size:14pt;font-weight:bold">${kop1}</div>`:''}
-                        ${kop2?`<div style="font-size:12pt;font-weight:bold">${kop2}</div>`:''}
-                        ${kop3?`<div style="font-size:10pt">${kop3}</div>`:''}
+                        ${d.kop1?`<div style="font-size:14pt;font-weight:bold">${d.kop1}</div>`:''}
+                        ${d.kop2?`<div style="font-size:12pt">${d.kop2}</div>`:''}
+                        ${d.kop3?`<div style="font-size:10pt">${d.kop3}</div>`:''}
                     </div>
                     <div style="display:flex;justify-content:space-between;font-size:10pt;margin-bottom:15px">
                         <div>Nomor: .... /RT../RW../ ${new Date().getFullYear()}</div>
                         <div>${new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
                     </div>
                     <div style="font-size:14pt;font-weight:bold;text-align:center;text-decoration:underline;margin-bottom:15px">SURAT PEMBERITAHUAN DUKA CITA</div>
-                    <div style="font-size:12pt">Yth. ${penerima}</div>
-                    <div style="font-size:12pt;font-style:italic;margin-top:10px">Assalamu'alaikum Wr.Wb</div>
-                    <div style="font-size:12pt;margin-top:10px">Dengan hormat, kami sampaikan bahwa:</div>
+                    <div style="font-size:12pt">Yth. ${d.penerima}</div>
+                    <div style="font-size:12pt;margin-top:10px">Dengan hormat, kami sampaikan bahwa warga kami yang bernama:</div>
                     <table style="font-size:12pt;margin:10px 0;border-collapse:collapse">
-                        <tr><td style="padding:3px 12px 3px 0">Nama</td><td>:</td><td style="padding-left:8px;font-weight:bold">${nama||'...'}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Status</td><td>:</td><td style="padding-left:8px">${status}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Umur</td><td>:</td><td style="padding-left:8px">${umur||'...'}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Wafat</td><td>:</td><td style="padding-left:8px">${wf.hari}, ${wf.tgl} pukul ${wf.jam}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Tempat</td><td>:</td><td style="padding-left:8px">${wf.tmp}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Nama</td><td>:</td><td style="padding-left:8px;font-weight:bold">${d.fullNama}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Umur</td><td>:</td><td style="padding-left:8px">${d.umur||'...'}</td></tr>
                     </table>
-                    <div style="font-size:12pt;margin-top:5px">Pemakaman akan dilaksanakan:</div>
+                    <div style="font-size:12pt">telah meninggal dunia pada:</div>
                     <table style="font-size:12pt;margin:5px 0;border-collapse:collapse">
-                        <tr><td style="padding:3px 12px 3px 0">Hari/Tgl</td><td>:</td><td style="padding-left:8px">${mk.hari}, ${mk.tgl}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Jam</td><td>:</td><td style="padding-left:8px">${mk.jam}</td></tr>
-                        <tr><td style="padding:3px 12px 3px 0">Makam</td><td>:</td><td style="padding-left:8px">${mk.tmp}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Hari/Tgl</td><td>:</td><td style="padding-left:8px">${d.wf.hari}, ${d.wf.tgl}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Jam</td><td>:</td><td style="padding-left:8px">${d.wf.jam}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Tempat</td><td>:</td><td style="padding-left:8px">${d.wf.tmp}</td></tr>
                     </table>
-                    <div style="font-size:12pt;margin-top:10px">Demikian surat ini kami sampaikan. Atas perhatiannya, kami ucapkan terima kasih.</div>
+                    <div style="font-size:12pt;margin-top:5px">Pemakaman akan dilaksanakan pada:</div>
+                    <table style="font-size:12pt;margin:5px 0;border-collapse:collapse">
+                        <tr><td style="padding:3px 12px 3px 0">Hari/Tgl</td><td>:</td><td style="padding-left:8px">${d.mk.hari}, ${d.mk.tgl}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Jam</td><td>:</td><td style="padding-left:8px">${d.mk.jam}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Makam</td><td>:</td><td style="padding-left:8px">${d.mk.tmp}</td></tr>
+                    </table>
+                    <div style="font-size:12pt;margin-top:15px">Demikian pemberitahuan ini kami sampaikan. Atas perhatian dan kehadirannya, kami ucapkan terima kasih.</div>
                     <div style="font-size:12pt;font-style:italic;margin-top:10px">Wassalamu'alaikum Wr.Wb</div>
-                    <div style="font-size:12pt;margin-top:10px">Keluarga yang berduka:</div>
-                    ${famHTML}
                     <div style="flex:1"></div>
-                    <div style="font-size:10pt;display:flex;justify-content:space-between;margin-top:auto;border-top:1px solid #000;padding-top:8px"><div>${footL}</div><div>${footR}</div></div>
+                    <div style="display:flex;justify-content:space-between;margin-top:20px">
+                        <div style="font-size:11pt;text-align:center;width:45%"><div>Keluarga yang berduka:</div><div style="margin-top:40px;text-decoration:underline">${d.nama||'...'}</div></div>
+                        <div style="font-size:11pt;text-align:center;width:45%"><div>Ketua RT/RW:</div><div style="margin-top:40px;text-decoration:underline">( .................. )</div></div>
+                    </div>
+                    <div style="border-top:1px solid #000;padding-top:6px;margin-top:15px;font-size:9pt;color:#666;display:flex;justify-content:space-between"><div>${d.foot}</div></div>
                 </div>`;
 
-            } else if (tpl.style === 'masjid') {
-                html = `
-                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
-                    <div style="text-align:center;margin-bottom:10px">
-                        <div style="font-size:24px;margin-bottom:6px">🕌</div>
-                        ${kop1?`<div style="font-size:15pt;font-weight:bold;color:#1a5c2e">${kop1}</div>`:''}
-                        ${kop2?`<div style="font-size:12pt;font-weight:bold;color:#1a5c2e">${kop2}</div>`:''}
-                        ${kop3?`<div style="font-size:10pt;color:#555">${kop3}</div>`:''}
+            // ===== MASJID =====
+            } else if (d.ctx === 'masjid') {
+                const isOpening = d.sub === 'nu' || d.sub === 'umum';
+                const green = '#1a5c2e';
+                html = `<div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:'Book Antiqua',serif">
+                    <div style="text-align:center;margin-bottom:8px">
+                        <div style="font-size:22px;margin-bottom:4px">🕌</div>
+                        ${d.kop1?`<div style="font-size:15pt;font-weight:bold;color:${green}">${d.kop1}</div>`:''}
+                        ${d.kop2?`<div style="font-size:12pt;color:${green}">${d.kop2}</div>`:''}
+                        ${d.kop3?`<div style="font-size:10pt;color:#555">${d.kop3}</div>`:''}
                     </div>
-                    <div style="border-top:2px solid #1a5c2e;margin:10px 0 15px"></div>
-                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
-                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:10px">${t.salam}</div>
-                    <div style="font-size:16pt;font-weight:bold;text-align:center;margin:12px 0;color:#1a5c2e">${t.title}</div>
-                    <div style="font-size:12pt;text-align:center">${t.open}</div>
-                    <div style="font-size:12pt;margin-top:10px">${t.announce}</div>
-                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt">Yuswa : ${umur||'...'}</div></div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
-                        <div>Dinten</div><div>:</div><div>${wf.hari}</div>
-                        <div>Tanggal</div><div>:</div><div>${wf.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
-                        <div>Tempat</div><div>:</div><div>${wf.tmp}</div>
+                    <div style="border-top:2px solid ${green};margin:10px 0 15px"></div>
+                    ${isOpening?`<div style="text-align:center;font-size:13pt;color:${green};margin-bottom:10px;line-height:1.6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ<br>إِنَّا لِلّهِ وَإِنَّـا إِلَيْهِ رَاجِعُونَ</div>`:''}
+                    <div style="font-size:15pt;font-weight:bold;text-align:center;color:${green};margin:10px 0">${d.sub==='muhammadiyah'?'BERITA DUKA':'PAWARTOS DUKA'}</div>
+                    <div style="text-align:center;margin:15px 0"><div style="font-size:16pt;font-weight:bold;text-decoration:underline">${d.status} ${d.fullNama}</div>${d.umur?`<div style="font-size:11pt;margin-top:4px">Yuswa: ${d.umur}</div>`:''}</div>
+                    <div style="font-size:12pt;text-align:justify;line-height:1.6">
+                        ${d.sub==='muhammadiyah'
+                            ?`Telah berpulang ke Rahmatullah ${d.status} <strong>${d.fullNama}</strong> pada hari ${d.wf.hari}, ${d.wf.tgl} pukul ${d.wf.jam} di ${d.wf.tmp}.`
+                            :`Sampun katimbalan sowan wonten ngarsanipun Allah SWT ${d.status} <strong>${d.fullNama}</strong> wonten dinten ${d.wf.hari}, ${d.wf.tgl} tabuh ${d.wf.jam} wonten ${d.wf.tmp}.`}
                     </div>
-                    <div style="font-size:12pt;margin-top:12px">Jenazah akan dishalatkan dan dimakamkan:</div>
-                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
-                        <div>Hari/Tgl</div><div>:</div><div>${mk.hari}, ${mk.tgl}</div>
-                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
-                        <div>Makam</div><div>:</div><div>${mk.tmp}</div>
+                    <div style="font-size:12pt;margin-top:12px;text-align:justify;line-height:1.6">
+                        Jenazah akan dishalatkan dan dimakamkan pada hari ${d.mk.hari}, ${d.mk.tgl} pukul ${d.mk.jam} di ${d.mk.tmp}.
                     </div>
-                    <div style="font-size:12pt;margin-top:12px">${t.familyLabel}</div>
-                    ${famHTML}
+                    <div style="font-size:12pt;margin-top:12px">Keluarga yang berduka:</div>
+                    ${fam}
                     <div style="flex:1"></div>
-                    <div style="border-top:1px solid #1a5c2e;padding-top:8px;display:flex;justify-content:space-between;font-size:10pt;color:#1a5c2e"><div>${footL}</div><div>${footR}</div></div>
+                    <div style="border-top:1px solid ${green};padding-top:8px;margin-top:auto;display:flex;justify-content:space-between;font-size:9pt;color:${green}"><div>${d.foot}</div></div>
+                </div>`;
+
+            // ===== PESANTREN =====
+            } else if (d.ctx === 'pesantren') {
+                html = `<div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:'Book Antiqua',serif">
+                    <div style="text-align:center;margin-bottom:8px">
+                        ${d.kop1?`<div style="font-size:16pt;font-weight:bold;letter-spacing:0.05em">${d.kop1}</div>`:''}
+                        ${d.kop2?`<div style="font-size:12pt">${d.kop2}</div>`:''}
+                        ${d.kop3?`<div style="font-size:10pt;color:#666">${d.kop3}</div>`:''}
+                    </div>
+                    <div style="border-top:3px double #000;margin:10px 0 15px"></div>
+                    <div style="text-align:center;font-size:13pt;margin-bottom:8px;line-height:1.6;color:#2d5a3d">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                    <div style="text-align:center;font-size:12pt;margin-bottom:12px;line-height:1.6">إِنَّا لِلّهِ وَإِنَّـا إِلَيْهِ رَاجِعُونَ</div>
+                    <div style="font-size:16pt;font-weight:bold;text-align:center;text-decoration:underline;margin-bottom:15px">BERITA DUKA</div>
+                    <div style="text-align:center;margin-bottom:15px"><div style="font-size:18pt;font-weight:bold">${d.fullNama}</div>${d.umur?`<div style="font-size:11pt;color:#555;margin-top:3px">Yuswa: ${d.umur}</div>`:''}</div>
+                    <div style="font-size:12pt;text-align:justify;line-height:1.7">
+                        Telah berpulang ke Rahmatullah ${d.status} <strong>${d.fullNama}</strong>, pada hari ${d.wf.hari}, ${d.wf.tgl} pukul ${d.wf.jam} di ${d.wf.tmp}.
+                    </div>
+                    <div style="font-size:12pt;margin-top:10px;text-align:justify;line-height:1.7">
+                        Jenazah akan dishalatkan dan dimakamkan pada hari ${d.mk.hari}, ${d.mk.tgl} pukul ${d.mk.jam} di ${d.mk.tmp}.
+                    </div>
+                    <div style="font-size:12pt;margin-top:12px">Keluarga yang ditinggalkan:</div>
+                    ${fam}
+                    <div style="flex:1"></div>
+                    <div style="text-align:center;font-size:10pt;margin-top:15px;font-style:italic">"Kullu nafsin dzaa-iqatul maut"</div>
+                    <div style="border-top:1px solid #000;padding-top:6px;margin-top:10px;font-size:9pt;display:flex;justify-content:space-between"><div>${d.foot}</div></div>
+                </div>`;
+
+            // ===== DESA =====
+            } else if (d.ctx === 'desa') {
+                html = `<div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:'Times New Roman',serif">
+                    <div style="text-align:center;margin-bottom:10px">
+                        ${d.kop1?`<div style="font-size:14pt;font-weight:bold">${d.kop1}</div>`:''}
+                        ${d.kop2?`<div style="font-size:12pt">${d.kop2}</div>`:''}
+                        ${d.kop3?`<div style="font-size:10pt">${d.kop3}</div>`:''}
+                    </div>
+                    <div style="border-bottom:3px double #000;margin-bottom:15px"></div>
+                    <div style="display:flex;justify-content:space-between;font-size:10pt;margin-bottom:12px">
+                        <div>Nomor: ...../Duka/${new Date().getFullYear()}</div>
+                        <div>${new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
+                    </div>
+                    <div style="font-size:14pt;font-weight:bold;text-align:center;text-decoration:underline;margin-bottom:15px">SURAT PEMBERITAHUAN DUKA CITA</div>
+                    <div style="font-size:12pt">Yth. ${d.penerima}</div>
+                    <div style="font-size:12pt;margin-top:8px">di Tempat</div>
+                    <div style="font-size:12pt;margin-top:10px;text-align:justify">Dengan ini kami sampaikan bahwa salah satu warga kami telah meninggal dunia:</div>
+                    <table style="font-size:12pt;margin:10px 0;border-collapse:collapse">
+                        <tr><td style="padding:4px 15px 4px 20px">Nama</td><td>:</td><td style="padding-left:8px;font-weight:bold">${d.fullNama}</td></tr>
+                        <tr><td style="padding:4px 15px 4px 20px">Umur</td><td>:</td><td style="padding-left:8px">${d.umur||'...'}</td></tr>
+                        <tr><td style="padding:4px 15px 4px 20px">Meninggal</td><td>:</td><td style="padding-left:8px">${d.wf.hari}, ${d.wf.tgl} pukul ${d.wf.jam}</td></tr>
+                        <tr><td style="padding:4px 15px 4px 20px">Tempat</td><td>:</td><td style="padding-left:8px">${d.wf.tmp}</td></tr>
+                        <tr><td style="padding:4px 15px 4px 20px">Pemakaman</td><td>:</td><td style="padding-left:8px">${d.mk.hari}, ${d.mk.tgl} pukul ${d.mk.jam}</td></tr>
+                        <tr><td style="padding:4px 15px 4px 20px">Makam</td><td>:</td><td style="padding-left:8px">${d.mk.tmp}</td></tr>
+                    </table>
+                    <div style="font-size:12pt;margin-top:10px;text-align:justify">Demikian surat pemberitahuan ini dibuat untuk dapat diketahui oleh seluruh warga.</div>
+                    <div style="font-size:12pt;font-style:italic;margin-top:8px">Wassalamu'alaikum Wr.Wb</div>
+                    <div style="flex:1"></div>
+                    <div style="display:flex;justify-content:space-between;margin-top:20px">
+                        <div style="font-size:11pt;text-align:center;width:45%"><div>Keluarga Berduka</div><div style="margin-top:40px;text-decoration:underline">${d.nama||'...'}</div></div>
+                        <div style="font-size:11pt;text-align:center;width:45%"><div>Kepala Desa</div><div style="margin-top:40px;text-decoration:underline">( .................. )</div></div>
+                    </div>
+                    <div style="border-top:1px solid #000;padding-top:6px;margin-top:12px;font-size:9pt;color:#666;display:flex;justify-content:space-between"><div>${d.foot}</div></div>
+                </div>`;
+
+            // ===== KELUARGA (narrative) =====
+            } else if (d.ctx === 'keluarga') {
+                const lang = d.sub || 'jawa';
+                const isJawa = lang === 'jawa';
+                const salam = "Assalamu'alaikum Wr.Wb";
+                const title = isJawa ? 'PAWARTOS LELAYU' : (lang === 'indo' ? 'BERITA DUKA CITA' : 'PAWARTOS LELAYU');
+                const open = isJawa ? "Inna lillahi wa inna ilaihi roji'un" : "Innalillahi wa inna ilaihi roji'un";
+                const announce = isJawa ? 'Sampun katimbalan sowan wonten ngarsanipun Allah SWT :' : 'Telah berpulang ke Rahmatullah :';
+                const narrate = isJawa
+                    ? `${d.status} <strong>${d.fullNama}</strong>, wonten dinten ${d.wf.hari}, ${d.wf.tgl} tabuh ${d.wf.jam} wonten ${d.wf.tmp}.`
+                    : `${d.status} <strong>${d.fullNama}</strong>, pada hari ${d.wf.hari}, ${d.wf.tgl} pukul ${d.wf.jam} di ${d.wf.tmp}.`;
+                const mkNarrate = isJawa
+                    ? `Jenazah badhe dipunkasareaken wonten ${d.mk.hari}, ${d.mk.tgl} tabuh ${d.mk.jam} wonten ${d.mk.tmp}.`
+                    : `Jenazah akan dimakamkan pada hari ${d.mk.hari}, ${d.mk.tgl} pukul ${d.mk.jam} di ${d.mk.tmp}.`;
+
+                html = `<div style="padding:25mm 22mm 18mm;display:flex;flex-direction:column;height:100%;font-family:'Georgia',serif">
+                    <div style="text-align:center;margin-bottom:20mm">
+                        ${d.kop1?`<div style="font-size:11pt;letter-spacing:0.15em;text-transform:uppercase;color:#555">${d.kop1}</div>`:''}
+                        ${d.kop2?`<div style="font-size:10pt;color:#888">${d.kop2}</div>`:''}
+                    </div>
+                    <div style="font-size:22pt;font-weight:bold;text-align:center;letter-spacing:-0.01em;margin-bottom:6mm">${title}</div>
+                    <div style="text-align:center;font-size:11pt;color:#555;margin-bottom:10mm">${open}</div>
+                    <div style="text-align:center;margin-bottom:12mm"><div style="font-size:18pt;font-weight:bold">${d.fullNama}</div>${d.umur?`<div style="font-size:10pt;color:#888;margin-top:3px">${d.umur}</div>`:''}</div>
+                    <div style="font-size:12pt;line-height:1.8;text-align:justify;margin-bottom:8mm">${announce}<br>${narrate}</div>
+                    <div style="font-size:12pt;line-height:1.8;text-align:justify;margin-bottom:8mm">${mkNarrate}</div>
+                    <div style="font-size:11pt;color:#555;margin-bottom:5mm">${isJawa?'Ingkang nandang sungkawa:':'Yang berduka:'}</div>
+                    ${fam}
+                    <div style="flex:1"></div>
+                    <div style="font-size:9pt;color:#bbb;display:flex;justify-content:space-between;border-top:1px solid #eee;padding-top:6px"><div>${d.foot}</div></div>
+                </div>`;
+
+            // ===== MINIMALIS =====
+            } else {
+                html = `<div style="padding:30mm 28mm 20mm;display:flex;flex-direction:column;height:100%;font-family:'Cambria',serif">
+                    ${d.kop1?`<div style="font-size:10pt;letter-spacing:0.2em;text-transform:uppercase;color:#999">${d.kop1}</div>`:''}
+                    ${d.kop2?`<div style="font-size:9pt;color:#bbb">${d.kop2}</div>`:''}
+                    <div style="margin-top:24mm"></div>
+                    <div style="font-size:24pt;font-weight:300;letter-spacing:-0.02em;margin-bottom:15mm">${d.ctx==='minimalis'?'Pengumuman Duka':'PAWARTOS LELAYU'}</div>
+                    <div style="font-size:14pt;font-weight:600;margin-bottom:4mm">${d.fullNama}</div>
+                    ${d.umur?`<div style="font-size:10pt;color:#888;margin-bottom:10mm">${d.umur}</div>`:''}
+                    <div style="font-size:10pt;line-height:2;color:#444">
+                        <div>${d.wf.hari}, ${d.wf.tgl} &middot; ${d.wf.jam}</div>
+                        <div>${d.wf.tmp}</div>
+                    </div>
+                    <div style="margin:6mm 0"></div>
+                    <div style="font-size:10pt;line-height:2;color:#444">
+                        <div>${d.mk.hari}, ${d.mk.tgl} &middot; ${d.mk.jam}</div>
+                        <div>${d.mk.tmp}</div>
+                    </div>
+                    <div style="margin:8mm 0"></div>
+                    <div style="font-size:10pt;color:#555">Yang berduka:</div>
+                    ${fam}
+                    <div style="flex:1"></div>
+                    <div style="font-size:9pt;color:#bbb;display:flex;justify-content:space-between"><div>${d.foot}</div></div>
                 </div>`;
             }
 
             a4.innerHTML = html;
-            a4.style.fontFamily = tpl.font;
-        }
-
-        // ===== TEXT VARIANTS =====
-        function getTexts() {
-            const t = {salam:'',title:'',open:'',announce:'',wfLabel:'',mkLabel:'',closing:'',wsalam:'',familyLabel:''};
-            if (selLang==='jawa') {
-                t.salam="Assalamu'alaikum Wr.Wb"; t.title='PAWARTOS LELAYU';
-                t.open="Inna lillahi wa inna ilaihi roji'un"; t.announce='Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
-                t.wfLabel='Sedorikolo'; t.mkLabel='Jenazah badhe dipunkasareaken';
-                t.closing='Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng';
-                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Ingkang nandang sungkawa :';
-            } else if (selLang==='jawa_ngoko') {
-                t.salam="Assalamu'alaikum Wr.Wb"; t.title='WARTOS LELAYU';
-                t.open="Inna lillahi wa inna ilaihi roji'un"; t.announce='Wis dipundang dening Gusti Allah SWT :';
-                t.wfLabel='Wektu Sedo'; t.mkLabel='Jenazah arep dikubur';
-                t.closing='Kangge Bapak/Ibu/Saudara kulo nyuwun penghormatan pungkasan kangge';
-                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Sing melu belasungkawa :';
-            } else if (selLang==='indo') {
-                t.salam="Assalamu'alaikum Wr.Wb"; t.title='BERITA DUKA CITA';
-                t.open="Innalillahi wa inna ilaihi roji'un"; t.announce='Telah berpulang ke Rahmatullah :';
-                t.wfLabel='Waktu Wafat'; t.mkLabel='Jenazah akan dimakamkan';
-                t.closing='Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
-                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Yang berduka :';
-            } else {
-                t.salam="Assalamu'alaikum Wr.Wb"; t.title='PAWARTOS LELAYU';
-                t.open="Innalillahi wa inna ilaihi roji'un"; t.announce='Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
-                t.wfLabel='Sedorikolo'; t.mkLabel='Jenazah akan dimakamkan';
-                t.closing='Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
-                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Yang berduka / Ingkang nandang sungkawa :';
-            }
-            // Style mods
-            if (selStyle==='islami') { t.salam="Assalamu'alaikum Warahmatullahi Wabarakatuh"; t.wsalam="Wassalamu'alaikum Warahmatullahi Wabarakatuh"; }
-            if (selStyle==='nu') { t.open="Innalillahi wa inna ilaihi roji'un. Sesungguhnya kami milik Allah dan kepada-Nya kami kembali."; }
-            if (selStyle==='muhammadiyah') { if(selLang==='indo') t.title='SURAT PEMBERITAHUAN DUKA'; t.open="Telah berpulang ke Rahmatullah"; }
-            if (selStyle==='modern') { if(selLang==='indo') t.title='SURAT PEMBERITAHUAN DUKA CITA'; }
-            return t;
-        }
-
-        // ===== CHIPS & CARDS =====
-        function renderChips(id, items, sel, fn) {
-            const c=document.getElementById(id); c.innerHTML='';
-            items.forEach(i=>{
-                const b=document.createElement('button');
-                b.className='chip'+(sel===i.id?' sel':'');
-                b.textContent=i.name;
-                b.onclick=()=>{fn(i.id);renderAll();};
-                c.appendChild(b);
-            });
-        }
-
-        function renderTplCards() {
-            const g=document.getElementById('tpl-grid'); g.innerHTML='';
-            templates.forEach(t=>{
-                const d=document.createElement('div');
-                d.className='tpl-card'+(selTpl===t.id?' sel':'');
-                d.onclick=()=>{selTpl=t.id;renderTplCards();renderA4();};
-                d.innerHTML=`<div class="tpl-thumb" style="font-family:${t.font};padding:6px;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                    <div style="font-size:5px;font-weight:bold;text-align:center;margin-bottom:2px">${t.name==='Islami'?'﷽':''}</div>
-                    <div style="font-size:5px;font-weight:bold;text-align:center">${t.name==='RT/RW'?'RT 03/RW 05':''}</div>
-                    <div style="font-size:6px;font-weight:bold;text-align:center;border-${t.style==='modern'?'bottom':'top'}:${t.style==='minimal'?'none':'1px'} solid #000;padding:2px 0;margin:2px 0">${t.style==='rt'?'SURAT PEMBERITAHUAN':'PAWARTOS LELAYU'}</div>
-                    <div style="font-size:3.5px;text-align:center;line-height:1.6;color:#555">Nama Almarhum<br>Yuswa: 60 thn</div>
-                </div>
-                <div class="tpl-name">${t.name}</div>`;
-                g.appendChild(d);
-            });
-        }
-
-        function renderAll() {
-            renderChips('lang-chips',languages,selLang,id=>{selLang=id;});
-            renderChips('style-chips',styles,selStyle,id=>{selStyle=id;});
-            renderChips('size-chips',sizes,selSize,id=>{selSize=id;});
-            renderChips('kop-chips',kopPresets,selKop,id=>{
-                selKop=id;
-                const p=kopPresets.find(k=>k.id===id);
-                if(p&&id!=='custom'){document.getElementById('in-kop1').value=p.l1;document.getElementById('in-kop2').value=p.l2;document.getElementById('in-kop3').value=p.l3;}
-            });
-            renderA4();
         }
 
         // ===== Wizard =====
         function goStep(n) {
-            if(n<0||n>4||mode==='all') return;
-            document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+            if (n < 0 || n > 4 || mode === 'all') return;
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
-            cur=n;
-            document.querySelectorAll('.stp-item').forEach(s=>{
-                const i=parseInt(s.dataset.s);
-                s.className='stp-item'+(i<n?' done':i===n?' current':'');
+            cur = n;
+            document.querySelectorAll('.stp-item').forEach(s => {
+                const i = parseInt(s.dataset.s);
+                s.className = 'stp-item' + (i < n ? ' done' : i === n ? ' current' : '');
             });
-            document.querySelectorAll('.stp-line').forEach((l,i)=>{l.className='stp-line'+(i<n?' done':'');});
-            document.getElementById('btn-back').style.visibility=n===0?'hidden':'visible';
-            const nb=document.getElementById('btn-next');
-            if(n===4){nb.textContent='Download PDF';nb.onclick=downloadPDF;}
-            else{nb.textContent='Lanjut →';nb.onclick=()=>goStep(cur+1);}
+            document.querySelectorAll('.stp-line').forEach((l, i) => l.className = 'stp-line' + (i < n ? ' done' : ''));
+            document.getElementById('btn-back').style.visibility = n === 0 ? 'hidden' : 'visible';
+            const nb = document.getElementById('btn-next');
+            if (n === 4) { nb.textContent = 'Download PDF'; nb.onclick = downloadPDF; }
+            else { nb.textContent = 'Lanjut →'; nb.onclick = () => goStep(cur + 1); }
             updateDL();
-            document.getElementById('form-scroll').scrollTop=0;
+            document.getElementById('form-scroll').scrollTop = 0;
         }
 
         function toggleMode() {
-            if(mode==='wizard'){
-                mode='all';
-                document.querySelectorAll('.step').forEach(s=>s.classList.add('active'));
-                document.getElementById('stp-area').style.display='none';
-                document.getElementById('nav-area').style.display='none';
-                document.getElementById('mode-btn').textContent='Pakai wizard (langkah demi langkah)';
+            if (mode === 'wizard') {
+                mode = 'all';
+                document.querySelectorAll('.step').forEach(s => s.classList.add('active'));
+                document.getElementById('stp-area').style.display = 'none';
+                document.getElementById('nav-area').style.display = 'none';
+                document.getElementById('mode-btn').textContent = 'Pakai wizard';
             } else {
-                mode='wizard';
-                document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+                mode = 'wizard';
+                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
                 document.querySelector(`.step[data-step="${cur}"]`).classList.add('active');
-                document.getElementById('stp-area').style.display='';
-                document.getElementById('nav-area').style.display='';
-                document.getElementById('mode-btn').textContent='Lihat semua sekaligus';
+                document.getElementById('stp-area').style.display = '';
+                document.getElementById('nav-area').style.display = '';
+                document.getElementById('mode-btn').textContent = 'Lihat semua sekaligus';
             }
         }
 
-        // ===== Zoom =====
         function setZoom(z) {
-            zoomLevel=z;
-            document.getElementById('a4-wrap').style.transform=`scale(${z})`;
-            document.querySelectorAll('.zoom-btn').forEach(b=>{
-                b.classList.toggle('sel', b.textContent===Math.round(z*100)+'%');
-            });
+            zoomLevel = z;
+            document.getElementById('a4-wrap').style.transform = `scale(${z})`;
+            document.querySelectorAll('.zoom-btn').forEach(b => b.classList.toggle('sel', b.textContent === Math.round(z * 100) + '%'));
         }
 
         // ===== Keluarga =====
-        let famData=[{nama:"",status:"( Garwo )"},{nama:"",status:"( anak/mantu )"},{nama:"Lan Sedoyo Keluargo",status:""}];
+        let famData = [{nama:"",status:"( Garwo )"},{nama:"",status:"( anak/mantu )"},{nama:"",status:""}];
         function renderFam() {
-            const box=document.getElementById('fam-box'); box.innerHTML='';
-            famData.forEach((d,i)=>{
-                const r=document.createElement('div');
-                r.className='flex gap-2 items-center';
-                r.innerHTML=`<span class="text-[11px] w-4 text-sub">${i+1}.</span>
+            const box = document.getElementById('fam-box'); box.innerHTML = '';
+            famData.forEach((d, i) => {
+                const r = document.createElement('div');
+                r.className = 'flex gap-2 items-center';
+                r.innerHTML = `<span class="text-[11px] w-4 text-sub">${i+1}.</span>
                     <input class="f-input text-[12px] py-1.5 flex-1" value="${d.nama}" placeholder="Nama" oninput="updFam(${i},'nama',this.value)">
                     <input class="f-input text-[12px] py-1.5 w-24" value="${d.status}" placeholder="Status" oninput="updFam(${i},'status',this.value)">
                     <button onclick="rmFam(${i})" class="text-[11px] opacity-30 hover:opacity-100 bg-transparent border-none cursor-pointer p-1">✕</button>`;
                 box.appendChild(r);
             });
-            updateDL(); renderA4();
+            renderA4();
         }
-        function updFam(i,f,v){famData[i][f]=v;renderFam();}
-        function addFam(){famData.push({nama:"",status:""});renderFam();}
-        function rmFam(i){famData.splice(i,1);renderFam();}
+        function updFam(i, f, v) { famData[i][f] = v; renderFam(); }
+        function addFam() { famData.push({nama:"",status:""}); renderFam(); }
+        function rmFam(i) { famData.splice(i, 1); renderFam(); }
 
-        function loadLogo(e,id){
-            const f=e.target.files[0]; if(!f) return;
-            const r=new FileReader();
-            r.onload=ev=>{const img=document.getElementById(id);if(img){img.src=ev.target.result;img.style.display='block';}};
+        function loadLogo(e, id) {
+            const f = e.target.files[0]; if (!f) return;
+            const r = new FileReader();
+            r.onload = ev => { const img = document.getElementById(id); if (img) { img.src = ev.target.result; img.style.display = 'block'; } };
             r.readAsDataURL(f);
         }
 
-        function downloadPDF(){
-            const el=document.getElementById('a4');
-            const nama=document.getElementById('in-nama').value||'Almarhum';
-            html2pdf().set({
-                margin:0,filename:'Surat Lelayu '+nama+'.pdf',
-                image:{type:'jpeg',quality:0.98},
-                html2canvas:{scale:2,useCORS:true,scrollY:0},
-                jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-            }).from(el).save();
+        function downloadPDF() {
+            const el = document.getElementById('a4');
+            const nama = document.getElementById('in-nama').value || 'Almarhum';
+            html2pdf().set({ margin: 0, filename: 'Surat Lelayu ' + nama + '.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, scrollY: 0 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } }).from(el).save();
         }
 
-        function updateDL(){
-            const btn=document.getElementById('dl-btn');
-            const hint=document.getElementById('dl-hint');
-            const nama=document.getElementById('in-nama').value.trim();
-            if(nama){btn.disabled=false;hint.textContent='PDF siap diunduh';hint.className='text-[12px] text-accent';}
-            else{btn.disabled=cur<4&&mode==='wizard';hint.textContent=cur<4?'Isi data di langkah '+(cur+1):'Isi nama almarhum';hint.className='text-[12px] text-sub';}
+        function updateDL() {
+            const btn = document.getElementById('dl-btn');
+            const hint = document.getElementById('dl-hint');
+            const nama = document.getElementById('in-nama').value.trim();
+            if (nama) { btn.disabled = false; hint.textContent = 'PDF siap diunduh'; hint.className = 'text-[12px] text-accent'; }
+            else { btn.disabled = cur < 4 && mode === 'wizard'; hint.textContent = cur < 4 ? 'Isi data di langkah ' + (cur + 1) : 'Isi nama almarhum'; hint.className = 'text-[12px] text-sub'; }
         }
 
-        // ===== Init =====
-        function init(){
-            const syncMap={'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3','in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur','in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp','in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp','in-foot-l':'out-foot-l','in-foot-r':'out-foot-r'};
-            for(const[i,o] of Object.entries(syncMap)){
-                const el=document.getElementById(i);
-                if(el) el.addEventListener('input',()=>renderA4());
-            }
-            document.getElementById('in-status').addEventListener('change',()=>renderA4());
-            renderFam(); renderTplCards(); renderAll();
+        function init() {
+            renderContexts();
+            renderFam();
+            // Sync all inputs to preview
+            document.addEventListener('input', () => { renderA4(); updateDL(); });
+            document.getElementById('in-status').addEventListener('change', renderA4);
+            updateDL();
         }
 
-        window.addEventListener('load',init);
-        document.addEventListener('input',()=>{renderA4();updateDL();});
+        window.addEventListener('load', init);
     </script>
 </body>
 </html>
