@@ -7,410 +7,209 @@
     <meta name="description" content="Generator pembuat Surat Lelayu dan Pawartos Duka Bahasa Jawa online. Isi nama, langsung jadi PDF rapi dan siap sebar ke WhatsApp. 100% Gratis.">
     <meta name="keywords" content="surat lelayu, pawartos duka, generator lelayu, cetak lelayu online, lelayu bahasa jawa, format lelayu pdf, pengumuman duka cita">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <meta name="author" content="Cetak Lelayu">
     <meta property="og:title" content="Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis">
-    <meta property="og:description" content="Generator surat lelayu bahasa Jawa. Isi form, langsung jadi PDF siap cetak atau sebar ke WhatsApp.">
+    <meta property="og:description" content="Generator surat lelayu bahasa Jawa. Isi form, langsung jadi PDF.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cetak-lelayu.web.id">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Cetak Lelayu",
-      "url": "https://cetak-lelayu.web.id",
-      "description": "Generator surat lelayu dan pawartos duka bahasa Jawa online, gratis.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "All",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Apakah aplikasi ini 100% gratis?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ya, 100% gratis. Tidak ada biaya apa pun. Semoga bermanfaat untuk masyarakat yang sedang berduka."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Apakah data yang saya masukkan aman?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sangat aman. Semua proses dilakukan langsung di browser Anda. Kami tidak menyimpan data apa pun di server."
-          }
-        }
-      ]
-    }
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Cetak Lelayu","url":"https://cetak-lelayu.web.id","description":"Generator surat lelayu bahasa Jawa, gratis.","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"}}
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
     tailwind.config = {
         darkMode: 'class',
         theme: {
             extend: {
-                fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] },
+                fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] },
                 colors: {
+                    bg: { DEFAULT: '#fafaf9', dark: '#0a0a0b' },
                     surface: { DEFAULT: '#ffffff', dark: '#111113' },
-                    canvas: { DEFAULT: '#f5f5f4', dark: '#0a0a0b' },
-                    muted: { DEFAULT: '#f8f8f8', dark: '#18181b' },
-                    accent: { DEFAULT: '#3b5fe0', dark: '#6b8aff', light: '#eef2ff', 'dark-light': '#1a1f3a' },
                     ink: { DEFAULT: '#18181b', dark: '#fafafa' },
-                    subtle: { DEFAULT: '#71717a', dark: '#a1a1aa' },
+                    sub: { DEFAULT: '#71717a', dark: '#a1a1aa' },
                     hair: { DEFAULT: '#e4e4e7', dark: '#27272a' },
+                    accent: { DEFAULT: '#3b5fe0', dark: '#6b8aff' },
+                    accentsoft: { DEFAULT: '#eef2ff', dark: '#1a1f3a' },
                 },
-                borderRadius: { '2xl': '16px', '3xl': '20px' },
             }
         }
     }
     </script>
 
     <style>
-        /* ===== Emil's Design Engineering ===== */
         :root {
-            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
         }
-
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 0; overflow: hidden; }
 
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background: #f5f5f4;
-            color: #18181b;
-            min-height: 100dvh;
-            margin: 0;
-            overflow-x: hidden;
+        /* ===== Wizard Steps ===== */
+        .step { display: none; }
+        .step.active { display: block; }
+
+        /* ===== Progress ===== */
+        .prog-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #d4d4d8; transition: background 300ms var(--ease), transform 300ms var(--ease);
         }
+        .prog-dot.done { background: #3b5fe0; transform: scale(1.1); }
+        .prog-dot.current { background: #3b5fe0; transform: scale(1.3); box-shadow: 0 0 0 3px rgba(59,95,224,0.2); }
+        .dark .prog-dot { background: #3f3f46; }
+        .dark .prog-dot.done, .dark .prog-dot.current { background: #6b8aff; box-shadow: 0 0 0 3px rgba(107,138,255,0.2); }
 
-        body.dark { background: #0a0a0b; color: #fafafa; }
-
-        /* ===== Emil: Button Press ===== */
-        .btn-press { transition: transform 140ms var(--ease-out); }
-        .btn-press:active { transform: scale(0.97); }
-
-        /* ===== Emil: Scroll Reveal ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+        .prog-line {
+            height: 2px; flex: 1; background: #e4e4e7; transition: background 400ms var(--ease);
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal.d1 { transition-delay: 50ms; }
-        .reveal.d2 { transition-delay: 100ms; }
-        .reveal.d3 { transition-delay: 150ms; }
-        .reveal.d4 { transition-delay: 200ms; }
-        .reveal.d5 { transition-delay: 250ms; }
-        .reveal.d6 { transition-delay: 300ms; }
-        .reveal.d7 { transition-delay: 350ms; }
+        .prog-line.done { background: #3b5fe0; }
+        .dark .prog-line { background: #27272a; }
+        .dark .prog-line.done { background: #6b8aff; }
 
-        /* ===== Layout ===== */
-        #app { display: flex; width: 100%; flex: 1; min-height: 0; }
-
-        #sidebar {
-            width: 440px;
-            background: #ffffff;
-            border-right: 1px solid #e4e4e7;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        body.dark #sidebar { background: #111113; border-color: #27272a; }
-
-        #sidebar-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 24px;
-            scrollbar-width: thin;
-            scrollbar-color: #d4d4d8 transparent;
-        }
-        body.dark #sidebar-scroll { scrollbar-color: #3f3f46 transparent; }
-
-        #preview-area {
-            flex: 1;
-            padding: 48px 24px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            background: #f5f5f4;
-        }
-        body.dark #preview-area { background: #0a0a0b; }
-
-        /* ===== A4 Page ===== */
-        #a4-page {
-            width: 210mm;
-            height: 297mm;
-            background: #ffffff;
-            padding: 20mm 20mm 15mm 20mm;
-            font-family: 'Times New Roman', Times, serif;
-            color: #000000;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-            box-shadow:
-                0 0 0 1px rgba(0,0,0,0.04),
-                0 1px 2px rgba(0,0,0,0.06),
-                0 4px 16px rgba(0,0,0,0.06),
-                0 12px 40px rgba(0,0,0,0.08);
-            border-radius: 4px;
-            transition: box-shadow 400ms var(--ease-out);
-            position: relative;
-        }
-        #a4-page:hover {
-            box-shadow:
-                0 0 0 1px rgba(0,0,0,0.04),
-                0 2px 4px rgba(0,0,0,0.06),
-                0 8px 24px rgba(0,0,0,0.08),
-                0 20px 56px rgba(0,0,0,0.10);
-        }
-
-        #scale-wrap {
-            transform-origin: top center;
-            width: 210mm;
-            transition: transform 400ms var(--ease-out);
-        }
-
-        /* ===== Desktop Scaling ===== */
-        @media (min-width: 1600px) { #scale-wrap { transform: scale(1); } }
-        @media (max-width: 1599px) and (min-width: 1400px) { #scale-wrap { transform: scale(0.88); margin-bottom: -35mm; } }
-        @media (max-width: 1399px) and (min-width: 1200px) { #scale-wrap { transform: scale(0.78); margin-bottom: -65mm; } #sidebar { width: 400px; } }
-        @media (max-width: 1199px) and (min-width: 992px) { #scale-wrap { transform: scale(0.62); margin-bottom: -115mm; } #sidebar { width: 380px; } }
-
-        /* ===== Mobile ===== */
-        @media (max-width: 991px) {
-            #app { flex-direction: column; }
-            #sidebar { width: 100%; border-right: none; border-bottom: 1px solid #e4e4e7; }
-            body.dark #sidebar { border-bottom-color: #27272a; }
-            #preview-area { padding: 24px 12px; }
-            #scale-wrap { transform: none !important; }
-        }
-
-        /* ===== A4 Document ===== */
-        .doc-header { text-align: center; margin-bottom: 5px; position: relative; }
-        .doc-logo-l { position: absolute; left: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
-        .doc-logo-r { position: absolute; right: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
-        .doc-title { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
-        .doc-subtitle { font-size: 12pt; font-weight: bold; margin: 0; line-height: 1.2; }
-        .doc-sep { border-top: 3px double #000; margin: 15px 0 20px; }
-        .doc-p { font-size: 12pt; line-height: 1.4; margin-bottom: 8px; }
-        .doc-bold { font-weight: bold; }
-        .doc-center { text-align: center; }
-        .doc-italic { font-style: italic; }
-        .doc-title-main { font-size: 18pt; font-weight: bold; text-align: center; margin: 15px 0; letter-spacing: 1px; }
-        .doc-name-sec { text-align: center; margin: 15px 0; }
-        .doc-name { font-size: 14pt; font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
-        .doc-age { font-size: 12pt; font-weight: bold; }
-        .doc-grid { display: grid; grid-template-columns: 100px 15px 1fr; font-size: 12pt; line-height: 1.4; }
-        .doc-fam { display: grid; grid-template-columns: 30px 1fr 150px; font-size: 12pt; line-height: 1.4; margin-top: 5px; }
-        .doc-body { flex: 1; }
-        .doc-foot { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 10pt; font-style: italic; }
-        .doc-mt { margin-top: 15px; }
-
-        /* ===== Form ===== */
-        .f-group { margin-bottom: 14px; }
-        .f-group:last-child { margin-bottom: 0; }
-        .f-label { display: block; font-size: 12px; font-weight: 600; color: #71717a; margin-bottom: 5px; letter-spacing: 0.03em; }
+        /* ===== Form Elements ===== */
+        .f-label { display: block; font-size: 11.5px; font-weight: 600; color: #71717a; margin-bottom: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
         .dark .f-label { color: #a1a1aa; }
         .f-input {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1px solid #e4e4e7;
-            border-radius: 10px;
-            font-size: 13.5px;
-            font-family: inherit;
-            background: #fafafa;
-            color: #18181b;
-            outline: none;
-            transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), background 180ms var(--ease-out);
+            width: 100%; padding: 9px 11px; border: 1px solid #e4e4e7; border-radius: 10px;
+            font-size: 14px; font-family: inherit; background: #fafafa; color: #18181b; outline: none;
+            transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
         }
-        .f-input:focus {
-            border-color: #3b5fe0;
-            box-shadow: 0 0 0 3px rgba(59,95,224,0.10);
-            background: #ffffff;
+        .f-input:focus { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.08); background: #fff; }
+        .dark .f-input { background: #18181b; border-color: #27272a; color: #fafafa; }
+        .dark .f-input:focus { border-color: #6b8aff; box-shadow: 0 0 0 3px rgba(107,138,255,0.10); background: #111113; }
+
+        .f-group { margin-bottom: 14px; }
+
+        /* ===== Buttons ===== */
+        .btn-primary {
+            padding: 9px 20px; border-radius: 10px; border: none; font-size: 13px; font-weight: 700;
+            font-family: inherit; color: #fff; background: #3b5fe0; cursor: pointer;
+            transition: transform 120ms var(--ease), background 160ms var(--ease);
+            display: inline-flex; align-items: center; gap: 6px;
         }
-        .dark .f-input {
-            background: #18181b;
-            border-color: #27272a;
-            color: #fafafa;
+        .btn-primary:hover { background: #2d4bc4; }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-primary:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+        .btn-ghost {
+            padding: 9px 16px; border-radius: 10px; border: 1px solid #e4e4e7; font-size: 13px; font-weight: 600;
+            font-family: inherit; color: #71717a; background: transparent; cursor: pointer;
+            transition: transform 120ms var(--ease), border-color 160ms var(--ease);
         }
-        .dark .f-input:focus {
-            border-color: #6b8aff;
-            box-shadow: 0 0 0 3px rgba(107,138,255,0.12);
-            background: #111113;
+        .btn-ghost:hover { border-color: #a1a1aa; }
+        .btn-ghost:active { transform: scale(0.97); }
+        .dark .btn-ghost { border-color: #27272a; color: #a1a1aa; }
+        .dark .btn-ghost:hover { border-color: #3f3f46; }
+
+        /* ===== A4 ===== */
+        #a4-page {
+            width: 210mm; height: 297mm; background: #fff; padding: 20mm 20mm 15mm 20mm;
+            font-family: 'Times New Roman', Times, serif; color: #000;
+            display: flex; flex-direction: column; flex-shrink: 0;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
+            border-radius: 3px; position: relative;
+        }
+        #scale-wrap { transform-origin: top center; width: 210mm; }
+
+        /* A4 internal */
+        .d-header { text-align: center; margin-bottom: 5px; position: relative; }
+        .d-logo-l { position: absolute; left: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
+        .d-logo-r { position: absolute; right: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
+        .d-kop { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
+        .d-kopsub { font-size: 12pt; font-weight: bold; margin: 0; line-height: 1.2; }
+        .d-sep { border-top: 3px double #000; margin: 15px 0 20px; }
+        .d-p { font-size: 12pt; line-height: 1.4; margin-bottom: 8px; }
+        .d-bold { font-weight: bold; }
+        .d-italic { font-style: italic; }
+        .d-mt { margin-top: 15px; }
+        .d-main { font-size: 18pt; font-weight: bold; text-align: center; margin: 15px 0; letter-spacing: 1px; }
+        .d-nsec { text-align: center; margin: 15px 0; }
+        .d-name { font-size: 14pt; font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
+        .d-age { font-size: 12pt; font-weight: bold; }
+        .d-grid { display: grid; grid-template-columns: 100px 15px 1fr; font-size: 12pt; line-height: 1.4; }
+        .d-fam { display: grid; grid-template-columns: 30px 1fr 150px; font-size: 12pt; line-height: 1.4; margin-top: 5px; }
+        .d-body { flex: 1; }
+        .d-foot { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-size: 10pt; font-style: italic; }
+
+        /* ===== Preview update flash ===== */
+        .flash { animation: flashIn 250ms var(--ease); }
+        @keyframes flashIn {
+            0% { opacity: 0.4; } 100% { opacity: 1; }
         }
 
-        /* ===== Card Section ===== */
-        .card {
-            background: #fafafa;
-            border: 1px solid #e4e4e7;
-            border-radius: 16px;
-            padding: 18px;
-            transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+        /* ===== Scrollbar ===== */
+        #form-scroll::-webkit-scrollbar { width: 4px; }
+        #form-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
+        .dark #form-scroll::-webkit-scrollbar-thumb { background: #3f3f46; }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1199px) { #scale-wrap { transform: scale(0.72); margin-bottom: -80mm; } }
+        @media (max-width: 991px) {
+            #app { flex-direction: column !important; overflow-y: auto !important; }
+            #form-panel { width: 100% !important; max-height: none !important; border-right: none !important; border-bottom: 1px solid #e4e4e7; }
+            .dark #form-panel { border-bottom-color: #27272a; }
+            #preview-panel { width: 100% !important; padding: 16px !important; }
+            #scale-wrap { transform: none !important; margin: 0 !important; }
+            body { overflow: auto !important; }
         }
-        .card:hover {
-            border-color: #d4d4d8;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .dark .card {
-            background: #18181b;
-            border-color: #27272a;
-        }
-        .dark .card:hover {
-            border-color: #3f3f46;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        @media (max-width: 600px) {
+            #scale-wrap { zoom: 0.45; }
         }
 
-        .card-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: #3b5fe0;
-            margin: 0 0 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: 0.01em;
-        }
-        .dark .card-title { color: #6b8aff; }
-        .card-icon {
-            width: 28px; height: 28px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 9px;
-            background: #eef2ff;
-            font-size: 13px;
-        }
-        .dark .card-icon { background: #1a1f3a; }
-
-        /* ===== Download Button ===== */
-        .dl-btn {
-            width: 100%;
-            padding: 13px 20px;
-            border-radius: 13px;
-            border: none;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: inherit;
-            letter-spacing: -0.01em;
-            color: #ffffff;
-            background: #3b5fe0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(59,95,224,0.20);
-            transition: transform 140ms var(--ease-out), box-shadow 200ms var(--ease-out), background 200ms var(--ease-out);
-        }
-        .dl-btn:hover {
-            background: #2d4bc4;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 6px 20px rgba(59,95,224,0.28);
-        }
-        .dl-btn:active { transform: scale(0.97); }
-
-        /* ===== FAQ ===== */
-        details { border-radius: 14px; }
-        details summary { list-style: none; cursor: pointer; }
-        details summary::-webkit-details-marker { display: none; }
-        details[open] summary .faq-icon { transform: rotate(45deg); }
-        .faq-icon { transition: transform 200ms var(--ease-out); }
-
-        /* ===== Navbar Glass ===== */
-        .nav-glass {
-            background: rgba(245,245,244,0.82);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
-        .dark .nav-glass {
-            background: rgba(10,10,11,0.82);
-            border-bottom-color: rgba(255,255,255,0.06);
-        }
-
-        /* ===== Reduced Motion ===== */
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 80ms !important;
-            }
-            .reveal { opacity: 1; transform: none; transition: none; }
+            *, *::before, *::after { transition-duration: 60ms !important; animation: none !important; }
         }
     </style>
 </head>
 
-<body class="dark:bg-canvas-dark">
-    <!-- ===== NAVBAR ===== -->
-    <nav class="nav-glass sticky top-0 z-50">
-        <div class="max-w-[1440px] mx-auto px-5 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 bg-accent dark:bg-accent-dark rounded-[10px] flex items-center justify-center text-white text-[11px] font-extrabold tracking-tight">CL</div>
-                <span class="text-[15px] font-extrabold tracking-tight text-ink dark:text-ink-dark hidden sm:block">Cetak Lelayu</span>
-            </div>
-            <button onclick="toggleDark()" class="btn-press bg-surface dark:bg-surface-dark border border-hair dark:border-hair-dark rounded-full px-3.5 py-1.5 text-xs font-semibold text-ink dark:text-ink-dark flex items-center gap-1.5">
-                <span id="dm-icon">🌙</span>
-                <span id="dm-label" class="hidden sm:inline">Gelap</span>
-            </button>
+<body class="bg-bg dark:bg-bg-dark text-ink dark:text-ink-dark">
+    <!-- ===== NAVBAR (compact) ===== -->
+    <nav class="h-12 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between px-4 shrink-0" style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(255,255,255,0.85)">
+        <div class="flex items-center gap-2">
+            <div class="w-7 h-7 bg-accent dark:bg-accent rounded-[8px] flex items-center justify-center text-white text-[10px] font-extrabold">CL</div>
+            <span class="text-sm font-extrabold tracking-tight hidden sm:block">Cetak Lelayu</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="text-[11px] text-sub dark:text-sub-dark hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
+            <button onclick="toggleDark()" class="w-7 h-7 rounded-lg border border-hair dark:border-hair-dark flex items-center justify-center text-xs bg-transparent cursor-pointer" id="dm-btn">🌙</button>
         </div>
     </nav>
 
-    <!-- ===== INTRO ===== -->
-    <div class="reveal bg-surface dark:bg-surface-dark border-b border-hair dark:border-hair-dark py-7 px-5">
-        <div class="max-w-3xl mx-auto text-center">
-            <h1 class="text-[26px] sm:text-[32px] font-extrabold tracking-tight leading-tight text-ink dark:text-ink-dark mb-2">Buat Surat Pawartos Duka Online</h1>
-            <p class="text-subtle dark:text-subtle-dark text-[14px] leading-relaxed max-w-lg mx-auto">Isi formulir, pratinjau langsung terlihat. Unduh PDF untuk dicetak atau dibagikan ke WhatsApp. <strong class="text-ink dark:text-ink-dark font-semibold">100% gratis, tanpa iklan.</strong></p>
-        </div>
-    </div>
+    <!-- ===== APP ===== -->
+    <div id="app" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden;">
 
-    <!-- ===== MAIN ===== -->
-    <div id="app">
-        <!-- Sidebar -->
-        <div id="sidebar">
-            <div id="sidebar-scroll">
-
-                <!-- Kop Surat -->
-                <div class="card reveal d1 mb-4">
-                    <div class="card-title"><span class="card-icon">🏛️</span> Pengaturan Kop Surat</div>
-                    <div class="f-group">
-                        <label class="f-label">Nama Organisasi / Paguyuban (Baris 1)</label>
-                        <input type="text" class="f-input" id="in-kop1" placeholder="cth: IKATAN PEMUDA PEMUDI">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Nama Organisasi / RT-RW (Baris 2)</label>
-                        <input type="text" class="f-input" id="in-kop2" placeholder="cth: MANUNGGAL HATI">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Alamat / Subtitle Kop</label>
-                        <input type="text" class="f-input" id="in-kop3" placeholder="cth: Gemblangan, Timbulharjo, Sewon, Bantul">
-                    </div>
+        <!-- FORM PANEL -->
+        <div id="form-panel" style="width:35%;min-width:340px;max-width:440px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#ffffff;shrink:0;">
+            <!-- Progress -->
+            <div class="px-5 pt-4 pb-3 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark">
+                <div class="flex items-center gap-1" id="progress">
+                    <div class="prog-dot current" data-step="0"></div>
+                    <div class="prog-line"></div>
+                    <div class="prog-dot" data-step="1"></div>
+                    <div class="prog-line"></div>
+                    <div class="prog-dot" data-step="2"></div>
+                    <div class="prog-line"></div>
+                    <div class="prog-dot" data-step="3"></div>
+                    <div class="prog-line"></div>
+                    <div class="prog-dot" data-step="4"></div>
                 </div>
-
-                <!-- Penerima -->
-                <div class="card reveal d2 mb-4">
-                    <div class="card-title"><span class="card-icon">✉️</span> Penerima Surat</div>
-                    <div class="f-group">
-                        <label class="f-label">Yth. (Nama Penerima)</label>
-                        <input type="text" class="f-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat">
-                    </div>
+                <div class="flex justify-between mt-2">
+                    <span class="text-[11px] font-semibold text-sub dark:text-sub-dark" id="step-label">Data Almarhum</span>
+                    <span class="text-[11px] text-sub dark:text-sub-dark" id="step-count">1 / 5</span>
                 </div>
+            </div>
 
-                <!-- Data Almarhum -->
-                <div class="card reveal d3 mb-4">
-                    <div class="card-title"><span class="card-icon">👤</span> Data Almarhum/ah</div>
+            <!-- Form Scroll Area -->
+            <div id="form-scroll" style="flex:1;overflow-y:auto;padding:20px 20px 24px;">
+
+                <!-- Step 0: Almarhum -->
+                <div class="step active" data-step="0">
                     <div class="f-group">
                         <label class="f-label">Status</label>
                         <select class="f-input" id="in-status">
@@ -420,122 +219,150 @@
                     </div>
                     <div class="f-group">
                         <label class="f-label">Nama Lengkap</label>
-                        <input type="text" class="f-input" id="in-nama" placeholder="Nama binti/bin nama">
+                        <input class="f-input" id="in-nama" placeholder="Nama binti/bin nama">
                     </div>
                     <div class="f-group">
                         <label class="f-label">Umur (Yuswa)</label>
-                        <input type="text" class="f-input" id="in-umur" placeholder="60 tahun">
+                        <input class="f-input" id="in-umur" placeholder="60 tahun">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Yth. (Penerima Surat)</label>
+                        <input class="f-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat">
                     </div>
                 </div>
 
-                <!-- Wafat -->
-                <div class="card reveal d4 mb-4">
-                    <div class="card-title"><span class="card-icon">🕒</span> Waktu Wafat (Sedorikolo)</div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="f-group"><label class="f-label">Hari</label><input type="text" class="f-input" id="in-wf-hari" placeholder="Jumat Legi"></div>
-                        <div class="f-group"><label class="f-label">Tanggal</label><input type="text" class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026"></div>
+                <!-- Step 1: Wafat -->
+                <div class="step" data-step="1">
+                    <div class="f-group">
+                        <label class="f-label">Hari Wafat</label>
+                        <input class="f-input" id="in-wf-hari" placeholder="Jumat Legi">
                     </div>
-                    <div class="f-group"><label class="f-label">Jam</label><input type="text" class="f-input" id="in-wf-jam" placeholder="22.00 WIB"></div>
-                    <div class="f-group"><label class="f-label">Tempat</label><textarea class="f-input resize-none" id="in-wf-tempat" rows="2" placeholder="Alamat lengkap tempat wafat"></textarea></div>
+                    <div class="f-group">
+                        <label class="f-label">Tanggal Wafat</label>
+                        <input class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Jam Wafat</label>
+                        <input class="f-input" id="in-wf-jam" placeholder="22.00 WIB">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Tempat Wafat</label>
+                        <textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="Alamat lengkap"></textarea>
+                    </div>
                 </div>
 
-                <!-- Pemakaman -->
-                <div class="card reveal d5 mb-4">
-                    <div class="card-title"><span class="card-icon">🪦</span> Waktu Pemakaman</div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="f-group"><label class="f-label">Hari</label><input type="text" class="f-input" id="in-mk-hari" placeholder="Sabtu Paing"></div>
-                        <div class="f-group"><label class="f-label">Tanggal</label><input type="text" class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026"></div>
+                <!-- Step 2: Pemakaman -->
+                <div class="step" data-step="2">
+                    <div class="f-group">
+                        <label class="f-label">Hari Pemakaman</label>
+                        <input class="f-input" id="in-mk-hari" placeholder="Sabtu Paing">
                     </div>
-                    <div class="f-group"><label class="f-label">Jam</label><input type="text" class="f-input" id="in-mk-jam" placeholder="14.00 WIB (Jam 2 Siang)"></div>
-                    <div class="f-group"><label class="f-label">Makam</label><input type="text" class="f-input" id="in-mk-tempat" placeholder="Nama makam"></div>
+                    <div class="f-group">
+                        <label class="f-label">Tanggal Pemakaman</label>
+                        <input class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Jam Pemakaman</label>
+                        <input class="f-input" id="in-mk-jam" placeholder="14.00 WIB (Jam 2 Siang)">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Nama Makam</label>
+                        <input class="f-input" id="in-mk-tmp" placeholder="Makam Suci Gemblangan">
+                    </div>
                 </div>
 
-                <!-- Keluarga -->
-                <div class="card reveal d6 mb-4">
-                    <div class="card-title" style="justify-content: space-between;">
-                        <span style="display:flex;align-items:center;gap:8px"><span class="card-icon">👨‍👩‍👧‍👦</span> Keluarga Ditinggalkan</span>
-                        <button onclick="addFam()" class="btn-press text-[11px] font-bold bg-accent-light dark:bg-accent-dark-light text-accent dark:text-accent-dark px-2.5 py-1 rounded-lg border-none cursor-pointer">+ Tambah</button>
+                <!-- Step 3: Keluarga -->
+                <div class="step" data-step="3">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-[11px] font-semibold text-sub dark:text-sub-dark uppercase tracking-wider">Keluarga Ditinggalkan</span>
+                        <button onclick="addFam()" class="text-[11px] font-bold text-accent dark:text-accent bg-accentsoft dark:bg-accentsoft border-none px-2 py-1 rounded-lg cursor-pointer">+ Tambah</button>
                     </div>
                     <div id="fam-box" class="flex flex-col gap-2"></div>
                 </div>
 
-                <!-- Catatan -->
-                <div class="card reveal d7 mb-4">
-                    <div class="card-title"><span class="card-icon">📝</span> Catatan Kaki</div>
+                <!-- Step 4: Kop & Catatan -->
+                <div class="step" data-step="4">
                     <div class="f-group">
-                        <label class="f-label">Catatan Kiri</label>
-                        <input type="text" class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun.">
+                        <label class="f-label">Nama Organisasi (Baris 1)</label>
+                        <input class="f-input" id="in-kop1" placeholder="cth: IKATAN PEMUDA PEMUDI">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Catatan Kanan</label>
-                        <input type="text" class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026">
+                        <label class="f-label">Nama RT/RW (Baris 2)</label>
+                        <input class="f-input" id="in-kop2" placeholder="cth: MANUNGGAL HATI">
                     </div>
-                </div>
-
-                <!-- Logo -->
-                <div class="card reveal d7 mb-4">
-                    <div class="card-title"><span class="card-icon">🖼️</span> Logo (Opsional)</div>
+                    <div class="f-group">
+                        <label class="f-label">Alamat / Subtitle</label>
+                        <input class="f-input" id="in-kop3" placeholder="cth: Gemblangan, Timbulharjo, Sewon, Bantul">
+                    </div>
+                    <div class="border-t border-hair dark:border-hair-dark my-4"></div>
+                    <div class="f-group">
+                        <label class="f-label">Catatan Kaki Kiri</label>
+                        <input class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun.">
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label">Catatan Kaki Kanan</label>
+                        <input class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026">
+                    </div>
+                    <div class="border-t border-hair dark:border-hair-dark my-4"></div>
                     <div class="grid grid-cols-2 gap-3">
-                        <div><label class="f-label">Logo Kiri</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-l')"></div>
-                        <div><label class="f-label">Logo Kanan</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-r')"></div>
+                        <div class="f-group"><label class="f-label">Logo Kiri</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-l')"></div>
+                        <div class="f-group"><label class="f-label">Logo Kanan</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-r')"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Download -->
-            <div class="px-6 py-4 border-t border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark">
-                <button onclick="downloadPDF()" class="dl-btn">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download PDF / Cetak
-                </button>
+            <!-- Nav Buttons -->
+            <div class="px-5 py-3 border-t border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between">
+                <button onclick="goStep(cur-1)" id="btn-back" class="btn-ghost" style="visibility:hidden">← Kembali</button>
+                <button onclick="goStep(cur+1)" id="btn-next" class="btn-primary">Lanjut →</button>
             </div>
         </div>
 
-        <!-- Preview -->
-        <div id="preview-area">
+        <!-- PREVIEW PANEL -->
+        <div id="preview-panel" style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px;overflow:auto;background:#f5f5f4;">
             <div id="scale-wrap">
                 <div id="a4-page">
-                    <div class="doc-body">
-                        <div class="doc-header">
-                            <img id="out-logo-l" class="doc-logo-l" src="" alt="" style="display:none;">
-                            <svg id="ph-logo-l" class="doc-logo-l" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" style="opacity:0.12"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
-                            <img id="out-logo-r" class="doc-logo-r" src="" alt="" style="display:none;">
-                            <svg id="ph-logo-r" class="doc-logo-r" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" style="opacity:0.12"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
-                            <div class="doc-title" id="out-kop1"></div>
-                            <div class="doc-title" id="out-kop2"></div>
-                            <div class="doc-subtitle" id="out-kop3"></div>
+                    <div class="d-body">
+                        <div class="d-header">
+                            <img id="out-logo-l" class="d-logo-l" src="" style="display:none">
+                            <svg id="ph-logo-l" class="d-logo-l" viewBox="0 0 80 80" style="opacity:0.1"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+                            <img id="out-logo-r" class="d-logo-r" src="" style="display:none">
+                            <svg id="ph-logo-r" class="d-logo-r" viewBox="0 0 80 80" style="opacity:0.1"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+                            <div class="d-kop" id="out-kop1"></div>
+                            <div class="d-kop" id="out-kop2"></div>
+                            <div class="d-kopsub" id="out-kop3"></div>
                         </div>
-                        <div class="doc-sep"></div>
-                        <div class="doc-p doc-bold">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
-                        <div class="doc-p doc-bold" style="color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin-bottom:10px;height:16px"></div>
-                        <div class="doc-p doc-bold doc-italic doc-mt">Assalamu'alaikum Wr.Wb</div>
-                        <div class="doc-title-main">PAWARTOS LELAYU</div>
-                        <div class="doc-p">Inna lillahi wa inna ilaihi roji'un</div>
-                        <div class="doc-p">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
-                        <div class="doc-name-sec">
-                            <div class="doc-name"><span id="out-status">Almarhumah</span> <span id="out-nama"></span></div>
-                            <div class="doc-age">Yuswa : <span id="out-umur"></span></div>
+                        <div class="d-sep"></div>
+                        <div class="d-p d-bold">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
+                        <div class="d-p d-bold" style="color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin-bottom:10px;height:16px"></div>
+                        <div class="d-p d-bold d-italic d-mt">Assalamu'alaikum Wr.Wb</div>
+                        <div class="d-main">PAWARTOS LELAYU</div>
+                        <div class="d-p">Inna lillahi wa inna ilaihi roji'un</div>
+                        <div class="d-p">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
+                        <div class="d-nsec">
+                            <div class="d-name"><span id="out-status">Almarhumah</span> <span id="out-nama"></span></div>
+                            <div class="d-age">Yuswa : <span id="out-umur"></span></div>
                         </div>
-                        <div class="doc-p doc-mt">Sedorikolo</div>
-                        <div class="doc-grid">
+                        <div class="d-p d-mt">Sedorikolo</div>
+                        <div class="d-grid">
                             <div>Dinten</div><div>:</div><div id="out-wf-hari"></div>
                             <div>Tanggal</div><div>:</div><div id="out-wf-tgl"></div>
                             <div>Jam</div><div>:</div><div id="out-wf-jam"></div>
-                            <div>Wonten</div><div>:</div><div id="out-wf-tempat"></div>
+                            <div>Wonten</div><div>:</div><div id="out-wf-tmp"></div>
                         </div>
-                        <div class="doc-p doc-mt">Jenazah badhe dipunkasareaken</div>
-                        <div class="doc-grid">
+                        <div class="d-p d-mt">Jenazah badhe dipunkasareaken</div>
+                        <div class="d-grid">
                             <div>Dinten</div><div>:</div><div id="out-mk-hari"></div>
                             <div>Tanggal</div><div>:</div><div id="out-mk-tgl"></div>
                             <div>Jam</div><div>:</div><div id="out-mk-jam"></div>
-                            <div>Wonten ing makam</div><div>:</div><div id="out-mk-tempat"></div>
+                            <div>Wonten ing makam</div><div>:</div><div id="out-mk-tmp"></div>
                         </div>
-                        <div class="doc-p doc-mt" style="text-align:justify">Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.</div>
-                        <div class="doc-p doc-bold doc-italic doc-mt">Wassalamu'alaikum Wr.Wb</div>
-                        <div class="doc-p">Ingkang nandang sungkawa :</div>
+                        <div class="d-p d-mt" style="text-align:justify">Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.</div>
+                        <div class="d-p d-bold d-italic d-mt">Wassalamu'alaikum Wr.Wb</div>
+                        <div class="d-p">Ingkang nandang sungkawa :</div>
                         <div id="out-fam"></div>
                     </div>
-                    <div class="doc-foot">
+                    <div class="d-foot">
                         <div id="out-foot-l">Sumangga dipun-getok tularaken dhumateng warga sanesipun.</div>
                         <div id="out-foot-r"></div>
                     </div>
@@ -544,83 +371,95 @@
         </div>
     </div>
 
-    <!-- ===== FAQ ===== -->
-    <section class="reveal bg-surface dark:bg-surface-dark border-t border-hair dark:border-hair-dark py-16 px-5">
-        <div class="max-w-2xl mx-auto">
-            <h2 class="text-2xl font-extrabold tracking-tight text-center text-ink dark:text-ink-dark mb-8">Pertanyaan Umum</h2>
-            <div class="flex flex-col gap-3">
-                <details class="bg-canvas dark:bg-canvas-dark border border-hair dark:border-hair-dark p-4">
-                    <summary class="font-bold text-[14px] text-ink dark:text-ink-dark flex justify-between items-center">
-                        Apakah aplikasi ini 100% gratis?
-                        <span class="faq-icon text-subtle dark:text-subtle-dark text-lg leading-none">+</span>
-                    </summary>
-                    <p class="mt-3 text-subtle dark:text-subtle-dark text-[13px] leading-relaxed">Ya, 100% gratis. Tidak ada biaya, tidak ada iklan. Semoga bermanfaat untuk masyarakat yang sedang berduka.</p>
-                </details>
-                <details class="bg-canvas dark:bg-canvas-dark border border-hair dark:border-hair-dark p-4">
-                    <summary class="font-bold text-[14px] text-ink dark:text-ink-dark flex justify-between items-center">
-                        Apakah data saya aman?
-                        <span class="faq-icon text-subtle dark:text-subtle-dark text-lg leading-none">+</span>
-                    </summary>
-                    <p class="mt-3 text-subtle dark:text-subtle-dark text-[13px] leading-relaxed">Sangat aman. Semua proses dilakukan langsung di browser perangkat Anda. Kami tidak menyimpan data di server mana pun.</p>
-                </details>
-                <details class="bg-canvas dark:bg-canvas-dark border border-hair dark:border-hair-dark p-4">
-                    <summary class="font-bold text-[14px] text-ink dark:text-ink-dark flex justify-between items-center">
-                        Bagaimana cara kirim PDF ke WhatsApp?
-                        <span class="faq-icon text-subtle dark:text-subtle-dark text-lg leading-none">+</span>
-                    </summary>
-                    <p class="mt-3 text-subtle dark:text-subtle-dark text-[13px] leading-relaxed">Klik "Download PDF / Cetak", file tersimpan di perangkat. Buka WhatsApp, pilih kontak/grup, klik 📎 lampiran, pilih "Dokumen", kirim.</p>
-                </details>
-                <details class="bg-canvas dark:bg-canvas-dark border border-hair dark:border-hair-dark p-4">
-                    <summary class="font-bold text-[14px] text-ink dark:text-ink-dark flex justify-between items-center">
-                        Mengapa preview terlihat kecil di HP?
-                        <span class="faq-icon text-subtle dark:text-subtle-dark text-lg leading-none">+</span>
-                    </summary>
-                    <p class="mt-3 text-subtle dark:text-subtle-dark text-[13px] leading-relaxed">Di HP, preview diperkecil agar muat di layar. Saat di-download, PDF berukuran normal A4 standar yang rapi untuk dicetak.</p>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="bg-surface dark:bg-surface-dark border-t border-hair dark:border-hair-dark py-10 px-5 text-center">
-        <div class="flex items-center justify-center gap-2 mb-2">
-            <div class="w-6 h-6 bg-accent dark:bg-accent-dark rounded-lg flex items-center justify-center text-white text-[9px] font-extrabold">CL</div>
-            <span class="font-extrabold text-sm tracking-tight text-ink dark:text-ink-dark">Cetak Lelayu</span>
-        </div>
-        <p class="text-subtle dark:text-subtle-dark text-[13px] mb-1">100% Gratis. Semoga bermanfaat.</p>
-        <p class="text-subtle dark:text-subtle-dark text-[11px] opacity-60">Data Anda tetap di browser Anda. Tidak ada yang kami simpan.</p>
-    </footer>
+    <!-- ===== STICKY DOWNLOAD BAR ===== -->
+    <div id="dl-bar" style="height:52px;border-top:1px solid #e4e4e7;background:#ffffff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;shrink:0;position:sticky;bottom:0;z-index:40;">
+        <span class="text-[12px] text-sub dark:text-sub-dark" id="dl-hint">Lengkapi semua data untuk mengunduh</span>
+        <button onclick="downloadPDF()" id="dl-btn" class="btn-primary" disabled>
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+        </button>
+    </div>
 
     <script>
-        // ===== Data =====
+        let cur = 0;
+        const steps = ['Data Almarhum','Waktu Wafat','Pemakaman','Keluarga','Kop & Catatan'];
+        const labels = ['Data Almarhum','Waktu Wafat','Pemakaman','Keluarga','Pengaturan Surat'];
+
         let famData = [
-            { nama: "", status: "( Garwo )" },
-            { nama: "", status: "( anak/mantu )" },
-            { nama: "Lan Sedoyo Keluargo", status: "" }
+            {nama:"",status:"( Garwo )"},
+            {nama:"",status:"( anak/mantu )"},
+            {nama:"Lan Sedoyo Keluargo",status:""}
         ];
 
         const syncMap = {
-            'in-kop1':'out-kop1', 'in-kop2':'out-kop2', 'in-kop3':'out-kop3',
-            'in-penerima':'out-penerima', 'in-nama':'out-nama', 'in-umur':'out-umur',
-            'in-wf-hari':'out-wf-hari', 'in-wf-tgl':'out-wf-tgl',
-            'in-wf-jam':'out-wf-jam', 'in-wf-tempat':'out-wf-tempat',
-            'in-mk-hari':'out-mk-hari', 'in-mk-tgl':'out-mk-tgl',
-            'in-mk-jam':'out-mk-jam', 'in-mk-tempat':'out-mk-tempat',
-            'in-foot-l':'out-foot-l', 'in-foot-r':'out-foot-r',
+            'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3',
+            'in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur',
+            'in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp',
+            'in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp',
+            'in-foot-l':'out-foot-l','in-foot-r':'out-foot-r',
         };
 
         function init() {
-            for (const [i, o] of Object.entries(syncMap)) {
+            for (const [i,o] of Object.entries(syncMap)) {
                 const el = document.getElementById(i);
-                if (el) el.addEventListener('input', e => { const t = document.getElementById(o); if (t) t.innerText = e.target.value; });
+                if (!el) continue;
+                el.addEventListener('input', e => {
+                    const t = document.getElementById(o);
+                    if (t) { t.innerText = e.target.value; t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
+                });
             }
             document.getElementById('in-status').addEventListener('change', e => {
                 document.getElementById('out-status').innerText = e.target.value;
                 document.getElementById('out-status2').innerText = e.target.value;
             });
             renderFam();
-            setupReveal();
             updateScale();
+        }
+
+        // ===== Wizard =====
+        function goStep(n) {
+            if (n < 0 || n > 4) return;
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+            cur = n;
+
+            // Progress
+            document.querySelectorAll('.prog-dot').forEach(d => {
+                const s = parseInt(d.dataset.step);
+                d.className = 'prog-dot' + (s < n ? ' done' : s === n ? ' current' : '');
+            });
+            document.querySelectorAll('.prog-line').forEach((l,i) => {
+                l.className = 'prog-line' + (i < n ? ' done' : '');
+            });
+            document.getElementById('step-label').textContent = labels[n];
+            document.getElementById('step-count').textContent = `${n+1} / 5`;
+
+            // Nav buttons
+            document.getElementById('btn-back').style.visibility = n === 0 ? 'hidden' : 'visible';
+            const nextBtn = document.getElementById('btn-next');
+            if (n === 4) { nextBtn.textContent = 'Download PDF'; nextBtn.onclick = downloadPDF; }
+            else { nextBtn.textContent = 'Lanjut →'; nextBtn.onclick = () => goStep(cur+1); }
+
+            // Download bar
+            updateDL();
+
+            // Scroll form to top
+            document.getElementById('form-scroll').scrollTop = 0;
+        }
+
+        function updateDL() {
+            const btn = document.getElementById('dl-btn');
+            const hint = document.getElementById('dl-hint');
+            const nama = document.getElementById('in-nama').value.trim();
+            if (nama) {
+                btn.disabled = false;
+                hint.textContent = 'PDF siap diunduh';
+                hint.classList.remove('text-sub','dark:text-sub-dark');
+                hint.classList.add('text-accent','dark:text-accent');
+            } else {
+                btn.disabled = cur < 4;
+                hint.textContent = cur < 4 ? `Isi data di langkah ${cur+1} terlebih dahulu` : 'Isi nama almarhum untuk mengunduh';
+            }
         }
 
         // ===== Keluarga =====
@@ -628,45 +467,50 @@
             const box = document.getElementById('fam-box');
             const out = document.getElementById('out-fam');
             box.innerHTML = ''; out.innerHTML = '';
-            famData.forEach((d, i) => {
+            famData.forEach((d,i) => {
                 const row = document.createElement('div');
                 row.className = 'flex gap-2 items-center';
                 row.innerHTML = `
-                    <span class="text-[11px] w-4 text-subtle dark:text-subtle-dark">${i+1}.</span>
+                    <span class="text-[11px] w-4 text-sub">${i+1}.</span>
                     <input class="f-input text-[12px] py-1.5 flex-1" value="${d.nama}" placeholder="Nama" oninput="updFam(${i},'nama',this.value)">
                     <input class="f-input text-[12px] py-1.5 w-24" value="${d.status}" placeholder="Status" oninput="updFam(${i},'status',this.value)">
-                    <button onclick="rmFam(${i})" class="btn-press text-[11px] opacity-40 hover:opacity-100 bg-transparent border-none cursor-pointer p-1">✕</button>`;
+                    <button onclick="rmFam(${i})" class="text-[11px] opacity-30 hover:opacity-100 bg-transparent border-none cursor-pointer p-1 transition-opacity">✕</button>`;
                 box.appendChild(row);
                 const outRow = document.createElement('div');
-                outRow.className = 'doc-fam';
+                outRow.className = 'd-fam';
                 outRow.innerHTML = `<div style="text-align:right;padding-right:5px">${i+1}.</div><div>${d.nama}</div><div>${d.status}</div>`;
                 out.appendChild(outRow);
             });
+            updateDL();
         }
-        function updFam(i, f, v) { famData[i][f] = v; renderFam(); }
+        function updFam(i,f,v) { famData[i][f] = v; renderFam(); }
         function addFam() { famData.push({nama:"",status:""}); renderFam(); }
         function rmFam(i) { famData.splice(i,1); renderFam(); }
 
         // ===== Logo =====
-        function loadLogo(e, id) {
-            const f = e.target.files[0]; if (!f) return;
+        function loadLogo(e,id) {
+            const f = e.target.files[0]; if(!f) return;
             const r = new FileReader();
             r.onload = ev => {
                 const img = document.getElementById(id);
-                const ph = document.getElementById('ph-' + id.replace('out-',''));
-                if (img) { img.src = ev.target.result; img.style.display = 'block'; }
-                if (ph) ph.style.display = 'none';
+                const ph = document.getElementById('ph-'+id.replace('out-',''));
+                if(img){img.src=ev.target.result;img.style.display='block';}
+                if(ph)ph.style.display='none';
             };
             r.readAsDataURL(f);
         }
 
-        // ===== Dark Mode =====
+        // ===== Dark =====
         function toggleDark() {
-            document.body.classList.toggle('dark');
-            const d = document.body.classList.contains('dark');
-            document.getElementById('dm-icon').textContent = d ? '☀️' : '🌙';
-            document.getElementById('dm-label').textContent = d ? 'Terang' : 'Gelap';
-            document.documentElement.classList.toggle('dark', d);
+            document.documentElement.classList.toggle('dark');
+            const d = document.documentElement.classList.contains('dark');
+            document.getElementById('dm-btn').textContent = d ? '☀️' : '🌙';
+            document.getElementById('form-panel').style.background = d ? '#111113' : '#ffffff';
+            document.getElementById('preview-panel').style.background = d ? '#0a0a0b' : '#f5f5f4';
+            document.getElementById('dl-bar').style.background = d ? '#111113' : '#ffffff';
+            document.getElementById('dl-bar').style.borderColor = d ? '#27272a' : '#e4e4e7';
+            document.querySelector('nav').style.background = d ? 'rgba(17,17,19,0.85)' : 'rgba(255,255,255,0.85)';
+            document.querySelector('nav').style.borderColor = d ? '#27272a' : '#e4e4e7';
         }
 
         // ===== PDF =====
@@ -674,55 +518,35 @@
             const el = document.getElementById('a4-page');
             const nama = document.getElementById('in-nama').value || 'Almarhum';
             html2pdf().set({
-                margin: 0,
-                filename: 'Surat Lelayu ' + nama + '.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, scrollY: 0,
-                    onclone: doc => {
-                        const w = doc.getElementById('scale-wrap');
-                        if (w) w.style.transform = 'none';
-                        const p = doc.getElementById('a4-page');
-                        p.style.transform = 'none'; p.style.margin = '0';
-                        p.style.boxShadow = 'none'; p.style.height = '296mm'; p.style.overflow = 'hidden';
-                    }
+                margin:0, filename:'Surat Lelayu '+nama+'.pdf',
+                image:{type:'jpeg',quality:0.98},
+                html2canvas:{scale:2,useCORS:true,scrollY:0,
+                    onclone:d=>{const w=d.getElementById('scale-wrap');if(w)w.style.transform='none';const p=d.getElementById('a4-page');p.style.transform='none';p.style.margin='0';p.style.boxShadow='none';p.style.height='296mm';p.style.overflow='hidden';}
                 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).from(el).toPdf().get('pdf').then(pdf => {
-                const n = pdf.internal.getNumberOfPages();
-                if (n > 1) for (let i = n; i > 1; i--) pdf.deletePage(i);
-            }).save();
+                jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+            }).from(el).toPdf().get('pdf').then(pdf=>{const n=pdf.internal.getNumberOfPages();if(n>1)for(let i=n;i>1;i--)pdf.deletePage(i);}).save();
         }
 
-        // ===== Mobile Scale =====
+        // ===== Scale =====
         function updateScale() {
             const w = document.getElementById('scale-wrap');
-            const c = document.getElementById('preview-area');
-            if (!w || !c) return;
             if (window.innerWidth <= 991) {
-                const s = Math.min((c.clientWidth - 24) / 793, 1);
-                w.style.transform = 'none';
-                w.style.zoom = s;
+                const c = document.getElementById('preview-panel');
+                const s = Math.min((c.clientWidth-40)/793,1);
+                w.style.transform='none'; w.style.zoom=s;
+            } else if (window.innerWidth <= 1199) {
+                w.style.zoom=''; w.style.transform='scale(0.72)'; w.style.marginBottom='-80mm';
             } else {
-                w.style.zoom = '';
-                w.style.transform = '';
+                w.style.zoom=''; w.style.transform=''; w.style.margin='';
             }
-        }
-
-        // ===== Emil: Scroll Reveal =====
-        function setupReveal() {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-                return;
-            }
-            const obs = new IntersectionObserver(entries => {
-                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-            }, { threshold: 0.08, rootMargin: '-20px' });
-            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         }
 
         window.addEventListener('resize', updateScale);
-        window.addEventListener('load', () => { updateScale(); init(); });
+        window.addEventListener('load', init);
         setTimeout(updateScale, 80);
+
+        // Update DL on any input
+        document.addEventListener('input', updateDL);
     </script>
 </body>
 </html>
