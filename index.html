@@ -84,14 +84,32 @@
         #form-scroll::-webkit-scrollbar-thumb{background:#d4d4d8;border-radius:4px}
 
         @media(max-width:991px){
-            #app{flex-direction:column!important;overflow-y:auto!important}
-            #form-panel{width:100%!important;max-height:none!important;border-right:none!important}
-            #preview-panel{width:100%!important;padding:12px!important}
-            #a4-wrap{transform:none!important;margin:0!important}
-            body{overflow:auto!important}
+            body{overflow:auto!important;height:auto!important}
+            #app{display:block!important;height:auto!important;overflow:visible!important}
+            #form-panel{width:100%!important;max-width:none!important;min-width:0!important;border-right:none!important;border-bottom:1px solid #e4e4e7!important;max-height:none!important;overflow:visible!important}
+            #form-scroll{overflow:visible!important;max-height:none!important}
+            #preview-panel{width:100%!important;padding:16px!important;overflow:visible!important}
+            #a4-wrap{transform:none!important;margin:0 auto!important}
+            #a4{transform-origin:top center}
         }
-        @media(max-width:600px){#a4-wrap{zoom:0.42}}
+        @media(max-width:600px){
+            #a4{transform:scale(0.42);transform-origin:top center;height:auto;margin-bottom:-170mm}
+        }
+        @media(min-width:601px) and (max-width:991px){
+            #a4{transform:scale(0.65);transform-origin:top center;margin-bottom:-105mm}
+        }
         @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:60ms!important;animation:none!important}}
+
+        /* Mobile stepper compact */
+        @media(max-width:600px){
+            .stp-item{font-size:10px}
+            .stp-item .dot{width:20px;height:20px;font-size:10px}
+            .stp-item span.hidden{display:none!important}
+            .ctx-card{padding:12px 8px}
+            .ctx-icon{font-size:22px}
+            .ctx-name{font-size:11px}
+            .f-input{font-size:16px;padding:11px 12px} /* prevent iOS zoom */
+        }
     </style>
 </head>
 
@@ -101,7 +119,7 @@
         <span class="text-[11px] text-sub hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
     </nav>
 
-    <div id="app" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden">
+    <div id="app" class="desktop-layout" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden">
 
         <!-- FORM -->
         <div id="form-panel" style="width:38%;min-width:360px;max-width:480px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#fff">
