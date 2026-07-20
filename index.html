@@ -142,6 +142,14 @@
         @keyframes flashIn {
             0% { opacity: 0.4; } 100% { opacity: 1; }
         }
+        .step-header {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e4e4e7;
+        }
+        .dark .step-header {
+            border-bottom-color: #27272a;
+        }
 
         /* ===== Scrollbar ===== */
         #form-scroll::-webkit-scrollbar { width: 4px; }
@@ -187,7 +195,7 @@
         <!-- FORM PANEL -->
         <div id="form-panel" style="width:35%;min-width:340px;max-width:440px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#ffffff;shrink:0;">
             <!-- Progress -->
-            <div class="px-5 pt-4 pb-3 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark">
+            <div class="px-5 pt-4 pb-3 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark" id="progress-area">
                 <div class="flex items-center gap-1" id="progress">
                     <div class="prog-dot current" data-step="0"></div>
                     <div class="prog-line"></div>
@@ -202,6 +210,9 @@
                 <div class="flex justify-between mt-2">
                     <span class="text-[11px] font-semibold text-sub dark:text-sub-dark" id="step-label">Data Almarhum</span>
                     <span class="text-[11px] text-sub dark:text-sub-dark" id="step-count">1 / 5</span>
+                </div>
+                <div class="mt-2 text-center">
+                    <button onclick="toggleMode()" id="mode-toggle" class="text-[11px] text-sub dark:text-sub-dark hover:text-ink dark:hover:text-ink-dark bg-transparent border-none cursor-pointer underline underline-offset-2 decoration-hair dark:decoration-hair-dark" style="font-family:inherit">Lihat semua sekaligus</button>
                 </div>
             </div>
 
@@ -312,7 +323,7 @@
             </div>
 
             <!-- Nav Buttons -->
-            <div class="px-5 py-3 border-t border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between">
+            <div class="px-5 py-3 border-t border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between" id="nav-buttons">
                 <button onclick="goStep(cur-1)" id="btn-back" class="btn-ghost" style="visibility:hidden">← Kembali</button>
                 <button onclick="goStep(cur+1)" id="btn-next" class="btn-primary">Lanjut →</button>
             </div>
@@ -547,6 +558,43 @@
 
         // Update DL on any input
         document.addEventListener('input', updateDL);
+
+        // ===== Mode Toggle (Wizard / All) =====
+        let mode = 'wizard'; // 'wizard' | 'all'
+        function toggleMode() {
+            if (mode === 'wizard') {
+                mode = 'all';
+                // Show all steps
+                document.querySelectorAll('.step').forEach(s => s.classList.add('active'));
+                // Hide progress & nav
+                document.getElementById('progress-area').style.display = 'none';
+                document.getElementById('nav-buttons').style.display = 'none';
+                // Update toggle text
+                document.getElementById('mode-toggle').textContent = 'Pakai wizard (langkah demi langkah)';
+                // Make step sections have visible labels
+                document.querySelectorAll('.step[data-step]').forEach(s => {
+                    const n = parseInt(s.dataset.step);
+                    if (!s.querySelector('.step-header')) {
+                        const h = document.createElement('div');
+                        h.className = 'step-header';
+                        h.innerHTML = `<span class="text-[11px] font-semibold text-sub dark:text-sub-dark uppercase tracking-wider">${labels[n]}</span>`;
+                        s.insertBefore(h, s.firstChild);
+                    }
+                });
+            } else {
+                mode = 'wizard';
+                // Back to wizard
+                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+                document.querySelector(`.step[data-step="${cur}"]`).classList.add('active');
+                // Show progress & nav
+                document.getElementById('progress-area').style.display = '';
+                document.getElementById('nav-buttons').style.display = '';
+                // Update toggle text
+                document.getElementById('mode-toggle').textContent = 'Lihat semua sekaligus';
+                // Remove step headers
+                document.querySelectorAll('.step-header').forEach(h => h.remove());
+            }
+        }
     </script>
 </body>
 </html>
