@@ -6,15 +6,14 @@
     <title>Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis</title>
     <meta name="description" content="Generator pembuat Surat Lelayu dan Pawartos Duka Bahasa Jawa online. Isi nama, langsung jadi PDF rapi dan siap sebar ke WhatsApp. 100% Gratis.">
     <meta name="keywords" content="surat lelayu, pawartos duka, generator lelayu, cetak lelayu online, lelayu bahasa jawa, format lelayu pdf, pengumuman duka cita">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="robots" content="index, follow">
     <meta property="og:title" content="Cetak Lelayu - Buat Surat Pawartos Duka Online Gratis">
     <meta property="og:description" content="Generator surat lelayu bahasa Jawa. Isi form, langsung jadi PDF.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://cetak-lelayu.web.id">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
-
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"WebApplication","name":"Cetak Lelayu","url":"https://cetak-lelayu.web.id","description":"Generator surat lelayu bahasa Jawa, gratis.","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"}}
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Cetak Lelayu","url":"https://cetak-lelayu.web.id","description":"Generator surat lelayu bahasa Jawa, gratis.","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"}}
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,66 +24,93 @@
 
     <script>
     tailwind.config = {
-        darkMode: 'class',
         theme: {
             extend: {
                 fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] },
                 colors: {
-                    bg: { DEFAULT: '#fafaf9', dark: '#0a0a0b' },
-                    surface: { DEFAULT: '#ffffff', dark: '#111113' },
-                    ink: { DEFAULT: '#18181b', dark: '#fafafa' },
-                    sub: { DEFAULT: '#71717a', dark: '#a1a1aa' },
-                    hair: { DEFAULT: '#e4e4e7', dark: '#27272a' },
-                    accent: { DEFAULT: '#3b5fe0', dark: '#6b8aff' },
-                    accentsoft: { DEFAULT: '#eef2ff', dark: '#1a1f3a' },
-                },
+                    bg: '#f5f5f4',
+                    surface: '#ffffff',
+                    ink: '#18181b',
+                    sub: '#71717a',
+                    hair: '#e4e4e7',
+                    accent: '#3b5fe0',
+                    accentsoft: '#eef2ff',
+                    muted: '#fafafa',
+                }
             }
         }
     }
     </script>
 
     <style>
-        :root {
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
-            --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-        }
+        :root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 0; overflow: hidden; }
+        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 0; background: #f5f5f4; color: #18181b; overflow: hidden; }
 
-        /* ===== Wizard Steps ===== */
+        /* ===== Stepper ===== */
         .step { display: none; }
         .step.active { display: block; }
 
-        /* ===== Progress ===== */
-        .prog-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: #d4d4d8; transition: background 300ms var(--ease), transform 300ms var(--ease);
+        .stepper { display: flex; align-items: center; gap: 0; }
+        .stepper-item {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600; color: #a1a1aa;
+            transition: color 200ms var(--ease);
+            white-space: nowrap; cursor: pointer;
         }
-        .prog-dot.done { background: #3b5fe0; transform: scale(1.1); }
-        .prog-dot.current { background: #3b5fe0; transform: scale(1.3); box-shadow: 0 0 0 3px rgba(59,95,224,0.2); }
-        .dark .prog-dot { background: #3f3f46; }
-        .dark .prog-dot.done, .dark .prog-dot.current { background: #6b8aff; box-shadow: 0 0 0 3px rgba(107,138,255,0.2); }
-
-        .prog-line {
-            height: 2px; flex: 1; background: #e4e4e7; transition: background 400ms var(--ease);
+        .stepper-item .dot {
+            width: 22px; height: 22px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700;
+            border: 2px solid #e4e4e7; color: #a1a1aa; background: #fff;
+            transition: all 250ms var(--ease);
         }
-        .prog-line.done { background: #3b5fe0; }
-        .dark .prog-line { background: #27272a; }
-        .dark .prog-line.done { background: #6b8aff; }
+        .stepper-item.done .dot { border-color: #3b5fe0; background: #3b5fe0; color: #fff; }
+        .stepper-item.current .dot { border-color: #3b5fe0; color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
+        .stepper-item.current { color: #18181b; }
+        .stepper-item.done { color: #3b5fe0; }
+        .stepper-line { flex: 1; height: 2px; background: #e4e4e7; margin: 0 6px; min-width: 12px; transition: background 300ms var(--ease); }
+        .stepper-line.done { background: #3b5fe0; }
 
-        /* ===== Form Elements ===== */
-        .f-label { display: block; font-size: 11.5px; font-weight: 600; color: #71717a; margin-bottom: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
-        .dark .f-label { color: #a1a1aa; }
+        /* ===== Form ===== */
+        .f-label { display: block; font-size: 12px; font-weight: 600; color: #71717a; margin-bottom: 4px; }
+        .f-hint { font-size: 11px; color: #a1a1aa; margin-bottom: 6px; line-height: 1.4; }
         .f-input {
             width: 100%; padding: 9px 11px; border: 1px solid #e4e4e7; border-radius: 10px;
             font-size: 14px; font-family: inherit; background: #fafafa; color: #18181b; outline: none;
             transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
         }
         .f-input:focus { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.08); background: #fff; }
-        .dark .f-input { background: #18181b; border-color: #27272a; color: #fafafa; }
-        .dark .f-input:focus { border-color: #6b8aff; box-shadow: 0 0 0 3px rgba(107,138,255,0.10); background: #111113; }
-
         .f-group { margin-bottom: 14px; }
+
+        /* ===== Template Cards ===== */
+        .tpl-card {
+            border: 2px solid #e4e4e7; border-radius: 12px; padding: 12px; cursor: pointer;
+            transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+            text-align: center;
+        }
+        .tpl-card:hover { border-color: #a1a1aa; }
+        .tpl-card.selected { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
+        .tpl-card .tpl-name { font-size: 11px; font-weight: 700; margin-top: 6px; }
+        .tpl-card .tpl-preview {
+            width: 100%; aspect-ratio: 210/297; background: #fff; border-radius: 4px;
+            border: 1px solid #e4e4e7; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 8px; font-family: 'Times New Roman', serif;
+            overflow: hidden; position: relative;
+        }
+        .tpl-card .tpl-preview .mini-title { font-size: 5px; font-weight: bold; text-align: center; }
+        .tpl-card .tpl-preview .mini-line { width: 80%; height: 1px; background: #000; margin: 3px 0; }
+        .tpl-card .tpl-preview .mini-text { font-size: 3.5px; line-height: 1.5; text-align: center; color: #333; }
+
+        /* ===== Chips ===== */
+        .chip {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 6px 12px; border-radius: 8px; border: 1px solid #e4e4e7;
+            font-size: 12px; font-weight: 600; color: #71717a; background: #fff; cursor: pointer;
+            transition: all 160ms var(--ease);
+        }
+        .chip:hover { border-color: #a1a1aa; }
+        .chip.selected { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
 
         /* ===== Buttons ===== */
         .btn-primary {
@@ -95,8 +121,7 @@
         }
         .btn-primary:hover { background: #2d4bc4; }
         .btn-primary:active { transform: scale(0.97); }
-        .btn-primary:disabled { opacity: 0.4; cursor: default; transform: none; }
-
+        .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
         .btn-ghost {
             padding: 9px 16px; border-radius: 10px; border: 1px solid #e4e4e7; font-size: 13px; font-weight: 600;
             font-family: inherit; color: #71717a; background: transparent; cursor: pointer;
@@ -104,217 +129,217 @@
         }
         .btn-ghost:hover { border-color: #a1a1aa; }
         .btn-ghost:active { transform: scale(0.97); }
-        .dark .btn-ghost { border-color: #27272a; color: #a1a1aa; }
-        .dark .btn-ghost:hover { border-color: #3f3f46; }
+
+        /* ===== Section Header ===== */
+        .sec-head {
+            font-size: 11px; font-weight: 700; color: #a1a1aa; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #e4e4e7;
+        }
 
         /* ===== A4 ===== */
         #a4-page {
             width: 210mm; height: 297mm; background: #fff; padding: 20mm 20mm 15mm 20mm;
-            font-family: 'Times New Roman', Times, serif; color: #000;
-            display: flex; flex-direction: column; flex-shrink: 0;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
-            border-radius: 3px; position: relative;
+            color: #000; display: flex; flex-direction: column; flex-shrink: 0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+            border-radius: 2px; position: relative;
         }
         #scale-wrap { transform-origin: top center; width: 210mm; }
 
-        /* A4 internal */
         .d-header { text-align: center; margin-bottom: 5px; position: relative; }
         .d-logo-l { position: absolute; left: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
         .d-logo-r { position: absolute; right: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
-        .d-kop { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
-        .d-kopsub { font-size: 12pt; font-weight: bold; margin: 0; line-height: 1.2; }
+        .d-kop { font-weight: bold; margin: 0; line-height: 1.2; }
         .d-sep { border-top: 3px double #000; margin: 15px 0 20px; }
-        .d-p { font-size: 12pt; line-height: 1.4; margin-bottom: 8px; }
+        .d-p { line-height: 1.4; margin-bottom: 8px; }
         .d-bold { font-weight: bold; }
         .d-italic { font-style: italic; }
         .d-mt { margin-top: 15px; }
-        .d-main { font-size: 18pt; font-weight: bold; text-align: center; margin: 15px 0; letter-spacing: 1px; }
         .d-nsec { text-align: center; margin: 15px 0; }
-        .d-name { font-size: 14pt; font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
-        .d-age { font-size: 12pt; font-weight: bold; }
-        .d-grid { display: grid; grid-template-columns: 100px 15px 1fr; font-size: 12pt; line-height: 1.4; }
-        .d-fam { display: grid; grid-template-columns: 30px 1fr 150px; font-size: 12pt; line-height: 1.4; margin-top: 5px; }
+        .d-name { font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
+        .d-grid { display: grid; grid-template-columns: 100px 15px 1fr; line-height: 1.4; }
+        .d-fam { display: grid; grid-template-columns: 30px 1fr 150px; line-height: 1.4; margin-top: 5px; }
         .d-body { flex: 1; }
-        .d-foot { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-size: 10pt; font-style: italic; }
+        .d-foot { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-style: italic; }
 
-        /* ===== Preview update flash ===== */
-        .flash { animation: flashIn 250ms var(--ease); }
-        @keyframes flashIn {
-            0% { opacity: 0.4; } 100% { opacity: 1; }
-        }
-        .step-header {
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e4e4e7;
-        }
-        .dark .step-header {
-            border-bottom-color: #27272a;
-        }
+        .flash { animation: flashIn 200ms var(--ease); }
+        @keyframes flashIn { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
         /* ===== Scrollbar ===== */
         #form-scroll::-webkit-scrollbar { width: 4px; }
         #form-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
-        .dark #form-scroll::-webkit-scrollbar-thumb { background: #3f3f46; }
 
         /* ===== Responsive ===== */
         @media (max-width: 1199px) { #scale-wrap { transform: scale(0.72); margin-bottom: -80mm; } }
         @media (max-width: 991px) {
             #app { flex-direction: column !important; overflow-y: auto !important; }
-            #form-panel { width: 100% !important; max-height: none !important; border-right: none !important; border-bottom: 1px solid #e4e4e7; }
-            .dark #form-panel { border-bottom-color: #27272a; }
+            #form-panel { width: 100% !important; max-height: none !important; border-right: none !important; }
             #preview-panel { width: 100% !important; padding: 16px !important; }
             #scale-wrap { transform: none !important; margin: 0 !important; }
             body { overflow: auto !important; }
         }
-        @media (max-width: 600px) {
-            #scale-wrap { zoom: 0.45; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { transition-duration: 60ms !important; animation: none !important; }
-        }
+        @media (max-width: 600px) { #scale-wrap { zoom: 0.45; } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 60ms !important; animation: none !important; } }
     </style>
 </head>
 
-<body class="bg-bg dark:bg-bg-dark text-ink dark:text-ink-dark">
-    <!-- ===== NAVBAR (compact) ===== -->
-    <nav class="h-12 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between px-4 shrink-0" style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(255,255,255,0.85)">
+<body>
+    <!-- NAVBAR -->
+    <nav class="h-12 border-b border-hair bg-surface flex items-center justify-between px-4" style="position:sticky;top:0;z-index:50">
         <div class="flex items-center gap-2">
-            <div class="w-7 h-7 bg-accent dark:bg-accent rounded-[8px] flex items-center justify-center text-white text-[10px] font-extrabold">CL</div>
+            <span class="text-xl">🕊️</span>
             <span class="text-sm font-extrabold tracking-tight hidden sm:block">Cetak Lelayu</span>
         </div>
-        <div class="flex items-center gap-2">
-            <span class="text-[11px] text-sub dark:text-sub-dark hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
-            <button onclick="toggleDark()" class="w-7 h-7 rounded-lg border border-hair dark:border-hair-dark flex items-center justify-center text-xs bg-transparent cursor-pointer" id="dm-btn">🌙</button>
-        </div>
+        <span class="text-[11px] text-sub hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
     </nav>
 
-    <!-- ===== APP ===== -->
+    <!-- APP -->
     <div id="app" style="display:flex;height:calc(100dvh - 48px - 52px);overflow:hidden;">
 
-        <!-- FORM PANEL -->
-        <div id="form-panel" style="width:35%;min-width:340px;max-width:440px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#ffffff;shrink:0;">
-            <!-- Progress -->
-            <div class="px-5 pt-4 pb-3 border-b border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark" id="progress-area">
-                <div class="flex items-center gap-1" id="progress">
-                    <div class="prog-dot current" data-step="0"></div>
-                    <div class="prog-line"></div>
-                    <div class="prog-dot" data-step="1"></div>
-                    <div class="prog-line"></div>
-                    <div class="prog-dot" data-step="2"></div>
-                    <div class="prog-line"></div>
-                    <div class="prog-dot" data-step="3"></div>
-                    <div class="prog-line"></div>
-                    <div class="prog-dot" data-step="4"></div>
+        <!-- FORM -->
+        <div id="form-panel" style="width:38%;min-width:360px;max-width:480px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#fff;">
+
+            <!-- Stepper -->
+            <div class="px-5 pt-4 pb-3 border-b border-hair bg-surface" id="stepper-area">
+                <div class="stepper" id="stepper">
+                    <div class="stepper-item current" data-s="0" onclick="goStep(0)"><span class="dot">1</span><span class="hidden md:inline">Almarhum</span></div>
+                    <div class="stepper-line"></div>
+                    <div class="stepper-item" data-s="1" onclick="goStep(1)"><span class="dot">2</span><span class="hidden md:inline">Wafat</span></div>
+                    <div class="stepper-line"></div>
+                    <div class="stepper-item" data-s="2" onclick="goStep(2)"><span class="dot">3</span><span class="hidden md:inline">Makam</span></div>
+                    <div class="stepper-line"></div>
+                    <div class="stepper-item" data-s="3" onclick="goStep(3)"><span class="dot">4</span><span class="hidden md:inline">Keluarga</span></div>
+                    <div class="stepper-line"></div>
+                    <div class="stepper-item" data-s="4" onclick="goStep(4)"><span class="dot">5</span><span class="hidden md:inline">Surat</span></div>
                 </div>
-                <div class="flex justify-between mt-2">
-                    <span class="text-[11px] font-semibold text-sub dark:text-sub-dark" id="step-label">Data Almarhum</span>
-                    <span class="text-[11px] text-sub dark:text-sub-dark" id="step-count">1 / 5</span>
-                </div>
-                <div class="mt-2 text-center">
-                    <button onclick="toggleMode()" id="mode-toggle" class="text-[11px] text-sub dark:text-sub-dark hover:text-ink dark:hover:text-ink-dark bg-transparent border-none cursor-pointer underline underline-offset-2 decoration-hair dark:decoration-hair-dark" style="font-family:inherit">Lihat semua sekaligus</button>
+                <div class="mt-3 text-center">
+                    <button onclick="toggleMode()" id="mode-btn" class="text-[11px] text-sub hover:text-ink bg-transparent border-none cursor-pointer underline underline-offset-2 decoration-hair" style="font-family:inherit">Lihat semua sekaligus</button>
                 </div>
             </div>
 
-            <!-- Form Scroll Area -->
+            <!-- Form -->
             <div id="form-scroll" style="flex:1;overflow-y:auto;padding:20px 20px 24px;">
 
                 <!-- Step 0: Almarhum -->
                 <div class="step active" data-step="0">
+                    <div class="sec-head">Data Almarhum</div>
                     <div class="f-group">
                         <label class="f-label">Status</label>
                         <select class="f-input" id="in-status">
-                            <option value="Almarhum">Almarhum</option>
-                            <option value="Almarhumah" selected>Almarhumah</option>
+                            <option value="Almarhum">Almarhum (laki-laki)</option>
+                            <option value="Almarhumah" selected>Almarhumah (perempuan)</option>
                         </select>
                     </div>
                     <div class="f-group">
                         <label class="f-label">Nama Lengkap</label>
-                        <input class="f-input" id="in-nama" placeholder="Nama binti/bin nama">
+                        <div class="f-hint">Nama yang akan muncul pada surat</div>
+                        <input class="f-input" id="in-nama" placeholder="cth: Siti Aminah binti Ahmad">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Umur (Yuswa)</label>
+                        <label class="f-label">Umur</label>
+                        <div class="f-hint">Yuswa (umur almarhum/ah)</div>
                         <input class="f-input" id="in-umur" placeholder="60 tahun">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Yth. (Penerima Surat)</label>
+                        <label class="f-label">Penerima Surat</label>
+                        <div class="f-hint">Biasanya: Yth. Bapak/Ibu/Saudara/Masyarakat</div>
                         <input class="f-input" id="in-penerima" value="Bapak /Ibu /Saudara /Masyarakat">
                     </div>
                 </div>
 
                 <!-- Step 1: Wafat -->
                 <div class="step" data-step="1">
+                    <div class="sec-head">Waktu Wafat (Sedorikolo)</div>
                     <div class="f-group">
-                        <label class="f-label">Hari Wafat</label>
+                        <label class="f-label">Hari</label>
+                        <div class="f-hint">Hari pasaran Jawa, cth: Jumat Legi</div>
                         <input class="f-input" id="in-wf-hari" placeholder="Jumat Legi">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Tanggal Wafat</label>
+                        <label class="f-label">Tanggal</label>
                         <input class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Jam Wafat</label>
+                        <label class="f-label">Jam</label>
                         <input class="f-input" id="in-wf-jam" placeholder="22.00 WIB">
                     </div>
                     <div class="f-group">
                         <label class="f-label">Tempat Wafat</label>
-                        <textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="Alamat lengkap"></textarea>
+                        <div class="f-hint">Rumah sakit, rumah duka, atau alamat lengkap</div>
+                        <textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="RSUD Dr. Moewardi, Solo"></textarea>
                     </div>
                 </div>
 
                 <!-- Step 2: Pemakaman -->
                 <div class="step" data-step="2">
+                    <div class="sec-head">Waktu Pemakaman</div>
                     <div class="f-group">
-                        <label class="f-label">Hari Pemakaman</label>
+                        <label class="f-label">Hari</label>
                         <input class="f-input" id="in-mk-hari" placeholder="Sabtu Paing">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Tanggal Pemakaman</label>
+                        <label class="f-label">Tanggal</label>
                         <input class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Jam Pemakaman</label>
+                        <label class="f-label">Jam</label>
                         <input class="f-input" id="in-mk-jam" placeholder="14.00 WIB (Jam 2 Siang)">
                     </div>
                     <div class="f-group">
                         <label class="f-label">Nama Makam</label>
-                        <input class="f-input" id="in-mk-tmp" placeholder="Makam Suci Gemblangan">
+                        <input class="f-input" id="in-mk-tmp" placeholder="TPU Bonoloyo, Solo">
                     </div>
                 </div>
 
                 <!-- Step 3: Keluarga -->
                 <div class="step" data-step="3">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-[11px] font-semibold text-sub dark:text-sub-dark uppercase tracking-wider">Keluarga Ditinggalkan</span>
-                        <button onclick="addFam()" class="text-[11px] font-bold text-accent dark:text-accent bg-accentsoft dark:bg-accentsoft border-none px-2 py-1 rounded-lg cursor-pointer">+ Tambah</button>
+                    <div class="sec-head" style="display:flex;justify-content:space-between;align-items:center;border-bottom:none;padding-bottom:0;margin-bottom:8px">
+                        <span>Keluarga Ditinggalkan</span>
+                        <button onclick="addFam()" class="text-[11px] font-bold text-accent bg-accentsoft border-none px-2 py-1 rounded-lg cursor-pointer">+ Tambah</button>
                     </div>
+                    <div class="f-hint mb-3">Isi nama dan hubungan dengan almarhum/ah</div>
                     <div id="fam-box" class="flex flex-col gap-2"></div>
                 </div>
 
-                <!-- Step 4: Kop & Catatan -->
+                <!-- Step 4: Template & Surat -->
                 <div class="step" data-step="4">
+                    <div class="sec-head">Pilih Template</div>
+                    <div class="grid grid-cols-3 gap-2 mb-5" id="tpl-grid"></div>
+
+                    <div class="sec-head">Bahasa Surat</div>
+                    <div class="flex gap-2 mb-5" id="lang-chips"></div>
+
+                    <div class="sec-head">Gaya Penulisan</div>
+                    <div class="flex gap-2 mb-5 flex-wrap" id="style-chips"></div>
+
+                    <div class="sec-head">Ukuran Kertas</div>
+                    <div class="flex gap-2 mb-5" id="size-chips"></div>
+
+                    <div class="sec-head">Kop Surat</div>
+                    <div class="flex gap-2 mb-3 flex-wrap" id="kop-chips"></div>
                     <div class="f-group">
-                        <label class="f-label">Nama Organisasi (Baris 1)</label>
-                        <input class="f-input" id="in-kop1" placeholder="cth: IKATAN PEMUDA PEMUDI">
+                        <label class="f-label">Baris 1</label>
+                        <input class="f-input" id="in-kop1" placeholder="Nama organisasi">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Nama RT/RW (Baris 2)</label>
-                        <input class="f-input" id="in-kop2" placeholder="cth: MANUNGGAL HATI">
+                        <label class="f-label">Baris 2</label>
+                        <input class="f-input" id="in-kop2" placeholder="RT/RW atau divisi">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Alamat / Subtitle</label>
-                        <input class="f-input" id="in-kop3" placeholder="cth: Gemblangan, Timbulharjo, Sewon, Bantul">
+                        <label class="f-label">Alamat</label>
+                        <input class="f-input" id="in-kop3" placeholder="Alamat lengkap">
                     </div>
-                    <div class="border-t border-hair dark:border-hair-dark my-4"></div>
+
+                    <div class="sec-head mt-4">Catatan Kaki</div>
                     <div class="f-group">
-                        <label class="f-label">Catatan Kaki Kiri</label>
+                        <label class="f-label">Catatan Kiri</label>
                         <input class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun.">
                     </div>
                     <div class="f-group">
-                        <label class="f-label">Catatan Kaki Kanan</label>
+                        <label class="f-label">Catatan Kanan</label>
                         <input class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026">
                     </div>
-                    <div class="border-t border-hair dark:border-hair-dark my-4"></div>
+
+                    <div class="sec-head mt-4">Logo (Opsional)</div>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="f-group"><label class="f-label">Logo Kiri</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-l')"></div>
                         <div class="f-group"><label class="f-label">Logo Kanan</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-r')"></div>
@@ -322,58 +347,58 @@
                 </div>
             </div>
 
-            <!-- Nav Buttons -->
-            <div class="px-5 py-3 border-t border-hair dark:border-hair-dark bg-surface dark:bg-surface-dark flex items-center justify-between" id="nav-buttons">
+            <!-- Nav -->
+            <div class="px-5 py-3 border-t border-hair bg-surface flex items-center justify-between" id="nav-area">
                 <button onclick="goStep(cur-1)" id="btn-back" class="btn-ghost" style="visibility:hidden">← Kembali</button>
                 <button onclick="goStep(cur+1)" id="btn-next" class="btn-primary">Lanjut →</button>
             </div>
         </div>
 
-        <!-- PREVIEW PANEL -->
-        <div id="preview-panel" style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px;overflow:auto;background:#f5f5f4;">
+        <!-- PREVIEW -->
+        <div id="preview-panel" style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px;overflow:auto;background:#e8e8e6;">
             <div id="scale-wrap">
                 <div id="a4-page">
                     <div class="d-body">
                         <div class="d-header">
                             <img id="out-logo-l" class="d-logo-l" src="" style="display:none">
-                            <svg id="ph-logo-l" class="d-logo-l" viewBox="0 0 80 80" style="opacity:0.1"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+                            <svg id="ph-logo-l" class="d-logo-l" viewBox="0 0 80 80" style="opacity:0.08"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
                             <img id="out-logo-r" class="d-logo-r" src="" style="display:none">
-                            <svg id="ph-logo-r" class="d-logo-r" viewBox="0 0 80 80" style="opacity:0.1"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
-                            <div class="d-kop" id="out-kop1"></div>
-                            <div class="d-kop" id="out-kop2"></div>
-                            <div class="d-kopsub" id="out-kop3"></div>
+                            <svg id="ph-logo-r" class="d-logo-r" viewBox="0 0 80 80" style="opacity:0.08"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
+                            <div class="d-kop" id="out-kop1" style="font-size:16pt"></div>
+                            <div class="d-kop" id="out-kop2" style="font-size:16pt"></div>
+                            <div class="d-kop" id="out-kop3" style="font-size:12pt"></div>
                         </div>
                         <div class="d-sep"></div>
-                        <div class="d-p d-bold">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
+                        <div class="d-p d-bold" style="font-size:12pt">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
                         <div class="d-p d-bold" style="color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin-bottom:10px;height:16px"></div>
-                        <div class="d-p d-bold d-italic d-mt">Assalamu'alaikum Wr.Wb</div>
-                        <div class="d-main">PAWARTOS LELAYU</div>
-                        <div class="d-p">Inna lillahi wa inna ilaihi roji'un</div>
-                        <div class="d-p">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
+                        <div class="d-p d-bold d-italic d-mt" style="font-size:12pt" id="out-salam">Assalamu'alaikum Wr.Wb</div>
+                        <div id="out-title" style="font-size:18pt;font-weight:bold;text-align:center;margin:15px 0;letter-spacing:1px">PAWARTOS LELAYU</div>
+                        <div class="d-p" style="font-size:12pt" id="out-open">Inna lillahi wa inna ilaihi roji'un</div>
+                        <div class="d-p" style="font-size:12pt" id="out-announce">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
                         <div class="d-nsec">
-                            <div class="d-name"><span id="out-status">Almarhumah</span> <span id="out-nama"></span></div>
-                            <div class="d-age">Yuswa : <span id="out-umur"></span></div>
+                            <div class="d-name" style="font-size:14pt"><span id="out-status">Almarhumah</span> <span id="out-nama"></span></div>
+                            <div style="font-size:12pt;font-weight:bold">Yuswa : <span id="out-umur"></span></div>
                         </div>
-                        <div class="d-p d-mt">Sedorikolo</div>
-                        <div class="d-grid">
+                        <div class="d-p d-mt" style="font-size:12pt" id="out-wf-label">Sedorikolo</div>
+                        <div class="d-grid" style="font-size:12pt">
                             <div>Dinten</div><div>:</div><div id="out-wf-hari"></div>
                             <div>Tanggal</div><div>:</div><div id="out-wf-tgl"></div>
                             <div>Jam</div><div>:</div><div id="out-wf-jam"></div>
                             <div>Wonten</div><div>:</div><div id="out-wf-tmp"></div>
                         </div>
-                        <div class="d-p d-mt">Jenazah badhe dipunkasareaken</div>
-                        <div class="d-grid">
+                        <div class="d-p d-mt" style="font-size:12pt" id="out-mk-label">Jenazah badhe dipunkasareaken</div>
+                        <div class="d-grid" style="font-size:12pt">
                             <div>Dinten</div><div>:</div><div id="out-mk-hari"></div>
                             <div>Tanggal</div><div>:</div><div id="out-mk-tgl"></div>
                             <div>Jam</div><div>:</div><div id="out-mk-jam"></div>
                             <div>Wonten ing makam</div><div>:</div><div id="out-mk-tmp"></div>
                         </div>
-                        <div class="d-p d-mt" style="text-align:justify">Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.</div>
-                        <div class="d-p d-bold d-italic d-mt">Wassalamu'alaikum Wr.Wb</div>
-                        <div class="d-p">Ingkang nandang sungkawa :</div>
+                        <div class="d-p d-mt" style="text-align:justify;font-size:12pt" id="out-closing">Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.</div>
+                        <div class="d-p d-bold d-italic d-mt" style="font-size:12pt" id="out-wsalam">Wassalamu'alaikum Wr.Wb</div>
+                        <div class="d-p" style="font-size:12pt" id="out-family-label">Ingkang nandang sungkawa :</div>
                         <div id="out-fam"></div>
                     </div>
-                    <div class="d-foot">
+                    <div class="d-foot" style="font-size:10pt">
                         <div id="out-foot-l">Sumangga dipun-getok tularaken dhumateng warga sanesipun.</div>
                         <div id="out-foot-r"></div>
                     </div>
@@ -382,98 +407,231 @@
         </div>
     </div>
 
-    <!-- ===== STICKY DOWNLOAD BAR ===== -->
-    <div id="dl-bar" style="height:52px;border-top:1px solid #e4e4e7;background:#ffffff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;shrink:0;position:sticky;bottom:0;z-index:40;">
-        <span class="text-[12px] text-sub dark:text-sub-dark" id="dl-hint">Lengkapi semua data untuk mengunduh</span>
+    <!-- DOWNLOAD BAR -->
+    <div id="dl-bar" style="height:52px;border-top:1px solid #e4e4e7;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;">
+        <span class="text-[12px] text-sub" id="dl-hint">Lengkapi data untuk mengunduh</span>
         <button onclick="downloadPDF()" id="dl-btn" class="btn-primary" disabled>
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download PDF
         </button>
     </div>
 
     <script>
         let cur = 0;
-        const steps = ['Data Almarhum','Waktu Wafat','Pemakaman','Keluarga','Kop & Catatan'];
-        const labels = ['Data Almarhum','Waktu Wafat','Pemakaman','Keluarga','Pengaturan Surat'];
+        let mode = 'wizard';
+        const labels = ['Almarhum','Wafat','Pemakaman','Keluarga','Surat'];
 
-        let famData = [
-            {nama:"",status:"( Garwo )"},
-            {nama:"",status:"( anak/mantu )"},
-            {nama:"Lan Sedoyo Keluargo",status:""}
+        // ===== Template System =====
+        const templates = [
+            { id:'klasik', name:'Klasik', font:'Times New Roman' },
+            { id:'modern', name:'Modern', font:'Georgia' },
+            { id:'islami', name:'Islami', font:'Book Antiqua' },
+            { id:'minimalis', name:'Minimalis', font:'Cambria' },
+            { id:'rt', name:'RT/RW', font:'Times New Roman' },
+            { id:'masjid', name:'Masjid', font:'Traditional Arabic' },
         ];
+        let selTpl = 'klasik';
 
-        const syncMap = {
-            'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3',
-            'in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur',
-            'in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp',
-            'in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp',
-            'in-foot-l':'out-foot-l','in-foot-r':'out-foot-r',
-        };
+        const languages = [
+            { id:'jawa', name:'Jawa' },
+            { id:'indo', name:'Indonesia' },
+            { id:'campur', name:'Campuran' },
+        ];
+        let selLang = 'jawa';
 
-        function init() {
-            for (const [i,o] of Object.entries(syncMap)) {
-                const el = document.getElementById(i);
-                if (!el) continue;
-                el.addEventListener('input', e => {
-                    const t = document.getElementById(o);
-                    if (t) { t.innerText = e.target.value; t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
-                });
+        const styles = [
+            { id:'formal', name:'Formal' },
+            { id:'tradisional', name:'Tradisional' },
+            { id:'modern', name:'Modern' },
+            { id:'islami', name:'Islami' },
+        ];
+        let selStyle = 'tradisional';
+
+        const sizes = [
+            { id:'a4', name:'A4' },
+            { id:'f4', name:'F4' },
+        ];
+        let selSize = 'a4';
+
+        const kopPresets = [
+            { id:'masjid', name:'Masjid', l1:'TAKMIR MASJID', l2:'', l3:'' },
+            { id:'rt', name:'RT', l1:'RUKUN TETANGGA', l2:'RT / RW', l3:'' },
+            { id:'rw', name:'RW', l1:'RUKUN WARGA', l2:'RW', l3:'' },
+            { id:'karang', name:'Karang Taruna', l1:'KARANG TARUNA', l2:'', l3:'' },
+            { id:'desa', name:'Desa', l1:'PEMERINTAH DESA', l2:'', l3:'' },
+            { id:'paguyuban', name:'Paguyuban', l1:'PAGUYUBAN', l2:'', l3:'' },
+            { id:'custom', name:'Isi Sendiri', l1:'', l2:'', l3:'' },
+        ];
+        let selKop = 'custom';
+
+        // ===== Text variants by language + style =====
+        function getTexts() {
+            const t = {
+                salam: '', title: '', open: '', announce: '',
+                wfLabel: '', mkLabel: '', closing: '', wsalam: '', familyLabel: ''
+            };
+            if (selLang === 'jawa') {
+                t.salam = "Assalamu'alaikum Wr.Wb";
+                t.title = 'PAWARTOS LELAYU';
+                t.open = 'Inna lillahi wa inna ilaihi roji\'un';
+                t.announce = 'Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
+                t.wfLabel = 'Sedorikolo';
+                t.mkLabel = 'Jenazah badhe dipunkasareaken';
+                t.closing = 'Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng';
+                t.wsalam = "Wassalamu'alaikum Wr.Wb";
+                t.familyLabel = 'Ingkang nandang sungkawa :';
+            } else if (selLang === 'indo') {
+                t.salam = "Assalamu'alaikum Wr.Wb";
+                t.title = 'BERITA DUKA CITA';
+                t.open = 'Innalillahi wa inna ilaihi roji\'un';
+                t.announce = 'Telah berpulang ke Rahmatullah :';
+                t.wfLabel = 'Waktu Wafat';
+                t.mkLabel = 'Jenazah akan dimakamkan';
+                t.closing = 'Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
+                t.wsalam = "Wassalamu'alaikum Wr.Wb";
+                t.familyLabel = 'Yang berduka :';
+            } else { // campur
+                t.salam = "Assalamu'alaikum Wr.Wb";
+                t.title = 'PAWARTOS LELAYU';
+                t.open = 'Innalillahi wa inna ilaihi roji\'un';
+                t.announce = 'Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
+                t.wfLabel = 'Sedorikolo';
+                t.mkLabel = 'Jenazah akan dimakamkan';
+                t.closing = 'Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
+                t.wsalam = "Wassalamu'alaikum Wr.Wb";
+                t.familyLabel = 'Yang berduka / Ingkang nandang sungkawa :';
             }
-            document.getElementById('in-status').addEventListener('change', e => {
-                document.getElementById('out-status').innerText = e.target.value;
-                document.getElementById('out-status2').innerText = e.target.value;
+            // Style adjustments
+            if (selStyle === 'islami') {
+                t.salam = "Assalamu'alaikum Warahmatullahi Wabarakatuh";
+                t.wsalam = "Wassalamu'alaikum Warahmatullahi Wabarakatuh";
+                if (selLang === 'jawa') t.title = 'PAWARTOS DUKA';
+            }
+            if (selStyle === 'modern') {
+                if (selLang === 'indo') t.title = 'SURAT PEMBERITAHUAN DUKA CITA';
+                else t.title = 'WARTOS DUKA';
+            }
+            return t;
+        }
+
+        function applyTexts() {
+            const t = getTexts();
+            const map = {
+                'out-salam': t.salam, 'out-title': t.title, 'out-open': t.open,
+                'out-announce': t.announce, 'out-wf-label': t.wfLabel,
+                'out-mk-label': t.mkLabel, 'out-closing': t.closing + ' ',
+                'out-wsalam': t.wsalam, 'out-family-label': t.familyLabel,
+            };
+            for (const [id, val] of Object.entries(map)) {
+                const el = document.getElementById(id);
+                if (el) { el.innerText = val; el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
+            }
+            // Apply font
+            const tpl = templates.find(t => t.id === selTpl);
+            if (tpl) document.getElementById('a4-page').style.fontFamily = `'${tpl.font}', serif`;
+        }
+
+        // ===== Render chips/cards =====
+        function renderTemplateCards() {
+            const grid = document.getElementById('tpl-grid');
+            grid.innerHTML = '';
+            templates.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'tpl-card' + (selTpl === t.id ? ' selected' : '');
+                card.onclick = () => { selTpl = t.id; renderTemplateCards(); applyTexts(); };
+                card.innerHTML = `
+                    <div class="tpl-preview">
+                        <div class="mini-title">${t.name}</div>
+                        <div class="mini-line"></div>
+                        <div class="mini-text">Nama Almarhum<br>Yuswa: 60 tahun<br><br>Dinten / Tanggal / Jam</div>
+                    </div>
+                    <div class="tpl-name">${t.name}</div>`;
+                grid.appendChild(card);
             });
-            renderFam();
-            updateScale();
+        }
+
+        function renderChips(containerId, items, selected, onSelect) {
+            const c = document.getElementById(containerId);
+            c.innerHTML = '';
+            items.forEach(i => {
+                const chip = document.createElement('button');
+                chip.className = 'chip' + (selected === i.id ? ' selected' : '');
+                chip.textContent = i.name;
+                chip.onclick = () => { onSelect(i.id); renderAll(); };
+                c.appendChild(chip);
+            });
+        }
+
+        function renderAll() {
+            renderChips('lang-chips', languages, selLang, id => { selLang = id; });
+            renderChips('style-chips', styles, selStyle, id => { selStyle = id; });
+            renderChips('size-chips', sizes, selSize, id => { selSize = id; });
+            renderChips('kop-chips', kopPresets, selKop, id => {
+                selKop = id;
+                const p = kopPresets.find(k => k.id === id);
+                if (p && id !== 'custom') {
+                    document.getElementById('in-kop1').value = p.l1;
+                    document.getElementById('in-kop2').value = p.l2;
+                    document.getElementById('in-kop3').value = p.l3;
+                    syncField('in-kop1','out-kop1'); syncField('in-kop2','out-kop2'); syncField('in-kop3','out-kop3');
+                }
+            });
+            applyTexts();
+        }
+
+        function syncField(i, o) {
+            const el = document.getElementById(i);
+            const out = document.getElementById(o);
+            if (el && out) out.innerText = el.value;
         }
 
         // ===== Wizard =====
         function goStep(n) {
             if (n < 0 || n > 4) return;
+            if (mode === 'all') return;
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
             cur = n;
-
-            // Progress
-            document.querySelectorAll('.prog-dot').forEach(d => {
-                const s = parseInt(d.dataset.step);
-                d.className = 'prog-dot' + (s < n ? ' done' : s === n ? ' current' : '');
+            // Stepper
+            document.querySelectorAll('.stepper-item').forEach(s => {
+                const i = parseInt(s.dataset.s);
+                s.className = 'stepper-item' + (i < n ? ' done' : i === n ? ' current' : '');
             });
-            document.querySelectorAll('.prog-line').forEach((l,i) => {
-                l.className = 'prog-line' + (i < n ? ' done' : '');
+            document.querySelectorAll('.stepper-line').forEach((l, i) => {
+                l.className = 'stepper-line' + (i < n ? ' done' : '');
             });
-            document.getElementById('step-label').textContent = labels[n];
-            document.getElementById('step-count').textContent = `${n+1} / 5`;
-
-            // Nav buttons
+            // Nav
             document.getElementById('btn-back').style.visibility = n === 0 ? 'hidden' : 'visible';
-            const nextBtn = document.getElementById('btn-next');
-            if (n === 4) { nextBtn.textContent = 'Download PDF'; nextBtn.onclick = downloadPDF; }
-            else { nextBtn.textContent = 'Lanjut →'; nextBtn.onclick = () => goStep(cur+1); }
-
-            // Download bar
+            const nb = document.getElementById('btn-next');
+            if (n === 4) { nb.textContent = 'Download PDF'; nb.onclick = downloadPDF; }
+            else { nb.textContent = 'Lanjut →'; nb.onclick = () => goStep(cur+1); }
             updateDL();
-
-            // Scroll form to top
             document.getElementById('form-scroll').scrollTop = 0;
         }
 
-        function updateDL() {
-            const btn = document.getElementById('dl-btn');
-            const hint = document.getElementById('dl-hint');
-            const nama = document.getElementById('in-nama').value.trim();
-            if (nama) {
-                btn.disabled = false;
-                hint.textContent = 'PDF siap diunduh';
-                hint.classList.remove('text-sub','dark:text-sub-dark');
-                hint.classList.add('text-accent','dark:text-accent');
+        function toggleMode() {
+            if (mode === 'wizard') {
+                mode = 'all';
+                document.querySelectorAll('.step').forEach(s => s.classList.add('active'));
+                document.getElementById('stepper-area').style.display = 'none';
+                document.getElementById('nav-area').style.display = 'none';
+                document.getElementById('mode-btn').textContent = 'Pakai wizard (langkah demi langkah)';
             } else {
-                btn.disabled = cur < 4;
-                hint.textContent = cur < 4 ? `Isi data di langkah ${cur+1} terlebih dahulu` : 'Isi nama almarhum untuk mengunduh';
+                mode = 'wizard';
+                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+                document.querySelector(`.step[data-step="${cur}"]`).classList.add('active');
+                document.getElementById('stepper-area').style.display = '';
+                document.getElementById('nav-area').style.display = '';
+                document.getElementById('mode-btn').textContent = 'Lihat semua sekaligus';
             }
         }
 
         // ===== Keluarga =====
+        let famData = [
+            {nama:"",status:"( Garwo )"},
+            {nama:"",status:"( anak/mantu )"},
+            {nama:"Lan Sedoyo Keluargo",status:""}
+        ];
         function renderFam() {
             const box = document.getElementById('fam-box');
             const out = document.getElementById('out-fam');
@@ -485,10 +643,11 @@
                     <span class="text-[11px] w-4 text-sub">${i+1}.</span>
                     <input class="f-input text-[12px] py-1.5 flex-1" value="${d.nama}" placeholder="Nama" oninput="updFam(${i},'nama',this.value)">
                     <input class="f-input text-[12px] py-1.5 w-24" value="${d.status}" placeholder="Status" oninput="updFam(${i},'status',this.value)">
-                    <button onclick="rmFam(${i})" class="text-[11px] opacity-30 hover:opacity-100 bg-transparent border-none cursor-pointer p-1 transition-opacity">✕</button>`;
+                    <button onclick="rmFam(${i})" class="text-[11px] opacity-30 hover:opacity-100 bg-transparent border-none cursor-pointer p-1">✕</button>`;
                 box.appendChild(row);
                 const outRow = document.createElement('div');
                 outRow.className = 'd-fam';
+                outRow.style.fontSize = '12pt';
                 outRow.innerHTML = `<div style="text-align:right;padding-right:5px">${i+1}.</div><div>${d.nama}</div><div>${d.status}</div>`;
                 out.appendChild(outRow);
             });
@@ -509,19 +668,6 @@
                 if(ph)ph.style.display='none';
             };
             r.readAsDataURL(f);
-        }
-
-        // ===== Dark =====
-        function toggleDark() {
-            document.documentElement.classList.toggle('dark');
-            const d = document.documentElement.classList.contains('dark');
-            document.getElementById('dm-btn').textContent = d ? '☀️' : '🌙';
-            document.getElementById('form-panel').style.background = d ? '#111113' : '#ffffff';
-            document.getElementById('preview-panel').style.background = d ? '#0a0a0b' : '#f5f5f4';
-            document.getElementById('dl-bar').style.background = d ? '#111113' : '#ffffff';
-            document.getElementById('dl-bar').style.borderColor = d ? '#27272a' : '#e4e4e7';
-            document.querySelector('nav').style.background = d ? 'rgba(17,17,19,0.85)' : 'rgba(255,255,255,0.85)';
-            document.querySelector('nav').style.borderColor = d ? '#27272a' : '#e4e4e7';
         }
 
         // ===== PDF =====
@@ -552,49 +698,52 @@
             }
         }
 
-        window.addEventListener('resize', updateScale);
-        window.addEventListener('load', init);
-        setTimeout(updateScale, 80);
-
-        // Update DL on any input
-        document.addEventListener('input', updateDL);
-
-        // ===== Mode Toggle (Wizard / All) =====
-        let mode = 'wizard'; // 'wizard' | 'all'
-        function toggleMode() {
-            if (mode === 'wizard') {
-                mode = 'all';
-                // Show all steps
-                document.querySelectorAll('.step').forEach(s => s.classList.add('active'));
-                // Hide progress & nav
-                document.getElementById('progress-area').style.display = 'none';
-                document.getElementById('nav-buttons').style.display = 'none';
-                // Update toggle text
-                document.getElementById('mode-toggle').textContent = 'Pakai wizard (langkah demi langkah)';
-                // Make step sections have visible labels
-                document.querySelectorAll('.step[data-step]').forEach(s => {
-                    const n = parseInt(s.dataset.step);
-                    if (!s.querySelector('.step-header')) {
-                        const h = document.createElement('div');
-                        h.className = 'step-header';
-                        h.innerHTML = `<span class="text-[11px] font-semibold text-sub dark:text-sub-dark uppercase tracking-wider">${labels[n]}</span>`;
-                        s.insertBefore(h, s.firstChild);
-                    }
-                });
+        function updateDL() {
+            const btn = document.getElementById('dl-btn');
+            const hint = document.getElementById('dl-hint');
+            const nama = document.getElementById('in-nama').value.trim();
+            if (nama) {
+                btn.disabled = false;
+                hint.textContent = 'PDF siap diunduh';
+                hint.className = 'text-[12px] text-accent';
             } else {
-                mode = 'wizard';
-                // Back to wizard
-                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-                document.querySelector(`.step[data-step="${cur}"]`).classList.add('active');
-                // Show progress & nav
-                document.getElementById('progress-area').style.display = '';
-                document.getElementById('nav-buttons').style.display = '';
-                // Update toggle text
-                document.getElementById('mode-toggle').textContent = 'Lihat semua sekaligus';
-                // Remove step headers
-                document.querySelectorAll('.step-header').forEach(h => h.remove());
+                btn.disabled = cur < 4 && mode === 'wizard';
+                hint.textContent = 'Isi nama almarhum untuk mengunduh';
+                hint.className = 'text-[12px] text-sub';
             }
         }
+
+        // ===== Init =====
+        function init() {
+            const syncMap = {
+                'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3',
+                'in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur',
+                'in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp',
+                'in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp',
+                'in-foot-l':'out-foot-l','in-foot-r':'out-foot-r',
+            };
+            for (const [i,o] of Object.entries(syncMap)) {
+                const el = document.getElementById(i);
+                if (!el) continue;
+                el.addEventListener('input', e => {
+                    const t = document.getElementById(o);
+                    if (t) { t.innerText = e.target.value; t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
+                });
+            }
+            document.getElementById('in-status').addEventListener('change', e => {
+                document.getElementById('out-status').innerText = e.target.value;
+                document.getElementById('out-status2').innerText = e.target.value;
+            });
+            renderFam();
+            renderTemplateCards();
+            renderAll();
+            updateScale();
+        }
+
+        window.addEventListener('resize', updateScale);
+        window.addEventListener('load', init);
+        document.addEventListener('input', updateDL);
+        setTimeout(updateScale, 80);
     </script>
 </body>
 </html>
