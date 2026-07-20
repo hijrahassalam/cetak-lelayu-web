@@ -24,171 +24,97 @@
 
     <script>
     tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] },
-                colors: {
-                    bg: '#f5f5f4',
-                    surface: '#ffffff',
-                    ink: '#18181b',
-                    sub: '#71717a',
-                    hair: '#e4e4e7',
-                    accent: '#3b5fe0',
-                    accentsoft: '#eef2ff',
-                    muted: '#fafafa',
-                }
-            }
-        }
+        theme: { extend: {
+            fontFamily: { sans: ['"Plus Jakarta Sans"','system-ui','sans-serif'] },
+            colors: { bg:'#f5f5f4', surface:'#ffffff', ink:'#18181b', sub:'#71717a', hair:'#e4e4e7', accent:'#3b5fe0', accentsoft:'#eef2ff', muted:'#fafafa' }
+        }}
     }
     </script>
 
     <style>
-        :root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
+        :root { --ease: cubic-bezier(0.22,1,0.36,1); }
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 0; background: #f5f5f4; color: #18181b; overflow: hidden; }
 
-        /* ===== Stepper ===== */
-        .step { display: none; }
-        .step.active { display: block; }
+        .step { display: none; } .step.active { display: block; }
 
-        .stepper { display: flex; align-items: center; gap: 0; }
-        .stepper-item {
-            display: flex; align-items: center; gap: 6px;
-            font-size: 11px; font-weight: 600; color: #a1a1aa;
-            transition: color 200ms var(--ease);
-            white-space: nowrap; cursor: pointer;
-        }
-        .stepper-item .dot {
-            width: 22px; height: 22px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: 700;
-            border: 2px solid #e4e4e7; color: #a1a1aa; background: #fff;
-            transition: all 250ms var(--ease);
-        }
-        .stepper-item.done .dot { border-color: #3b5fe0; background: #3b5fe0; color: #fff; }
-        .stepper-item.current .dot { border-color: #3b5fe0; color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
-        .stepper-item.current { color: #18181b; }
-        .stepper-item.done { color: #3b5fe0; }
-        .stepper-line { flex: 1; height: 2px; background: #e4e4e7; margin: 0 6px; min-width: 12px; transition: background 300ms var(--ease); }
-        .stepper-line.done { background: #3b5fe0; }
+        /* Stepper */
+        .stp { display: flex; align-items: center; gap: 0; }
+        .stp-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #a1a1aa; cursor: pointer; transition: color 200ms var(--ease); white-space: nowrap; }
+        .stp-item .dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; border: 2px solid #e4e4e7; color: #a1a1aa; background: #fff; transition: all 250ms var(--ease); }
+        .stp-item.done .dot { border-color: #3b5fe0; background: #3b5fe0; color: #fff; }
+        .stp-item.done .dot::after { content: '✓'; font-size: 12px; }
+        .stp-item.done .dot .num { display: none; }
+        .stp-item.current .dot { border-color: #3b5fe0; color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
+        .stp-item.current { color: #18181b; }
+        .stp-item.done { color: #3b5fe0; }
+        .stp-line { flex: 1; height: 2px; background: #e4e4e7; margin: 0 6px; min-width: 12px; transition: background 300ms var(--ease); }
+        .stp-line.done { background: #3b5fe0; }
 
-        /* ===== Form ===== */
-        .f-label { display: block; font-size: 12px; font-weight: 600; color: #71717a; margin-bottom: 4px; }
-        .f-hint { font-size: 11px; color: #a1a1aa; margin-bottom: 6px; line-height: 1.4; }
-        .f-input {
-            width: 100%; padding: 9px 11px; border: 1px solid #e4e4e7; border-radius: 10px;
-            font-size: 14px; font-family: inherit; background: #fafafa; color: #18181b; outline: none;
-            transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
-        }
+        /* Form */
+        .f-label { display: block; font-size: 12px; font-weight: 600; color: #71717a; margin-bottom: 3px; }
+        .f-hint { font-size: 11px; color: #a1a1aa; margin-bottom: 5px; line-height: 1.4; }
+        .f-input { width: 100%; padding: 9px 11px; border: 1px solid #e4e4e7; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fafafa; color: #18181b; outline: none; transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease); }
         .f-input:focus { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.08); background: #fff; }
-        .f-group { margin-bottom: 14px; }
+        .f-group { margin-bottom: 13px; }
 
-        /* ===== Template Cards ===== */
-        .tpl-card {
-            border: 2px solid #e4e4e7; border-radius: 12px; padding: 12px; cursor: pointer;
-            transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
-            text-align: center;
-        }
-        .tpl-card:hover { border-color: #a1a1aa; }
-        .tpl-card.selected { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
-        .tpl-card .tpl-name { font-size: 11px; font-weight: 700; margin-top: 6px; }
-        .tpl-card .tpl-preview {
-            width: 100%; aspect-ratio: 210/297; background: #fff; border-radius: 4px;
-            border: 1px solid #e4e4e7; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; padding: 8px; font-family: 'Times New Roman', serif;
-            overflow: hidden; position: relative;
-        }
-        .tpl-card .tpl-preview .mini-title { font-size: 5px; font-weight: bold; text-align: center; }
-        .tpl-card .tpl-preview .mini-line { width: 80%; height: 1px; background: #000; margin: 3px 0; }
-        .tpl-card .tpl-preview .mini-text { font-size: 3.5px; line-height: 1.5; text-align: center; color: #333; }
-
-        /* ===== Chips ===== */
-        .chip {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 6px 12px; border-radius: 8px; border: 1px solid #e4e4e7;
-            font-size: 12px; font-weight: 600; color: #71717a; background: #fff; cursor: pointer;
-            transition: all 160ms var(--ease);
-        }
+        /* Chips */
+        .chip { display: inline-flex; padding: 5px 11px; border-radius: 8px; border: 1px solid #e4e4e7; font-size: 12px; font-weight: 600; color: #71717a; background: #fff; cursor: pointer; transition: all 160ms var(--ease); }
         .chip:hover { border-color: #a1a1aa; }
-        .chip.selected { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
+        .chip.sel { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
 
-        /* ===== Buttons ===== */
-        .btn-primary {
-            padding: 9px 20px; border-radius: 10px; border: none; font-size: 13px; font-weight: 700;
-            font-family: inherit; color: #fff; background: #3b5fe0; cursor: pointer;
-            transition: transform 120ms var(--ease), background 160ms var(--ease);
-            display: inline-flex; align-items: center; gap: 6px;
-        }
-        .btn-primary:hover { background: #2d4bc4; }
-        .btn-primary:active { transform: scale(0.97); }
-        .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
-        .btn-ghost {
-            padding: 9px 16px; border-radius: 10px; border: 1px solid #e4e4e7; font-size: 13px; font-weight: 600;
-            font-family: inherit; color: #71717a; background: transparent; cursor: pointer;
-            transition: transform 120ms var(--ease), border-color 160ms var(--ease);
-        }
-        .btn-ghost:hover { border-color: #a1a1aa; }
-        .btn-ghost:active { transform: scale(0.97); }
+        /* Template Cards */
+        .tpl-card { border: 2px solid #e4e4e7; border-radius: 12px; padding: 10px; cursor: pointer; text-align: center; transition: all 200ms var(--ease); }
+        .tpl-card:hover { border-color: #a1a1aa; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .tpl-card.sel { border-color: #3b5fe0; box-shadow: 0 0 0 3px rgba(59,95,224,0.12); }
+        .tpl-card .tpl-name { font-size: 10px; font-weight: 700; margin-top: 6px; color: #71717a; }
+        .tpl-card.sel .tpl-name { color: #3b5fe0; }
+        .tpl-thumb { width: 100%; aspect-ratio: 210/297; background: #fff; border-radius: 3px; border: 1px solid #eee; overflow: hidden; position: relative; }
 
-        /* ===== Section Header ===== */
-        .sec-head {
-            font-size: 11px; font-weight: 700; color: #a1a1aa; text-transform: uppercase;
-            letter-spacing: 0.06em; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #e4e4e7;
-        }
+        /* Buttons */
+        .btn-p { padding: 9px 20px; border-radius: 10px; border: none; font-size: 13px; font-weight: 700; font-family: inherit; color: #fff; background: #3b5fe0; cursor: pointer; transition: transform 120ms var(--ease), background 160ms var(--ease); display: inline-flex; align-items: center; gap: 6px; }
+        .btn-p:hover { background: #2d4bc4; }
+        .btn-p:active { transform: scale(0.97); }
+        .btn-p:disabled { opacity: 0.3; cursor: default; transform: none; }
+        .btn-g { padding: 9px 16px; border-radius: 10px; border: 1px solid #e4e4e7; font-size: 13px; font-weight: 600; font-family: inherit; color: #71717a; background: transparent; cursor: pointer; transition: transform 120ms var(--ease); }
+        .btn-g:hover { border-color: #a1a1aa; }
+        .btn-g:active { transform: scale(0.97); }
 
-        /* ===== A4 ===== */
-        #a4-page {
-            width: 210mm; height: 297mm; background: #fff; padding: 20mm 20mm 15mm 20mm;
-            color: #000; display: flex; flex-direction: column; flex-shrink: 0;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
-            border-radius: 2px; position: relative;
-        }
-        #scale-wrap { transform-origin: top center; width: 210mm; }
+        .sec-h { font-size: 11px; font-weight: 700; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; padding-bottom: 7px; border-bottom: 1px solid #e4e4e7; }
 
-        .d-header { text-align: center; margin-bottom: 5px; position: relative; }
-        .d-logo-l { position: absolute; left: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
-        .d-logo-r { position: absolute; right: 0; top: 0; width: 22mm; height: 22mm; object-fit: contain; }
-        .d-kop { font-weight: bold; margin: 0; line-height: 1.2; }
-        .d-sep { border-top: 3px double #000; margin: 15px 0 20px; }
-        .d-p { line-height: 1.4; margin-bottom: 8px; }
-        .d-bold { font-weight: bold; }
-        .d-italic { font-style: italic; }
-        .d-mt { margin-top: 15px; }
-        .d-nsec { text-align: center; margin: 15px 0; }
-        .d-name { font-weight: bold; text-decoration: underline; margin-bottom: 2px; }
-        .d-grid { display: grid; grid-template-columns: 100px 15px 1fr; line-height: 1.4; }
-        .d-fam { display: grid; grid-template-columns: 30px 1fr 150px; line-height: 1.4; margin-top: 5px; }
+        /* A4 */
+        #a4-wrap { transform-origin: top center; width: 210mm; }
+        #a4 { width: 210mm; height: 297mm; background: #fff; color: #000; display: flex; flex-direction: column; flex-shrink: 0; position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.08); border-radius: 2px; }
         .d-body { flex: 1; }
-        .d-foot { border-top: 1px solid #000; padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-style: italic; }
+        .d-foot { padding-top: 8px; margin-top: auto; display: flex; justify-content: space-between; font-style: italic; }
+        .flash { animation: fIn 200ms var(--ease); }
+        @keyframes fIn { 0% { opacity: 0.2; } 100% { opacity: 1; } }
 
-        .flash { animation: flashIn 200ms var(--ease); }
-        @keyframes flashIn { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+        /* Zoom */
+        .zoom-bar { display: flex; align-items: center; gap: 6px; }
+        .zoom-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d4d4d8; background: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 120ms var(--ease); }
+        .zoom-btn:hover { border-color: #a1a1aa; }
+        .zoom-btn.sel { border-color: #3b5fe0; background: #eef2ff; color: #3b5fe0; }
 
-        /* ===== Scrollbar ===== */
         #form-scroll::-webkit-scrollbar { width: 4px; }
         #form-scroll::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
 
-        /* ===== Responsive ===== */
-        @media (max-width: 1199px) { #scale-wrap { transform: scale(0.72); margin-bottom: -80mm; } }
         @media (max-width: 991px) {
             #app { flex-direction: column !important; overflow-y: auto !important; }
             #form-panel { width: 100% !important; max-height: none !important; border-right: none !important; }
-            #preview-panel { width: 100% !important; padding: 16px !important; }
-            #scale-wrap { transform: none !important; margin: 0 !important; }
+            #preview-panel { width: 100% !important; padding: 12px !important; }
+            #a4-wrap { transform: none !important; margin: 0 !important; }
             body { overflow: auto !important; }
         }
-        @media (max-width: 600px) { #scale-wrap { zoom: 0.45; } }
+        @media (max-width: 600px) { #a4-wrap { zoom: 0.42; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 60ms !important; animation: none !important; } }
     </style>
 </head>
 
 <body>
-    <!-- NAVBAR -->
+    <!-- NAV -->
     <nav class="h-12 border-b border-hair bg-surface flex items-center justify-between px-4" style="position:sticky;top:0;z-index:50">
-        <div class="flex items-center gap-2">
-            <span class="text-xl">🕊️</span>
-            <span class="text-sm font-extrabold tracking-tight hidden sm:block">Cetak Lelayu</span>
-        </div>
+        <div class="flex items-center gap-2"><span class="text-xl">🕊️</span><span class="text-sm font-extrabold tracking-tight hidden sm:block">Cetak Lelayu</span></div>
         <span class="text-[11px] text-sub hidden sm:block">Gratis &bull; Tanpa Login &bull; PDF Siap Cetak</span>
     </nav>
 
@@ -199,17 +125,17 @@
         <div id="form-panel" style="width:38%;min-width:360px;max-width:480px;display:flex;flex-direction:column;border-right:1px solid #e4e4e7;background:#fff;">
 
             <!-- Stepper -->
-            <div class="px-5 pt-4 pb-3 border-b border-hair bg-surface" id="stepper-area">
-                <div class="stepper" id="stepper">
-                    <div class="stepper-item current" data-s="0" onclick="goStep(0)"><span class="dot">1</span><span class="hidden md:inline">Almarhum</span></div>
-                    <div class="stepper-line"></div>
-                    <div class="stepper-item" data-s="1" onclick="goStep(1)"><span class="dot">2</span><span class="hidden md:inline">Wafat</span></div>
-                    <div class="stepper-line"></div>
-                    <div class="stepper-item" data-s="2" onclick="goStep(2)"><span class="dot">3</span><span class="hidden md:inline">Makam</span></div>
-                    <div class="stepper-line"></div>
-                    <div class="stepper-item" data-s="3" onclick="goStep(3)"><span class="dot">4</span><span class="hidden md:inline">Keluarga</span></div>
-                    <div class="stepper-line"></div>
-                    <div class="stepper-item" data-s="4" onclick="goStep(4)"><span class="dot">5</span><span class="hidden md:inline">Surat</span></div>
+            <div class="px-5 pt-4 pb-3 border-b border-hair bg-surface" id="stp-area">
+                <div class="stp" id="stepper">
+                    <div class="stp-item current" data-s="0" onclick="goStep(0)"><span class="dot"><span class="num">1</span></span><span class="hidden md:inline">Almarhum</span></div>
+                    <div class="stp-line"></div>
+                    <div class="stp-item" data-s="1" onclick="goStep(1)"><span class="dot"><span class="num">2</span></span><span class="hidden md:inline">Wafat</span></div>
+                    <div class="stp-line"></div>
+                    <div class="stp-item" data-s="2" onclick="goStep(2)"><span class="dot"><span class="num">3</span></span><span class="hidden md:inline">Makam</span></div>
+                    <div class="stp-line"></div>
+                    <div class="stp-item" data-s="3" onclick="goStep(3)"><span class="dot"><span class="num">4</span></span><span class="hidden md:inline">Keluarga</span></div>
+                    <div class="stp-line"></div>
+                    <div class="stp-item" data-s="4" onclick="goStep(4)"><span class="dot"><span class="num">5</span></span><span class="hidden md:inline">Surat</span></div>
                 </div>
                 <div class="mt-3 text-center">
                     <button onclick="toggleMode()" id="mode-btn" class="text-[11px] text-sub hover:text-ink bg-transparent border-none cursor-pointer underline underline-offset-2 decoration-hair" style="font-family:inherit">Lihat semua sekaligus</button>
@@ -219,15 +145,12 @@
             <!-- Form -->
             <div id="form-scroll" style="flex:1;overflow-y:auto;padding:20px 20px 24px;">
 
-                <!-- Step 0: Almarhum -->
+                <!-- Step 0 -->
                 <div class="step active" data-step="0">
-                    <div class="sec-head">Data Almarhum</div>
+                    <div class="sec-h">Data Almarhum</div>
                     <div class="f-group">
                         <label class="f-label">Status</label>
-                        <select class="f-input" id="in-status">
-                            <option value="Almarhum">Almarhum (laki-laki)</option>
-                            <option value="Almarhumah" selected>Almarhumah (perempuan)</option>
-                        </select>
+                        <select class="f-input" id="in-status"><option value="Almarhum">Almarhum (laki-laki)</option><option value="Almarhumah" selected>Almarhumah (perempuan)</option></select>
                     </div>
                     <div class="f-group">
                         <label class="f-label">Nama Lengkap</label>
@@ -246,53 +169,27 @@
                     </div>
                 </div>
 
-                <!-- Step 1: Wafat -->
+                <!-- Step 1 -->
                 <div class="step" data-step="1">
-                    <div class="sec-head">Waktu Wafat (Sedorikolo)</div>
-                    <div class="f-group">
-                        <label class="f-label">Hari</label>
-                        <div class="f-hint">Hari pasaran Jawa, cth: Jumat Legi</div>
-                        <input class="f-input" id="in-wf-hari" placeholder="Jumat Legi">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Tanggal</label>
-                        <input class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Jam</label>
-                        <input class="f-input" id="in-wf-jam" placeholder="22.00 WIB">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Tempat Wafat</label>
-                        <div class="f-hint">Rumah sakit, rumah duka, atau alamat lengkap</div>
-                        <textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="RSUD Dr. Moewardi, Solo"></textarea>
-                    </div>
+                    <div class="sec-h">Waktu Wafat</div>
+                    <div class="f-group"><label class="f-label">Hari</label><div class="f-hint">Hari pasaran Jawa, cth: Jumat Legi</div><input class="f-input" id="in-wf-hari" placeholder="Jumat Legi"></div>
+                    <div class="f-group"><label class="f-label">Tanggal</label><input class="f-input" id="in-wf-tgl" placeholder="19 Mei 2026"></div>
+                    <div class="f-group"><label class="f-label">Jam</label><input class="f-input" id="in-wf-jam" placeholder="22.00 WIB"></div>
+                    <div class="f-group"><label class="f-label">Tempat Wafat</label><div class="f-hint">Rumah sakit, rumah duka, atau alamat</div><textarea class="f-input resize-none" id="in-wf-tmp" rows="2" placeholder="RSUD Dr. Moewardi, Solo"></textarea></div>
                 </div>
 
-                <!-- Step 2: Pemakaman -->
+                <!-- Step 2 -->
                 <div class="step" data-step="2">
-                    <div class="sec-head">Waktu Pemakaman</div>
-                    <div class="f-group">
-                        <label class="f-label">Hari</label>
-                        <input class="f-input" id="in-mk-hari" placeholder="Sabtu Paing">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Tanggal</label>
-                        <input class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Jam</label>
-                        <input class="f-input" id="in-mk-jam" placeholder="14.00 WIB (Jam 2 Siang)">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Nama Makam</label>
-                        <input class="f-input" id="in-mk-tmp" placeholder="TPU Bonoloyo, Solo">
-                    </div>
+                    <div class="sec-h">Waktu Pemakaman</div>
+                    <div class="f-group"><label class="f-label">Hari</label><input class="f-input" id="in-mk-hari" placeholder="Sabtu Paing"></div>
+                    <div class="f-group"><label class="f-label">Tanggal</label><input class="f-input" id="in-mk-tgl" placeholder="20 Mei 2026"></div>
+                    <div class="f-group"><label class="f-label">Jam</label><input class="f-input" id="in-mk-jam" placeholder="14.00 WIB"></div>
+                    <div class="f-group"><label class="f-label">Nama Makam</label><input class="f-input" id="in-mk-tmp" placeholder="TPU Bonoloyo, Solo"></div>
                 </div>
 
-                <!-- Step 3: Keluarga -->
+                <!-- Step 3 -->
                 <div class="step" data-step="3">
-                    <div class="sec-head" style="display:flex;justify-content:space-between;align-items:center;border-bottom:none;padding-bottom:0;margin-bottom:8px">
+                    <div class="sec-h" style="display:flex;justify-content:space-between;align-items:center;border-bottom:none;padding-bottom:0;margin-bottom:6px">
                         <span>Keluarga Ditinggalkan</span>
                         <button onclick="addFam()" class="text-[11px] font-bold text-accent bg-accentsoft border-none px-2 py-1 rounded-lg cursor-pointer">+ Tambah</button>
                     </div>
@@ -300,46 +197,31 @@
                     <div id="fam-box" class="flex flex-col gap-2"></div>
                 </div>
 
-                <!-- Step 4: Template & Surat -->
+                <!-- Step 4: SHOWROOM -->
                 <div class="step" data-step="4">
-                    <div class="sec-head">Pilih Template</div>
+                    <div class="sec-h">Pilih Template</div>
                     <div class="grid grid-cols-3 gap-2 mb-5" id="tpl-grid"></div>
 
-                    <div class="sec-head">Bahasa Surat</div>
-                    <div class="flex gap-2 mb-5" id="lang-chips"></div>
+                    <div class="sec-h">Bahasa Surat</div>
+                    <div class="flex gap-2 mb-5 flex-wrap" id="lang-chips"></div>
 
-                    <div class="sec-head">Gaya Penulisan</div>
+                    <div class="sec-h">Gaya Penulisan</div>
                     <div class="flex gap-2 mb-5 flex-wrap" id="style-chips"></div>
 
-                    <div class="sec-head">Ukuran Kertas</div>
+                    <div class="sec-h">Ukuran Kertas</div>
                     <div class="flex gap-2 mb-5" id="size-chips"></div>
 
-                    <div class="sec-head">Kop Surat</div>
+                    <div class="sec-h">Kop Surat</div>
                     <div class="flex gap-2 mb-3 flex-wrap" id="kop-chips"></div>
-                    <div class="f-group">
-                        <label class="f-label">Baris 1</label>
-                        <input class="f-input" id="in-kop1" placeholder="Nama organisasi">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Baris 2</label>
-                        <input class="f-input" id="in-kop2" placeholder="RT/RW atau divisi">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Alamat</label>
-                        <input class="f-input" id="in-kop3" placeholder="Alamat lengkap">
-                    </div>
+                    <div class="f-group"><label class="f-label">Baris 1</label><input class="f-input" id="in-kop1" placeholder="Nama organisasi"></div>
+                    <div class="f-group"><label class="f-label">Baris 2</label><input class="f-input" id="in-kop2" placeholder="RT/RW atau divisi"></div>
+                    <div class="f-group"><label class="f-label">Alamat</label><input class="f-input" id="in-kop3" placeholder="Alamat"></div>
 
-                    <div class="sec-head mt-4">Catatan Kaki</div>
-                    <div class="f-group">
-                        <label class="f-label">Catatan Kiri</label>
-                        <input class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun.">
-                    </div>
-                    <div class="f-group">
-                        <label class="f-label">Catatan Kanan</label>
-                        <input class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026">
-                    </div>
+                    <div class="sec-h mt-4">Catatan Kaki</div>
+                    <div class="f-group"><label class="f-label">Catatan Kiri</label><input class="f-input" id="in-foot-l" value="Sumangga dipun-getok tularaken dhumateng warga sanesipun."></div>
+                    <div class="f-group"><label class="f-label">Catatan Kanan</label><input class="f-input" id="in-foot-r" placeholder="cth: RT 03/RW 05 © 2026"></div>
 
-                    <div class="sec-head mt-4">Logo (Opsional)</div>
+                    <div class="sec-h mt-4">Logo (Opsional)</div>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="f-group"><label class="f-label">Logo Kiri</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-l')"></div>
                         <div class="f-group"><label class="f-label">Logo Kanan</label><input type="file" accept="image/*" class="text-xs w-full" onchange="loadLogo(event,'out-logo-r')"></div>
@@ -349,401 +231,500 @@
 
             <!-- Nav -->
             <div class="px-5 py-3 border-t border-hair bg-surface flex items-center justify-between" id="nav-area">
-                <button onclick="goStep(cur-1)" id="btn-back" class="btn-ghost" style="visibility:hidden">← Kembali</button>
-                <button onclick="goStep(cur+1)" id="btn-next" class="btn-primary">Lanjut →</button>
+                <button onclick="goStep(cur-1)" id="btn-back" class="btn-g" style="visibility:hidden">← Kembali</button>
+                <button onclick="goStep(cur+1)" id="btn-next" class="btn-p">Lanjut →</button>
             </div>
         </div>
 
         <!-- PREVIEW -->
-        <div id="preview-panel" style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding:28px 20px;overflow:auto;background:#e8e8e6;">
-            <div id="scale-wrap">
-                <div id="a4-page">
-                    <div class="d-body">
-                        <div class="d-header">
-                            <img id="out-logo-l" class="d-logo-l" src="" style="display:none">
-                            <svg id="ph-logo-l" class="d-logo-l" viewBox="0 0 80 80" style="opacity:0.08"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
-                            <img id="out-logo-r" class="d-logo-r" src="" style="display:none">
-                            <svg id="ph-logo-r" class="d-logo-r" viewBox="0 0 80 80" style="opacity:0.08"><rect width="80" height="80" fill="none" stroke="#888" stroke-width="1" rx="4"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="9" fill="#888">Logo</text></svg>
-                            <div class="d-kop" id="out-kop1" style="font-size:16pt"></div>
-                            <div class="d-kop" id="out-kop2" style="font-size:16pt"></div>
-                            <div class="d-kop" id="out-kop3" style="font-size:12pt"></div>
-                        </div>
-                        <div class="d-sep"></div>
-                        <div class="d-p d-bold" style="font-size:12pt">Yth. <span id="out-penerima">Bapak /Ibu /Saudara /Masyarakat</span></div>
-                        <div class="d-p d-bold" style="color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin-bottom:10px;height:16px"></div>
-                        <div class="d-p d-bold d-italic d-mt" style="font-size:12pt" id="out-salam">Assalamu'alaikum Wr.Wb</div>
-                        <div id="out-title" style="font-size:18pt;font-weight:bold;text-align:center;margin:15px 0;letter-spacing:1px">PAWARTOS LELAYU</div>
-                        <div class="d-p" style="font-size:12pt" id="out-open">Inna lillahi wa inna ilaihi roji'un</div>
-                        <div class="d-p" style="font-size:12pt" id="out-announce">Sampun katimbalan sowan wonten ngarsanipun Allah SWT :</div>
-                        <div class="d-nsec">
-                            <div class="d-name" style="font-size:14pt"><span id="out-status">Almarhumah</span> <span id="out-nama"></span></div>
-                            <div style="font-size:12pt;font-weight:bold">Yuswa : <span id="out-umur"></span></div>
-                        </div>
-                        <div class="d-p d-mt" style="font-size:12pt" id="out-wf-label">Sedorikolo</div>
-                        <div class="d-grid" style="font-size:12pt">
-                            <div>Dinten</div><div>:</div><div id="out-wf-hari"></div>
-                            <div>Tanggal</div><div>:</div><div id="out-wf-tgl"></div>
-                            <div>Jam</div><div>:</div><div id="out-wf-jam"></div>
-                            <div>Wonten</div><div>:</div><div id="out-wf-tmp"></div>
-                        </div>
-                        <div class="d-p d-mt" style="font-size:12pt" id="out-mk-label">Jenazah badhe dipunkasareaken</div>
-                        <div class="d-grid" style="font-size:12pt">
-                            <div>Dinten</div><div>:</div><div id="out-mk-hari"></div>
-                            <div>Tanggal</div><div>:</div><div id="out-mk-tgl"></div>
-                            <div>Jam</div><div>:</div><div id="out-mk-jam"></div>
-                            <div>Wonten ing makam</div><div>:</div><div id="out-mk-tmp"></div>
-                        </div>
-                        <div class="d-p d-mt" style="text-align:justify;font-size:12pt" id="out-closing">Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng <span id="out-status2">Almarhumah</span> kasebat. Mugi dadosna ing pamriksa.</div>
-                        <div class="d-p d-bold d-italic d-mt" style="font-size:12pt" id="out-wsalam">Wassalamu'alaikum Wr.Wb</div>
-                        <div class="d-p" style="font-size:12pt" id="out-family-label">Ingkang nandang sungkawa :</div>
-                        <div id="out-fam"></div>
-                    </div>
-                    <div class="d-foot" style="font-size:10pt">
-                        <div id="out-foot-l">Sumangga dipun-getok tularaken dhumateng warga sanesipun.</div>
-                        <div id="out-foot-r"></div>
-                    </div>
-                </div>
+        <div id="preview-panel" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:16px 20px;overflow:auto;background:#e8e8e6;">
+            <!-- Zoom -->
+            <div class="zoom-bar mb-3 shrink-0">
+                <button class="zoom-btn" onclick="setZoom(0.55)">50%</button>
+                <button class="zoom-btn" onclick="setZoom(0.72)">75%</button>
+                <button class="zoom-btn sel" onclick="setZoom(1)">100%</button>
+            </div>
+            <div id="a4-wrap">
+                <div id="a4"></div>
             </div>
         </div>
     </div>
 
     <!-- DOWNLOAD BAR -->
-    <div id="dl-bar" style="height:52px;border-top:1px solid #e4e4e7;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;">
+    <div style="height:52px;border-top:1px solid #e4e4e7;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;">
         <span class="text-[12px] text-sub" id="dl-hint">Lengkapi data untuk mengunduh</span>
-        <button onclick="downloadPDF()" id="dl-btn" class="btn-primary" disabled>
+        <button onclick="downloadPDF()" id="dl-btn" class="btn-p" disabled>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download PDF
         </button>
     </div>
 
     <script>
-        let cur = 0;
-        let mode = 'wizard';
-        const labels = ['Almarhum','Wafat','Pemakaman','Keluarga','Surat'];
+        let cur=0, mode='wizard', zoomLevel=1;
+        const labels=['Almarhum','Wafat','Pemakaman','Keluarga','Surat'];
 
-        // ===== Template System =====
+        // ===== TEMPLATE DEFINITIONS =====
         const templates = [
-            { id:'klasik', name:'Klasik', font:'Times New Roman' },
-            { id:'modern', name:'Modern', font:'Georgia' },
-            { id:'islami', name:'Islami', font:'Book Antiqua' },
-            { id:'minimalis', name:'Minimalis', font:'Cambria' },
-            { id:'rt', name:'RT/RW', font:'Times New Roman' },
-            { id:'masjid', name:'Masjid', font:'Traditional Arabic' },
+            { id:'klasik', name:'Klasik', font:'"Times New Roman",serif',
+              style:'classic' },
+            { id:'modern', name:'Modern', font:'"Georgia",serif',
+              style:'modern' },
+            { id:'islami', name:'Islami', font:'"Book Antiqua",serif',
+              style:'islami' },
+            { id:'minimalis', name:'Minimalis', font:'"Cambria",serif',
+              style:'minimal' },
+            { id:'rt', name:'RT/RW', font:'"Times New Roman",serif',
+              style:'rt' },
+            { id:'masjid', name:'Masjid', font:'"Book Antiqua",serif',
+              style:'masjid' },
         ];
-        let selTpl = 'klasik';
+        let selTpl='klasik';
 
-        const languages = [
-            { id:'jawa', name:'Jawa' },
-            { id:'indo', name:'Indonesia' },
-            { id:'campur', name:'Campuran' },
+        const languages=[
+            {id:'jawa',name:'Jawa Krama'},
+            {id:'jawa_ngoko',name:'Jawa Ngoko'},
+            {id:'indo',name:'Indonesia'},
+            {id:'campur',name:'Campuran'},
         ];
-        let selLang = 'jawa';
+        let selLang='jawa';
 
-        const styles = [
-            { id:'formal', name:'Formal' },
-            { id:'tradisional', name:'Tradisional' },
-            { id:'modern', name:'Modern' },
-            { id:'islami', name:'Islami' },
+        const styles=[
+            {id:'formal',name:'Formal'},
+            {id:'tradisional',name:'Tradisional'},
+            {id:'modern',name:'Modern'},
+            {id:'islami',name:'Islami'},
+            {id:'nu',name:'NU'},
+            {id:'muhammadiyah',name:'Muhammadiyah'},
         ];
-        let selStyle = 'tradisional';
+        let selStyle='tradisional';
 
-        const sizes = [
-            { id:'a4', name:'A4' },
-            { id:'f4', name:'F4' },
+        const sizes=[{id:'a4',name:'A4'},{id:'f4',name:'F4'}];
+        let selSize='a4';
+
+        const kopPresets=[
+            {id:'masjid',name:'Masjid',l1:'DEWAN KEMAKMURAN MASJID',l2:'',l3:''},
+            {id:'rt',name:'RT',l1:'RUKUN TETANGGA 03 / RW 05',l2:'',l3:''},
+            {id:'rw',name:'RW',l1:'RUKUN WARGA 05',l2:'',l3:''},
+            {id:'karang',name:'Karang Taruna',l1:'KARANG TARUNA',l2:'',l3:''},
+            {id:'desa',name:'Desa',l1:'PEMERINTAH DESA',l2:'',l3:''},
+            {id:'paguyuban',name:'Paguyuban',l1:'PAGUYUBAN',l2:'',l3:''},
+            {id:'custom',name:'Isi Sendiri',l1:'',l2:'',l3:''},
         ];
-        let selSize = 'a4';
+        let selKop='custom';
 
-        const kopPresets = [
-            { id:'masjid', name:'Masjid', l1:'TAKMIR MASJID', l2:'', l3:'' },
-            { id:'rt', name:'RT', l1:'RUKUN TETANGGA', l2:'RT / RW', l3:'' },
-            { id:'rw', name:'RW', l1:'RUKUN WARGA', l2:'RW', l3:'' },
-            { id:'karang', name:'Karang Taruna', l1:'KARANG TARUNA', l2:'', l3:'' },
-            { id:'desa', name:'Desa', l1:'PEMERINTAH DESA', l2:'', l3:'' },
-            { id:'paguyuban', name:'Paguyuban', l1:'PAGUYUBAN', l2:'', l3:'' },
-            { id:'custom', name:'Isi Sendiri', l1:'', l2:'', l3:'' },
-        ];
-        let selKop = 'custom';
+        // ===== TEMPLATE RENDERER =====
+        function renderA4() {
+            const a4 = document.getElementById('a4');
+            const tpl = templates.find(t=>t.id===selTpl);
+            const t = getTexts();
+            const nama = document.getElementById('in-nama').value || '';
+            const umur = document.getElementById('in-umur').value || '';
+            const penerima = document.getElementById('in-penerima').value || '';
+            const status = document.getElementById('in-status').value;
+            const kop1 = document.getElementById('in-kop1').value;
+            const kop2 = document.getElementById('in-kop2').value;
+            const kop3 = document.getElementById('in-kop3').value;
+            const footL = document.getElementById('in-foot-l').value;
+            const footR = document.getElementById('in-foot-r').value;
 
-        // ===== Text variants by language + style =====
-        function getTexts() {
-            const t = {
-                salam: '', title: '', open: '', announce: '',
-                wfLabel: '', mkLabel: '', closing: '', wsalam: '', familyLabel: ''
+            const wf = {
+                hari: document.getElementById('in-wf-hari').value||'...',
+                tgl: document.getElementById('in-wf-tgl').value||'...',
+                jam: document.getElementById('in-wf-jam').value||'...',
+                tmp: document.getElementById('in-wf-tmp').value||'...',
             };
-            if (selLang === 'jawa') {
-                t.salam = "Assalamu'alaikum Wr.Wb";
-                t.title = 'PAWARTOS LELAYU';
-                t.open = 'Inna lillahi wa inna ilaihi roji\'un';
-                t.announce = 'Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
-                t.wfLabel = 'Sedorikolo';
-                t.mkLabel = 'Jenazah badhe dipunkasareaken';
-                t.closing = 'Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng';
-                t.wsalam = "Wassalamu'alaikum Wr.Wb";
-                t.familyLabel = 'Ingkang nandang sungkawa :';
-            } else if (selLang === 'indo') {
-                t.salam = "Assalamu'alaikum Wr.Wb";
-                t.title = 'BERITA DUKA CITA';
-                t.open = 'Innalillahi wa inna ilaihi roji\'un';
-                t.announce = 'Telah berpulang ke Rahmatullah :';
-                t.wfLabel = 'Waktu Wafat';
-                t.mkLabel = 'Jenazah akan dimakamkan';
-                t.closing = 'Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
-                t.wsalam = "Wassalamu'alaikum Wr.Wb";
-                t.familyLabel = 'Yang berduka :';
-            } else { // campur
-                t.salam = "Assalamu'alaikum Wr.Wb";
-                t.title = 'PAWARTOS LELAYU';
-                t.open = 'Innalillahi wa inna ilaihi roji\'un';
-                t.announce = 'Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
-                t.wfLabel = 'Sedorikolo';
-                t.mkLabel = 'Jenazah akan dimakamkan';
-                t.closing = 'Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
-                t.wsalam = "Wassalamu'alaikum Wr.Wb";
-                t.familyLabel = 'Yang berduka / Ingkang nandang sungkawa :';
+            const mk = {
+                hari: document.getElementById('in-mk-hari').value||'...',
+                tgl: document.getElementById('in-mk-tgl').value||'...',
+                jam: document.getElementById('in-mk-jam').value||'...',
+                tmp: document.getElementById('in-mk-tmp').value||'...',
+            };
+
+            let famHTML = '';
+            famData.forEach((f,i) => {
+                famHTML += `<div style="display:grid;grid-template-columns:20px 1fr 120px;font-size:12pt;line-height:1.5;margin-top:3px"><div style="text-align:right;padding-right:4px">${i+1}.</div><div>${f.nama||'...'}</div><div>${f.status}</div></div>`;
+            });
+
+            // Build different layouts per template style
+            let html = '';
+
+            if (tpl.style === 'classic') {
+                html = `
+                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    <div style="text-align:center;margin-bottom:5px">
+                        ${kop1?`<div style="font-size:16pt;font-weight:bold">${kop1}</div>`:''}
+                        ${kop2?`<div style="font-size:16pt;font-weight:bold">${kop2}</div>`:''}
+                        ${kop3?`<div style="font-size:12pt;font-weight:bold">${kop3}</div>`:''}
+                    </div>
+                    <div style="border-top:3px double #000;margin:15px 0 20px"></div>
+                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
+                    <div style="font-size:12pt;font-weight:bold;color:transparent;border-bottom:2px dotted #000;display:inline-block;min-width:200px;margin:10px 0;height:16px"></div>
+                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:15px">${t.salam}</div>
+                    <div style="font-size:18pt;font-weight:bold;text-align:center;margin:15px 0;letter-spacing:1px">${t.title}</div>
+                    <div style="font-size:12pt">${t.open}</div>
+                    <div style="font-size:12pt">${t.announce}</div>
+                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt;font-weight:bold">Yuswa : ${umur||'...'}</div></div>
+                    <div style="font-size:12pt;margin-top:15px">${t.wfLabel}</div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.4">
+                        <div>Dinten</div><div>:</div><div>${wf.hari}</div>
+                        <div>Tanggal</div><div>:</div><div>${wf.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
+                        <div>Wonten</div><div>:</div><div>${wf.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:15px">${t.mkLabel}</div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.4">
+                        <div>Dinten</div><div>:</div><div>${mk.hari}</div>
+                        <div>Tanggal</div><div>:</div><div>${mk.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
+                        <div>Wonten ing makam</div><div>:</div><div>${mk.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:15px;text-align:justify">${t.closing} ${status} kasebat. Mugi dadosna ing pamriksa.</div>
+                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:15px">${t.wsalam}</div>
+                    <div style="font-size:12pt">${t.familyLabel}</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="border-top:1px solid #000;padding-top:8px;margin-top:auto;display:flex;justify-content:space-between;font-size:10pt;font-style:italic"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
+
+            } else if (tpl.style === 'modern') {
+                html = `
+                <div style="padding:28mm 24mm 18mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    ${kop1?`<div style="font-size:11pt;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#555;margin-bottom:2px">${kop1}</div>`:''}
+                    ${kop2?`<div style="font-size:10pt;color:#888;letter-spacing:0.1em">${kop2}</div>`:''}
+                    ${kop3?`<div style="font-size:9pt;color:#aaa;margin-bottom:20mm">${kop3}</div>`:''}
+                    <div style="border-top:1px solid #ccc;margin:0 0 20mm"></div>
+                    <div style="font-size:13pt;font-weight:bold;text-align:center;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8mm">${t.title}</div>
+                    <div style="font-size:11pt;text-align:center;color:#555;margin-bottom:10mm">${t.open}</div>
+                    <div style="text-align:center;margin-bottom:10mm"><div style="font-size:16pt;font-weight:700;letter-spacing:-0.01em">${nama||'...'}</div><div style="font-size:10pt;color:#777;margin-top:4px">${status} &bull; Yuswa ${umur||'...'}</div></div>
+                    <div style="display:grid;grid-template-columns:90px 12px 1fr;font-size:10.5pt;line-height:1.8;color:#333;margin-bottom:8mm">
+                        <div style="color:#888">Wafat</div><div>:</div><div>${wf.hari}, ${wf.tgl} pukul ${wf.jam}</div>
+                        <div style="color:#888">Tempat</div><div>:</div><div>${wf.tmp}</div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:90px 12px 1fr;font-size:10.5pt;line-height:1.8;color:#333;margin-bottom:10mm">
+                        <div style="color:#888">Makam</div><div>:</div><div>${mk.hari}, ${mk.tgl} pukul ${mk.jam}</div>
+                        <div style="color:#888">Lokasi</div><div>:</div><div>${mk.tmp}</div>
+                    </div>
+                    <div style="font-size:10.5pt;color:#444;line-height:1.6;margin-bottom:8mm">${t.closing} ${status} kasebat.</div>
+                    <div style="font-size:10.5pt;color:#444;margin-bottom:10mm">${t.familyLabel}</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="border-top:1px solid #ddd;padding-top:8px;display:flex;justify-content:space-between;font-size:9pt;color:#999"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
+
+            } else if (tpl.style === 'islami') {
+                html = `
+                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    <div style="text-align:center;font-size:14pt;margin-bottom:8px;color:#2d5a3d;line-height:1.6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+                    <div style="text-align:center;font-size:11pt;color:#2d5a3d;margin-bottom:12px;line-height:1.5">إِنَّا لِلّهِ وَإِنَّـا إِلَيْهِ رَاجِعُونَ</div>
+                    ${kop1?`<div style="text-align:center;font-size:15pt;font-weight:bold;color:#1a3a25;margin-top:8px">${kop1}</div>`:''}
+                    ${kop2?`<div style="text-align:center;font-size:13pt;font-weight:bold;color:#1a3a25">${kop2}</div>`:''}
+                    ${kop3?`<div style="text-align:center;font-size:11pt;color:#555">${kop3}</div>`:''}
+                    <div style="border-top:2px solid #2d5a3d;margin:15px 0 20px"></div>
+                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
+                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:12px">${t.salam}</div>
+                    <div style="font-size:17pt;font-weight:bold;text-align:center;margin:12px 0;color:#2d5a3d">${t.title}</div>
+                    <div style="font-size:12pt;text-align:center;margin-bottom:10px">${t.open}</div>
+                    <div style="font-size:12pt">${t.announce}</div>
+                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt">Yuswa : ${umur||'...'}</div></div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
+                        <div>Hari/Tgl</div><div>:</div><div>${wf.hari}, ${wf.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
+                        <div>Tempat</div><div>:</div><div>${wf.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:12px">Dimakamkan:</div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
+                        <div>Hari/Tgl</div><div>:</div><div>${mk.hari}, ${mk.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
+                        <div>Makam</div><div>:</div><div>${mk.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:12px;text-align:justify">${t.closing} ${status} kasebat.</div>
+                    <div style="font-size:12pt;font-style:italic;margin-top:8px">${t.familyLabel}</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="border-top:1px solid #2d5a3d;padding-top:8px;display:flex;justify-content:space-between;font-size:10pt;font-style:italic;color:#2d5a3d"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
+
+            } else if (tpl.style === 'minimal') {
+                html = `
+                <div style="padding:30mm 28mm 20mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    ${kop1?`<div style="font-size:10pt;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:2px">${kop1}</div>`:''}
+                    ${kop2?`<div style="font-size:9pt;color:#bbb">${kop2}</div>`:''}
+                    <div style="margin-top:24mm"></div>
+                    <div style="font-size:22pt;font-weight:300;letter-spacing:-0.02em;margin-bottom:16mm">${t.title}</div>
+                    <div style="font-size:12pt;color:#555;margin-bottom:10mm">${t.open}</div>
+                    <div style="margin-bottom:10mm"><div style="font-size:15pt;font-weight:600">${nama||'...'}</div><div style="font-size:10pt;color:#888;margin-top:4px">${status} &middot; ${umur||'...'}</div></div>
+                    <div style="font-size:10pt;line-height:2;color:#444">
+                        <div>${wf.hari}, ${wf.tgl} &middot; ${wf.jam}</div>
+                        <div>${wf.tmp}</div>
+                    </div>
+                    <div style="margin:8mm 0"></div>
+                    <div style="font-size:10pt;line-height:2;color:#444">
+                        <div>${mk.hari}, ${mk.tgl} &middot; ${mk.jam}</div>
+                        <div>${mk.tmp}</div>
+                    </div>
+                    <div style="margin:10mm 0"></div>
+                    <div style="font-size:10pt;color:#555;line-height:1.7">${t.familyLabel}</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="font-size:9pt;color:#bbb;display:flex;justify-content:space-between"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
+
+            } else if (tpl.style === 'rt') {
+                html = `
+                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    <div style="border:2px solid #000;padding:12px 16px;text-align:center;margin-bottom:15px">
+                        ${kop1?`<div style="font-size:14pt;font-weight:bold">${kop1}</div>`:''}
+                        ${kop2?`<div style="font-size:12pt;font-weight:bold">${kop2}</div>`:''}
+                        ${kop3?`<div style="font-size:10pt">${kop3}</div>`:''}
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:10pt;margin-bottom:15px">
+                        <div>Nomor: .... /RT../RW../ ${new Date().getFullYear()}</div>
+                        <div>${new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
+                    </div>
+                    <div style="font-size:14pt;font-weight:bold;text-align:center;text-decoration:underline;margin-bottom:15px">SURAT PEMBERITAHUAN DUKA CITA</div>
+                    <div style="font-size:12pt">Yth. ${penerima}</div>
+                    <div style="font-size:12pt;font-style:italic;margin-top:10px">Assalamu'alaikum Wr.Wb</div>
+                    <div style="font-size:12pt;margin-top:10px">Dengan hormat, kami sampaikan bahwa:</div>
+                    <table style="font-size:12pt;margin:10px 0;border-collapse:collapse">
+                        <tr><td style="padding:3px 12px 3px 0">Nama</td><td>:</td><td style="padding-left:8px;font-weight:bold">${nama||'...'}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Status</td><td>:</td><td style="padding-left:8px">${status}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Umur</td><td>:</td><td style="padding-left:8px">${umur||'...'}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Wafat</td><td>:</td><td style="padding-left:8px">${wf.hari}, ${wf.tgl} pukul ${wf.jam}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Tempat</td><td>:</td><td style="padding-left:8px">${wf.tmp}</td></tr>
+                    </table>
+                    <div style="font-size:12pt;margin-top:5px">Pemakaman akan dilaksanakan:</div>
+                    <table style="font-size:12pt;margin:5px 0;border-collapse:collapse">
+                        <tr><td style="padding:3px 12px 3px 0">Hari/Tgl</td><td>:</td><td style="padding-left:8px">${mk.hari}, ${mk.tgl}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Jam</td><td>:</td><td style="padding-left:8px">${mk.jam}</td></tr>
+                        <tr><td style="padding:3px 12px 3px 0">Makam</td><td>:</td><td style="padding-left:8px">${mk.tmp}</td></tr>
+                    </table>
+                    <div style="font-size:12pt;margin-top:10px">Demikian surat ini kami sampaikan. Atas perhatiannya, kami ucapkan terima kasih.</div>
+                    <div style="font-size:12pt;font-style:italic;margin-top:10px">Wassalamu'alaikum Wr.Wb</div>
+                    <div style="font-size:12pt;margin-top:10px">Keluarga yang berduka:</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="font-size:10pt;display:flex;justify-content:space-between;margin-top:auto;border-top:1px solid #000;padding-top:8px"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
+
+            } else if (tpl.style === 'masjid') {
+                html = `
+                <div style="padding:20mm 20mm 15mm;display:flex;flex-direction:column;height:100%;font-family:${tpl.font}">
+                    <div style="text-align:center;margin-bottom:10px">
+                        <div style="font-size:24px;margin-bottom:6px">🕌</div>
+                        ${kop1?`<div style="font-size:15pt;font-weight:bold;color:#1a5c2e">${kop1}</div>`:''}
+                        ${kop2?`<div style="font-size:12pt;font-weight:bold;color:#1a5c2e">${kop2}</div>`:''}
+                        ${kop3?`<div style="font-size:10pt;color:#555">${kop3}</div>`:''}
+                    </div>
+                    <div style="border-top:2px solid #1a5c2e;margin:10px 0 15px"></div>
+                    <div style="font-size:12pt;font-weight:bold">Yth. ${penerima}</div>
+                    <div style="font-size:12pt;font-weight:bold;font-style:italic;margin-top:10px">${t.salam}</div>
+                    <div style="font-size:16pt;font-weight:bold;text-align:center;margin:12px 0;color:#1a5c2e">${t.title}</div>
+                    <div style="font-size:12pt;text-align:center">${t.open}</div>
+                    <div style="font-size:12pt;margin-top:10px">${t.announce}</div>
+                    <div style="text-align:center;margin:15px 0"><div style="font-size:14pt;font-weight:bold;text-decoration:underline">${status} ${nama||'...'}</div><div style="font-size:12pt">Yuswa : ${umur||'...'}</div></div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
+                        <div>Dinten</div><div>:</div><div>${wf.hari}</div>
+                        <div>Tanggal</div><div>:</div><div>${wf.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${wf.jam}</div>
+                        <div>Tempat</div><div>:</div><div>${wf.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:12px">Jenazah akan dishalatkan dan dimakamkan:</div>
+                    <div style="display:grid;grid-template-columns:100px 15px 1fr;font-size:12pt;line-height:1.5">
+                        <div>Hari/Tgl</div><div>:</div><div>${mk.hari}, ${mk.tgl}</div>
+                        <div>Jam</div><div>:</div><div>${mk.jam}</div>
+                        <div>Makam</div><div>:</div><div>${mk.tmp}</div>
+                    </div>
+                    <div style="font-size:12pt;margin-top:12px">${t.familyLabel}</div>
+                    ${famHTML}
+                    <div style="flex:1"></div>
+                    <div style="border-top:1px solid #1a5c2e;padding-top:8px;display:flex;justify-content:space-between;font-size:10pt;color:#1a5c2e"><div>${footL}</div><div>${footR}</div></div>
+                </div>`;
             }
-            // Style adjustments
-            if (selStyle === 'islami') {
-                t.salam = "Assalamu'alaikum Warahmatullahi Wabarakatuh";
-                t.wsalam = "Wassalamu'alaikum Warahmatullahi Wabarakatuh";
-                if (selLang === 'jawa') t.title = 'PAWARTOS DUKA';
+
+            a4.innerHTML = html;
+            a4.style.fontFamily = tpl.font;
+        }
+
+        // ===== TEXT VARIANTS =====
+        function getTexts() {
+            const t = {salam:'',title:'',open:'',announce:'',wfLabel:'',mkLabel:'',closing:'',wsalam:'',familyLabel:''};
+            if (selLang==='jawa') {
+                t.salam="Assalamu'alaikum Wr.Wb"; t.title='PAWARTOS LELAYU';
+                t.open="Inna lillahi wa inna ilaihi roji'un"; t.announce='Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
+                t.wfLabel='Sedorikolo'; t.mkLabel='Jenazah badhe dipunkasareaken';
+                t.closing='Dhumateng Bpk/Ibu/Saudara kasuwun paring pakurmatan ingkang pungkasan dhumateng';
+                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Ingkang nandang sungkawa :';
+            } else if (selLang==='jawa_ngoko') {
+                t.salam="Assalamu'alaikum Wr.Wb"; t.title='WARTOS LELAYU';
+                t.open="Inna lillahi wa inna ilaihi roji'un"; t.announce='Wis dipundang dening Gusti Allah SWT :';
+                t.wfLabel='Wektu Sedo'; t.mkLabel='Jenazah arep dikubur';
+                t.closing='Kangge Bapak/Ibu/Saudara kulo nyuwun penghormatan pungkasan kangge';
+                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Sing melu belasungkawa :';
+            } else if (selLang==='indo') {
+                t.salam="Assalamu'alaikum Wr.Wb"; t.title='BERITA DUKA CITA';
+                t.open="Innalillahi wa inna ilaihi roji'un"; t.announce='Telah berpulang ke Rahmatullah :';
+                t.wfLabel='Waktu Wafat'; t.mkLabel='Jenazah akan dimakamkan';
+                t.closing='Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
+                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Yang berduka :';
+            } else {
+                t.salam="Assalamu'alaikum Wr.Wb"; t.title='PAWARTOS LELAYU';
+                t.open="Innalillahi wa inna ilaihi roji'un"; t.announce='Sampun katimbalan sowan wonten ngarsanipun Allah SWT :';
+                t.wfLabel='Sedorikolo'; t.mkLabel='Jenazah akan dimakamkan';
+                t.closing='Kepada Bapak/Ibu/Saudara dimohon untuk memberikan penghormatan terakhir kepada';
+                t.wsalam="Wassalamu'alaikum Wr.Wb"; t.familyLabel='Yang berduka / Ingkang nandang sungkawa :';
             }
-            if (selStyle === 'modern') {
-                if (selLang === 'indo') t.title = 'SURAT PEMBERITAHUAN DUKA CITA';
-                else t.title = 'WARTOS DUKA';
-            }
+            // Style mods
+            if (selStyle==='islami') { t.salam="Assalamu'alaikum Warahmatullahi Wabarakatuh"; t.wsalam="Wassalamu'alaikum Warahmatullahi Wabarakatuh"; }
+            if (selStyle==='nu') { t.open="Innalillahi wa inna ilaihi roji'un. Sesungguhnya kami milik Allah dan kepada-Nya kami kembali."; }
+            if (selStyle==='muhammadiyah') { if(selLang==='indo') t.title='SURAT PEMBERITAHUAN DUKA'; t.open="Telah berpulang ke Rahmatullah"; }
+            if (selStyle==='modern') { if(selLang==='indo') t.title='SURAT PEMBERITAHUAN DUKA CITA'; }
             return t;
         }
 
-        function applyTexts() {
-            const t = getTexts();
-            const map = {
-                'out-salam': t.salam, 'out-title': t.title, 'out-open': t.open,
-                'out-announce': t.announce, 'out-wf-label': t.wfLabel,
-                'out-mk-label': t.mkLabel, 'out-closing': t.closing + ' ',
-                'out-wsalam': t.wsalam, 'out-family-label': t.familyLabel,
-            };
-            for (const [id, val] of Object.entries(map)) {
-                const el = document.getElementById(id);
-                if (el) { el.innerText = val; el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); }
-            }
-            // Apply font
-            const tpl = templates.find(t => t.id === selTpl);
-            if (tpl) document.getElementById('a4-page').style.fontFamily = `'${tpl.font}', serif`;
-        }
-
-        // ===== Render chips/cards =====
-        function renderTemplateCards() {
-            const grid = document.getElementById('tpl-grid');
-            grid.innerHTML = '';
-            templates.forEach(t => {
-                const card = document.createElement('div');
-                card.className = 'tpl-card' + (selTpl === t.id ? ' selected' : '');
-                card.onclick = () => { selTpl = t.id; renderTemplateCards(); applyTexts(); };
-                card.innerHTML = `
-                    <div class="tpl-preview">
-                        <div class="mini-title">${t.name}</div>
-                        <div class="mini-line"></div>
-                        <div class="mini-text">Nama Almarhum<br>Yuswa: 60 tahun<br><br>Dinten / Tanggal / Jam</div>
-                    </div>
-                    <div class="tpl-name">${t.name}</div>`;
-                grid.appendChild(card);
+        // ===== CHIPS & CARDS =====
+        function renderChips(id, items, sel, fn) {
+            const c=document.getElementById(id); c.innerHTML='';
+            items.forEach(i=>{
+                const b=document.createElement('button');
+                b.className='chip'+(sel===i.id?' sel':'');
+                b.textContent=i.name;
+                b.onclick=()=>{fn(i.id);renderAll();};
+                c.appendChild(b);
             });
         }
 
-        function renderChips(containerId, items, selected, onSelect) {
-            const c = document.getElementById(containerId);
-            c.innerHTML = '';
-            items.forEach(i => {
-                const chip = document.createElement('button');
-                chip.className = 'chip' + (selected === i.id ? ' selected' : '');
-                chip.textContent = i.name;
-                chip.onclick = () => { onSelect(i.id); renderAll(); };
-                c.appendChild(chip);
+        function renderTplCards() {
+            const g=document.getElementById('tpl-grid'); g.innerHTML='';
+            templates.forEach(t=>{
+                const d=document.createElement('div');
+                d.className='tpl-card'+(selTpl===t.id?' sel':'');
+                d.onclick=()=>{selTpl=t.id;renderTplCards();renderA4();};
+                d.innerHTML=`<div class="tpl-thumb" style="font-family:${t.font};padding:6px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                    <div style="font-size:5px;font-weight:bold;text-align:center;margin-bottom:2px">${t.name==='Islami'?'﷽':''}</div>
+                    <div style="font-size:5px;font-weight:bold;text-align:center">${t.name==='RT/RW'?'RT 03/RW 05':''}</div>
+                    <div style="font-size:6px;font-weight:bold;text-align:center;border-${t.style==='modern'?'bottom':'top'}:${t.style==='minimal'?'none':'1px'} solid #000;padding:2px 0;margin:2px 0">${t.style==='rt'?'SURAT PEMBERITAHUAN':'PAWARTOS LELAYU'}</div>
+                    <div style="font-size:3.5px;text-align:center;line-height:1.6;color:#555">Nama Almarhum<br>Yuswa: 60 thn</div>
+                </div>
+                <div class="tpl-name">${t.name}</div>`;
+                g.appendChild(d);
             });
         }
 
         function renderAll() {
-            renderChips('lang-chips', languages, selLang, id => { selLang = id; });
-            renderChips('style-chips', styles, selStyle, id => { selStyle = id; });
-            renderChips('size-chips', sizes, selSize, id => { selSize = id; });
-            renderChips('kop-chips', kopPresets, selKop, id => {
-                selKop = id;
-                const p = kopPresets.find(k => k.id === id);
-                if (p && id !== 'custom') {
-                    document.getElementById('in-kop1').value = p.l1;
-                    document.getElementById('in-kop2').value = p.l2;
-                    document.getElementById('in-kop3').value = p.l3;
-                    syncField('in-kop1','out-kop1'); syncField('in-kop2','out-kop2'); syncField('in-kop3','out-kop3');
-                }
+            renderChips('lang-chips',languages,selLang,id=>{selLang=id;});
+            renderChips('style-chips',styles,selStyle,id=>{selStyle=id;});
+            renderChips('size-chips',sizes,selSize,id=>{selSize=id;});
+            renderChips('kop-chips',kopPresets,selKop,id=>{
+                selKop=id;
+                const p=kopPresets.find(k=>k.id===id);
+                if(p&&id!=='custom'){document.getElementById('in-kop1').value=p.l1;document.getElementById('in-kop2').value=p.l2;document.getElementById('in-kop3').value=p.l3;}
             });
-            applyTexts();
-        }
-
-        function syncField(i, o) {
-            const el = document.getElementById(i);
-            const out = document.getElementById(o);
-            if (el && out) out.innerText = el.value;
+            renderA4();
         }
 
         // ===== Wizard =====
         function goStep(n) {
-            if (n < 0 || n > 4) return;
-            if (mode === 'all') return;
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            if(n<0||n>4||mode==='all') return;
+            document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
             document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
-            cur = n;
-            // Stepper
-            document.querySelectorAll('.stepper-item').forEach(s => {
-                const i = parseInt(s.dataset.s);
-                s.className = 'stepper-item' + (i < n ? ' done' : i === n ? ' current' : '');
+            cur=n;
+            document.querySelectorAll('.stp-item').forEach(s=>{
+                const i=parseInt(s.dataset.s);
+                s.className='stp-item'+(i<n?' done':i===n?' current':'');
             });
-            document.querySelectorAll('.stepper-line').forEach((l, i) => {
-                l.className = 'stepper-line' + (i < n ? ' done' : '');
-            });
-            // Nav
-            document.getElementById('btn-back').style.visibility = n === 0 ? 'hidden' : 'visible';
-            const nb = document.getElementById('btn-next');
-            if (n === 4) { nb.textContent = 'Download PDF'; nb.onclick = downloadPDF; }
-            else { nb.textContent = 'Lanjut →'; nb.onclick = () => goStep(cur+1); }
+            document.querySelectorAll('.stp-line').forEach((l,i)=>{l.className='stp-line'+(i<n?' done':'');});
+            document.getElementById('btn-back').style.visibility=n===0?'hidden':'visible';
+            const nb=document.getElementById('btn-next');
+            if(n===4){nb.textContent='Download PDF';nb.onclick=downloadPDF;}
+            else{nb.textContent='Lanjut →';nb.onclick=()=>goStep(cur+1);}
             updateDL();
-            document.getElementById('form-scroll').scrollTop = 0;
+            document.getElementById('form-scroll').scrollTop=0;
         }
 
         function toggleMode() {
-            if (mode === 'wizard') {
-                mode = 'all';
-                document.querySelectorAll('.step').forEach(s => s.classList.add('active'));
-                document.getElementById('stepper-area').style.display = 'none';
-                document.getElementById('nav-area').style.display = 'none';
-                document.getElementById('mode-btn').textContent = 'Pakai wizard (langkah demi langkah)';
+            if(mode==='wizard'){
+                mode='all';
+                document.querySelectorAll('.step').forEach(s=>s.classList.add('active'));
+                document.getElementById('stp-area').style.display='none';
+                document.getElementById('nav-area').style.display='none';
+                document.getElementById('mode-btn').textContent='Pakai wizard (langkah demi langkah)';
             } else {
-                mode = 'wizard';
-                document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+                mode='wizard';
+                document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
                 document.querySelector(`.step[data-step="${cur}"]`).classList.add('active');
-                document.getElementById('stepper-area').style.display = '';
-                document.getElementById('nav-area').style.display = '';
-                document.getElementById('mode-btn').textContent = 'Lihat semua sekaligus';
+                document.getElementById('stp-area').style.display='';
+                document.getElementById('nav-area').style.display='';
+                document.getElementById('mode-btn').textContent='Lihat semua sekaligus';
             }
+        }
+
+        // ===== Zoom =====
+        function setZoom(z) {
+            zoomLevel=z;
+            document.getElementById('a4-wrap').style.transform=`scale(${z})`;
+            document.querySelectorAll('.zoom-btn').forEach(b=>{
+                b.classList.toggle('sel', b.textContent===Math.round(z*100)+'%');
+            });
         }
 
         // ===== Keluarga =====
-        let famData = [
-            {nama:"",status:"( Garwo )"},
-            {nama:"",status:"( anak/mantu )"},
-            {nama:"Lan Sedoyo Keluargo",status:""}
-        ];
+        let famData=[{nama:"",status:"( Garwo )"},{nama:"",status:"( anak/mantu )"},{nama:"Lan Sedoyo Keluargo",status:""}];
         function renderFam() {
-            const box = document.getElementById('fam-box');
-            const out = document.getElementById('out-fam');
-            box.innerHTML = ''; out.innerHTML = '';
-            famData.forEach((d,i) => {
-                const row = document.createElement('div');
-                row.className = 'flex gap-2 items-center';
-                row.innerHTML = `
-                    <span class="text-[11px] w-4 text-sub">${i+1}.</span>
+            const box=document.getElementById('fam-box'); box.innerHTML='';
+            famData.forEach((d,i)=>{
+                const r=document.createElement('div');
+                r.className='flex gap-2 items-center';
+                r.innerHTML=`<span class="text-[11px] w-4 text-sub">${i+1}.</span>
                     <input class="f-input text-[12px] py-1.5 flex-1" value="${d.nama}" placeholder="Nama" oninput="updFam(${i},'nama',this.value)">
                     <input class="f-input text-[12px] py-1.5 w-24" value="${d.status}" placeholder="Status" oninput="updFam(${i},'status',this.value)">
                     <button onclick="rmFam(${i})" class="text-[11px] opacity-30 hover:opacity-100 bg-transparent border-none cursor-pointer p-1">✕</button>`;
-                box.appendChild(row);
-                const outRow = document.createElement('div');
-                outRow.className = 'd-fam';
-                outRow.style.fontSize = '12pt';
-                outRow.innerHTML = `<div style="text-align:right;padding-right:5px">${i+1}.</div><div>${d.nama}</div><div>${d.status}</div>`;
-                out.appendChild(outRow);
+                box.appendChild(r);
             });
-            updateDL();
+            updateDL(); renderA4();
         }
-        function updFam(i,f,v) { famData[i][f] = v; renderFam(); }
-        function addFam() { famData.push({nama:"",status:""}); renderFam(); }
-        function rmFam(i) { famData.splice(i,1); renderFam(); }
+        function updFam(i,f,v){famData[i][f]=v;renderFam();}
+        function addFam(){famData.push({nama:"",status:""});renderFam();}
+        function rmFam(i){famData.splice(i,1);renderFam();}
 
-        // ===== Logo =====
-        function loadLogo(e,id) {
-            const f = e.target.files[0]; if(!f) return;
-            const r = new FileReader();
-            r.onload = ev => {
-                const img = document.getElementById(id);
-                const ph = document.getElementById('ph-'+id.replace('out-',''));
-                if(img){img.src=ev.target.result;img.style.display='block';}
-                if(ph)ph.style.display='none';
-            };
+        function loadLogo(e,id){
+            const f=e.target.files[0]; if(!f) return;
+            const r=new FileReader();
+            r.onload=ev=>{const img=document.getElementById(id);if(img){img.src=ev.target.result;img.style.display='block';}};
             r.readAsDataURL(f);
         }
 
-        // ===== PDF =====
-        function downloadPDF() {
-            const el = document.getElementById('a4-page');
-            const nama = document.getElementById('in-nama').value || 'Almarhum';
+        function downloadPDF(){
+            const el=document.getElementById('a4');
+            const nama=document.getElementById('in-nama').value||'Almarhum';
             html2pdf().set({
-                margin:0, filename:'Surat Lelayu '+nama+'.pdf',
+                margin:0,filename:'Surat Lelayu '+nama+'.pdf',
                 image:{type:'jpeg',quality:0.98},
-                html2canvas:{scale:2,useCORS:true,scrollY:0,
-                    onclone:d=>{const w=d.getElementById('scale-wrap');if(w)w.style.transform='none';const p=d.getElementById('a4-page');p.style.transform='none';p.style.margin='0';p.style.boxShadow='none';p.style.height='296mm';p.style.overflow='hidden';}
-                },
+                html2canvas:{scale:2,useCORS:true,scrollY:0},
                 jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-            }).from(el).toPdf().get('pdf').then(pdf=>{const n=pdf.internal.getNumberOfPages();if(n>1)for(let i=n;i>1;i--)pdf.deletePage(i);}).save();
+            }).from(el).save();
         }
 
-        // ===== Scale =====
-        function updateScale() {
-            const w = document.getElementById('scale-wrap');
-            if (window.innerWidth <= 991) {
-                const c = document.getElementById('preview-panel');
-                const s = Math.min((c.clientWidth-40)/793,1);
-                w.style.transform='none'; w.style.zoom=s;
-            } else if (window.innerWidth <= 1199) {
-                w.style.zoom=''; w.style.transform='scale(0.72)'; w.style.marginBottom='-80mm';
-            } else {
-                w.style.zoom=''; w.style.transform=''; w.style.margin='';
-            }
-        }
-
-        function updateDL() {
-            const btn = document.getElementById('dl-btn');
-            const hint = document.getElementById('dl-hint');
-            const nama = document.getElementById('in-nama').value.trim();
-            if (nama) {
-                btn.disabled = false;
-                hint.textContent = 'PDF siap diunduh';
-                hint.className = 'text-[12px] text-accent';
-            } else {
-                btn.disabled = cur < 4 && mode === 'wizard';
-                hint.textContent = 'Isi nama almarhum untuk mengunduh';
-                hint.className = 'text-[12px] text-sub';
-            }
+        function updateDL(){
+            const btn=document.getElementById('dl-btn');
+            const hint=document.getElementById('dl-hint');
+            const nama=document.getElementById('in-nama').value.trim();
+            if(nama){btn.disabled=false;hint.textContent='PDF siap diunduh';hint.className='text-[12px] text-accent';}
+            else{btn.disabled=cur<4&&mode==='wizard';hint.textContent=cur<4?'Isi data di langkah '+(cur+1):'Isi nama almarhum';hint.className='text-[12px] text-sub';}
         }
 
         // ===== Init =====
-        function init() {
-            const syncMap = {
-                'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3',
-                'in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur',
-                'in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp',
-                'in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp',
-                'in-foot-l':'out-foot-l','in-foot-r':'out-foot-r',
-            };
-            for (const [i,o] of Object.entries(syncMap)) {
-                const el = document.getElementById(i);
-                if (!el) continue;
-                el.addEventListener('input', e => {
-                    const t = document.getElementById(o);
-                    if (t) { t.innerText = e.target.value; t.classList.remove('flash'); void t.offsetWidth; t.classList.add('flash'); }
-                });
+        function init(){
+            const syncMap={'in-kop1':'out-kop1','in-kop2':'out-kop2','in-kop3':'out-kop3','in-penerima':'out-penerima','in-nama':'out-nama','in-umur':'out-umur','in-wf-hari':'out-wf-hari','in-wf-tgl':'out-wf-tgl','in-wf-jam':'out-wf-jam','in-wf-tmp':'out-wf-tmp','in-mk-hari':'out-mk-hari','in-mk-tgl':'out-mk-tgl','in-mk-jam':'out-mk-jam','in-mk-tmp':'out-mk-tmp','in-foot-l':'out-foot-l','in-foot-r':'out-foot-r'};
+            for(const[i,o] of Object.entries(syncMap)){
+                const el=document.getElementById(i);
+                if(el) el.addEventListener('input',()=>renderA4());
             }
-            document.getElementById('in-status').addEventListener('change', e => {
-                document.getElementById('out-status').innerText = e.target.value;
-                document.getElementById('out-status2').innerText = e.target.value;
-            });
-            renderFam();
-            renderTemplateCards();
-            renderAll();
-            updateScale();
+            document.getElementById('in-status').addEventListener('change',()=>renderA4());
+            renderFam(); renderTplCards(); renderAll();
         }
 
-        window.addEventListener('resize', updateScale);
-        window.addEventListener('load', init);
-        document.addEventListener('input', updateDL);
-        setTimeout(updateScale, 80);
+        window.addEventListener('load',init);
+        document.addEventListener('input',()=>{renderA4();updateDL();});
     </script>
 </body>
 </html>
